@@ -11,6 +11,7 @@ Then select installed version of ruby `rvm use 3.1.2`
 Run `bundle install`
 ##### Postgres installation
 Visit https://www.postgresql.org/download/ and download Postgres 14.5
+Run `rails db:setup` to initialize the databases
 
 ##### Run server
 To run server use `rails server`
