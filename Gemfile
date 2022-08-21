@@ -43,13 +43,13 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 #Template language
-gem "slim-rails"
+gem 'slim-rails', '~> 3.1', '>= 3.5.1'
 
 #Front-end framework 
-gem 'bootstrap'
+gem 'bootstrap', '~> 5.2'
 
 #This gem provides jQuery and the jQuery-ujs driver
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.5'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -59,7 +59,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   #Testing
-  gem 'rspec'
+  gem 'rspec', '~> 3.11'
 end
 
 group :development do
