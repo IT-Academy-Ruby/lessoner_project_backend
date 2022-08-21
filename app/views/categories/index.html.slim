@@ -1,5 +1,5 @@
 h1 Categories
-head
-ul A
-ul B
-ul C
+ul
+  - @categories.each do |category|
+    li
+      = category.name
