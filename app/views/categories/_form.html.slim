@@ -1,0 +1,13 @@
+ = form_with model: category do |form|
+  div
+    = form.label :name
+    = form.text_field :name 
+    - category.errors.full_messages_for(:name).each do |message|
+      div = message
+  div
+    = form.label :description
+    = form.text_area :description
+    - category.errors.full_messages_for(:description).each do |message|
+      div = message
+  div
+    = form.submit
