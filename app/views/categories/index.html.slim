@@ -1,7 +1,8 @@
 h1 Categories
 ul.list-group.list-group-numbered
    - @categories.each do |category|
-    li
-      = link_to category.name, category, class: "list-group-item"
+    - unless category.archived?
+      li
+        = link_to category.name, category, class: "list-group-item"
 ul = link_to "New Category", new_category_path, class: "btn btn-primary"
 ul = link_to "Root", "#", class: "btn btn-primary"
