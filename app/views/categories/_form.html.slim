@@ -9,7 +9,7 @@
     = form.text_area :description
     - category.errors.full_messages_for(:description).each do |message|
       div = message
-  <div>
+  div
     = form.label :status
     = form.select :status, ['public', 'archived'], selected: 'public'
   div
