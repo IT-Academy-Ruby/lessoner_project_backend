@@ -11,6 +11,6 @@
       div = message
   div
     = form.label :status
-    = form.select :status, ['public', 'archived'], selected: 'public'
+    = form.select :status, ['active', 'archived'], selected: 'public'
   div
     = form.submit
