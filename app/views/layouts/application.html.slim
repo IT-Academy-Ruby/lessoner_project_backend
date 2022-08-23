@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title Lessoner
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body
+    header.navbar
+     div.container
+       = link_to "lessoner", "#"
+       ul.nav
+         li = link_to "Home", root_path
+         li = link_to "Categories", "#"
+         li = link_to "About", about_path
+         li = link_to "Log in", "#"
+
+    div.container
+      = yield
+
