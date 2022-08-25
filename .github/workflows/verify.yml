@@ -1,11 +1,8 @@
 name: Verify
 
 on:
-  push:
-    branches: [main, development]
-  pull_request:
-    branches: [main, development]
-
+  - push
+  - pull_request
 
 jobs:
   test:
@@ -29,15 +26,15 @@ jobs:
           ruby-version: 3.1.2
 
       - name: Install Dependencies
-      run: |
-        - sudo apt install -yqq libpq-dev
-        gem install bundler
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
 
-      -name: Install Gems
-      run: |
-        - bundle install
+      - name: Install Gems
+        run: |
+          bundle install
 
-  # We didn't have RSpec files for testing:
+  # We don't have RSpec files for testing:
   #      - name: Run Tests
   #        run: |
   #          bundle exec rspec
@@ -65,4 +62,35 @@ jobs:
         uses: devmasx/brakeman-linter-action@v1.0.0
         env:
           REPORT_PATH: tmp/brakeman.json
-          GITHUB_TOKEN: ${{secret.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  linters:
+    name: linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      #       - name: rubocop
+      #         uses: reviewdog/action-rubocop@v1
+      #         with:
+      #           rubocop_version: gemfile
+      #           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+      #           github_token: ${{ secrets.github_token }}
+
+      - name: brakeman
+        uses: reviewdog/action-brakeman@v1
+        with:
+          brakeman_version: gemfile
+          github_token: ${{ secrets.github_token }}
+
+      - name: reek
+        uses: reviewdog/action-reek@v1
+        with:
+          reek_version: gemfile
+          github_token: ${{ secrets.github_token }}
+
+      - name: fasterer
+        uses: vk26/action-fasterer@v1
+        with:
+          github_token: ${{ secrets.github_token }}
