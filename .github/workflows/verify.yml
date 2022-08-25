@@ -28,7 +28,7 @@ jobs:
         with:
           ruby-version: 3.1.2
 
-      -name: Install Dependencies
+      - name: Install Dependencies
       run: |
         - sudo apt install -yqq libpq-dev
         gem install bundler
@@ -37,10 +37,10 @@ jobs:
       run: |
         - bundle install
 
-# We didn't have RSpec files for testing:
-#      - name: Run Tests
-#        run: |
-#          bundle exec rspec
+  # We didn't have RSpec files for testing:
+  #      - name: Run Tests
+  #        run: |
+  #          bundle exec rspec
 
   security:
     runs-on: ubuntu-latest
