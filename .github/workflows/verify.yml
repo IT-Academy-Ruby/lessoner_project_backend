@@ -1,0 +1,68 @@
+name: Verify
+
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+
+jobs:
+  test:
+    services:
+      db:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - "5432:5432"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1.115.3
+        with:
+          ruby-version: 3.1.2
+
+      -name: Install Dependencies
+      run: |
+        - sudo apt install -yqq libpq-dev
+        gem install bundler
+
+      -name: Install Gems
+      run: |
+        - bundle install
+
+# We didn't have RSpec files for testing:
+#      - name: Run Tests
+#        run: |
+#          bundle exec rspec
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.115.3
+        with:
+          ruby-version: 3.1.2
+
+      - name: Install Brakeman
+        run: |
+          gem install brakeman
+
+      - name: Run Brakeman
+        run: |
+          brakeman -f json > tmp/brakeman.json || exit 0
+
+      - name: Brakeman Report
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          REPORT_PATH: tmp/brakeman.json
+          GITHUB_TOKEN: ${{secret.GITHUB_TOKEN}}
