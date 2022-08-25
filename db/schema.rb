@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_175150) do
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email", null: false, :unique true
+    t.string "email", null: false, unique: true
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
