@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_080608) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_26_101646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_080608) do
     t.integer "status", default: 0
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.string "description"
+    t.string "title"
+    t.string "video_link"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "author_id"
+    t.bigint "category_id"
+    t.index ["author_id"], name: "index_lessons_on_author_id"
+    t.index ["category_id"], name: "index_lessons_on_category_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -31,4 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_080608) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "lessons", "categories"
+  add_foreign_key "lessons", "users", column: "author_id"
 end
