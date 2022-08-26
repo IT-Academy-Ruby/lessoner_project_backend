@@ -78,12 +78,6 @@ jobs:
       #           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
       #           github_token: ${{ secrets.github_token }}
 
-      - name: brakeman
-        uses: reviewdog/action-brakeman@v1
-        with:
-          brakeman_version: gemfile
-          github_token: ${{ secrets.github_token }}
-
       - name: reek
         uses: reviewdog/action-reek@v1
         with:
@@ -94,3 +88,4 @@ jobs:
         uses: vk26/action-fasterer@v1
         with:
           github_token: ${{ secrets.github_token }}
+          
