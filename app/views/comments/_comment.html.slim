@@ -1,5 +1,5 @@
 div
-  = comment.commenter
+  = comment.user
 div
   = comment.body
 
@@ -7,3 +7,5 @@ div
   div
     = link_to "Edit", edit_lesson_comment_path
     = link_to "Destroy", [comment.lesson, comment], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+
