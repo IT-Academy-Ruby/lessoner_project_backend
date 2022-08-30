@@ -10,11 +10,14 @@ en:
     categories: "Categories"
     about: "About"
     login: "Log in"
+    create_account: "Create account"
+    learn_more: "Learn more"
     forms:
       submit: "Submit"
+    hero:
+      title: "Learn dozens of quality courses with Lessoner"
+      lead: "Best & free web platform for online learning"
 
   static_pages:
-    home:
-      signup: "Sign up now!"
-      welcome: "Welcome to the Lessoner"
-      madeby: "Made by Lessoner Team"
+    about:
+      description: "Information about out project"

@@ -1,0 +1,11 @@
+div.hero.bg-light
+  .hero_text-wrapper
+    h1.text-primary
+      = t('global.hero.title')
+    p.lead
+      = t('global.hero.lead')
+  .hero_button-wrapper.mt-3
+    a.btn.btn-outline-primary
+      = t('global.create_account')
+    a.btn.btn-outline-primary href = about_path
+      = t('global.learn_more')
