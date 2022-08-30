@@ -1,0 +1,20 @@
+ru:
+  activerecord:
+    attributes:
+      category:
+        name: "Название"
+        description: "Описание"
+
+  global:
+    home: "Домой"
+    categories: "Категории"
+    about: "О проекте"
+    login: "Войти"
+    forms:
+      submit: "Отправить"
+      
+  static_pages:
+    home:
+      signup: "Зарегистрироваться!"
+      welcome: "Добро пожаловать на Lessoner"
+      madeby: "Создан командой Lessoner"
