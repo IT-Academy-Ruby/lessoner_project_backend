@@ -1,0 +1,13 @@
+- menu_links  = {'Home' => root_path, 'Categories' => categories_path, 'About' => about_path}
+
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark.p-1
+  .container-fluid
+    a.navbar-brand href=root_path
+      | Lessoner
+    ul.navbar-nav.me-auto
+      - for label in menu_links.keys
+        li.nav-item
+          a.nav-link class=('active' if current_page?(menu_links[label])) href=menu_links[label]
+            = label
+    button.btn.btn-outline-light.btn-sm
+      | Login

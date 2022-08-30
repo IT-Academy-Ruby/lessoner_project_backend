@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="en"
   head
     title Lessoner
     meta name="viewport" content="width=device-width,initial-scale=1"
@@ -10,15 +10,11 @@ html
     = javascript_importmap_tags
 
   body
-    header.navbar
-     div.container
-       = link_to "lessoner", root_path
-       ul.nav
-         li = link_to "Home", root_path
-         li = link_to "Categories", categories_path
-         li = link_to "About", about_path
-         li = link_to "Log in", "#"
-
-    div.container
-      = yield
-
+    header
+      = render "layouts/header"
+      main
+        - if current_page?(root_path)
+          .container-fluid.p-0
+            = render "layouts/hero"
+        .container-fluid.mt-3
+          = yield
