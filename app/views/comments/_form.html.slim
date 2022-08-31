@@ -1,0 +1,10 @@
+= form_with model: [ @lesson, @lesson.comments.build ] do |form|
+  div
+    = form.label :commenter
+    = form.text_field :commenter
+  div
+    =form.label :body
+    = form.text_area :body
+  div
+    = form.submit
+
