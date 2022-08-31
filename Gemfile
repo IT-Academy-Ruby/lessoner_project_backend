@@ -57,9 +57,9 @@ gem 'jquery-rails', '~> 4.5'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-
   #Testing
   gem 'rspec', '~> 3.11'
+  gem 'rubocop-rails', '~> 2.15.2'
 end
 
 group :development do
