@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_101646) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_183041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_101646) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "lesson_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_comments_on_lesson_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -41,9 +51,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_101646) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "lessons"
+  add_foreign_key "comments", "users"
   add_foreign_key "lessons", "categories"
   add_foreign_key "lessons", "users", column: "author_id"
 end
