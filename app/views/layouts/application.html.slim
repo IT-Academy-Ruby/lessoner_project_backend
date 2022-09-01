@@ -12,13 +12,14 @@ html
   body
     header.navbar
      div.container
-       = link_to "lessoner", root_path
-       ul.nav
-         li = link_to "Home", root_path
-         li = link_to "Categories", categories_path
-         li = link_to "About", about_path
-         li = link_to "Log in", "#"
+        ul.nav 
+          li = link_to "English", url_for(locale: :en)
+          li = link_to "Русский", url_for(locale: :ru)
+        ul.nav
+          li = link_to t('global.home'), root_path
+          li = link_to t('global.categories'), categories_path
+          li = link_to t('global.about'), about_path
+          li = link_to t('global.login'), "#"
 
     div.container
       = yield
-
