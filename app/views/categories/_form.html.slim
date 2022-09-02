@@ -1,4 +1,4 @@
- = form_with model: category do |form|
+= form_with model: category do |form|
   div
     = form.label :name
     = form.text_field :name 
@@ -13,4 +13,4 @@
     = form.label :status
     = form.select :status, ['active', 'archived'], selected: 'public'
   div
-    = form.submit
+    = form.submit t('global.forms.submit')

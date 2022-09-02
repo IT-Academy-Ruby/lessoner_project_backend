@@ -53,15 +53,18 @@ gem 'bootstrap', '~> 5.2'
 #This gem provides jQuery and the jQuery-ujs driver
 gem 'jquery-rails', '~> 4.5'
 
+#A set of common locale data and translations to internationalize and/or localize application
+gem 'rails-i18n', '~> 7.0', '>= 7.0.5'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-
   #Testing
   gem 'rspec', '~> 3.11'
+  gem 'rubocop-rails', '~> 2.15.2'
 end
 
 group :development do

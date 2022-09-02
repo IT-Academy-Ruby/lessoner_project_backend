@@ -62,3 +62,8 @@ To run server:
 rails server
 ```
 
+### Run Rubocop linter
+
+```
+rubocop --require rubocop-rails
+```
