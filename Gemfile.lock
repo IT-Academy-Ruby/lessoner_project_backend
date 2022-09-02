@@ -194,6 +194,7 @@ GEM
     reline (0.3.1)
       io-console (~> 0.5)
     rexml (3.2.5)
+    rollbar (3.3.1)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -300,6 +301,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
   rails-i18n (~> 7.0, >= 7.0.5)
+  rollbar
   rspec (~> 3.11)
   rubocop-rails (~> 2.15.2)
   selenium-webdriver
