@@ -10,10 +10,6 @@ html lang = current_locale
     = javascript_importmap_tags
 
   body
-
-    p.notice = notice
-    p.alert  = alert
-
     header
       = render "layouts/header"
       main
@@ -21,5 +17,7 @@ html lang = current_locale
           .container-fluid.p-0
             = render "layouts/hero"
         .container-fluid.mt-3
+          p.notice = notice
+          p.alert = alert
           = yield
 

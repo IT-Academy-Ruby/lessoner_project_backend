@@ -1,11 +1,10 @@
-h2
-  Edit #{resource_name.to_s.humanize}
+h2 = t('data.edit')
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  = render "devise/shared/error_messages", resource: resource %>
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = render "devise/shared/error_messages", resource: resource
 
   div.field
-    = f.label :email
+    = f.label t('data.email')
     br
     = f.email_field :email, autofocus: true, autocomplete: "email"
 
@@ -14,30 +13,33 @@ h2
 
 
   div.field
-    = f.label :password
-    i leave blank if you don't want to change it
+    = f.label t('data.password')
+    br
+    i = t('data.info')
     br
     = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length %>
-        em #{@minimum_password_length} characters minimum
+    - if @minimum_password_length
+        ' #{@minimum_password_length}
+        em = t('data.text')
 
   div.field
-    = f.label :password_confirmation
+    = f.label t('data.passwordcon')
     br
     = f.password_field :password_confirmation, autocomplete: "new-password"
 
   div.field
-    = f.label :current_password
-    i we need your current password to confirm your changes
+    = f.label t('data.curpass')
+    br
+    i = t('data.curpasin')
     br
     = f.password_field :current_password, autocomplete: "current-password"
 
   div.actions
-    = f.submit "Update"
+    = f.submit t('data.update')
 
-h3 Cancel my account
+h3 = t('data.cancel')
 
-p Unhappy?
-= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+p = t('data.unhappy')
+= button_to "#{t('data.cancel')}", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
 
-= link_to "Back", :back
+= link_to "#{t('data.back')}", :back
