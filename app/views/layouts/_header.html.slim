@@ -18,7 +18,7 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark.p-1
     - if user_signed_in?
         = button_to "#{t('global.logout')}", destroy_user_session_path, method: :delete, :class=>"btn btn-outline-light btn-sm"
     - else
-        button.btn.btn-outline-light.btn-sm href = 'users/sign_in'
-          = t('global.login')
+      = button_to "#{t('global.login')}", new_user_session_path, :class=>"btn btn-outline-light btn-sm"
 
-          
+
+

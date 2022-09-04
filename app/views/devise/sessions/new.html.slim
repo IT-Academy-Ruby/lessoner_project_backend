@@ -12,9 +12,9 @@ h2 = t('global.login')
     = f.password_field :password, autocomplete: "current-password"
 
   - if devise_mapping.rememberable?
-  div.field
-    = f.check_box :remember_me
-    = f.label t('data.remember')
+    div.field
+     = f.check_box :remember_me
+     = f.label t('data.remember')
 
   div.actions
     = f.submit t('global.login')
