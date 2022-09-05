@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   root to: redirect("/#{I18n.default_locale}"), as: :redirected_root
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
-    devise_for :users do
-      get '/users/sign_out', to: 'devise/sessions#destroy'
-    end
+    devise_for :users 
 
     resources :categories
     root 'static_pages#home'
