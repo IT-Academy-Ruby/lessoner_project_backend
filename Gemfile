@@ -5,7 +5,7 @@ ruby "3.1.2"
 
 #Error Tracking
 gem 'rollbar'
-
+gem 'dotenv', '~> 2.8', '>= 2.8.1'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 
