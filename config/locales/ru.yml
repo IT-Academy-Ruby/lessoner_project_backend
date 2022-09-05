@@ -10,11 +10,15 @@ ru:
     categories: "Категории"
     about: "О проекте"
     login: "Войти"
+    create_account: "Создать аккаунт"
+    learn_more: "Узнать подробнее"
     forms:
       submit: "Отправить"
+    hero:
+      title: "Изучайте качественные курсы вместе с Lessoner"
+      lead: "Лучшая и бесплатная платформа для удаленного обучения"
       
   static_pages:
-    home:
-      signup: "Зарегистрироваться!"
-      welcome: "Добро пожаловать на Lessoner"
-      madeby: "Создан командой Lessoner"
+    about:
+      description: "Информация о нашем проекте"
+
