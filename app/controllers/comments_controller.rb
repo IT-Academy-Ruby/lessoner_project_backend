@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :lesson_find, only: [:create, :edit, :update]
 
  def create
-    @comment = current_user.comments.create(comment_params.merge(lesson: @lesson)
+    @comment = current_user.comments.create(comment_params.merge(lesson: @lesson))
     if @comment.save
       flash[:success] = "Comment successfully added"
       redirect_to lesson_path(@lesson)

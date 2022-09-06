@@ -1,0 +1,24 @@
+ru:
+  activerecord:
+    attributes:
+      category:
+        name: "Название"
+        description: "Описание"
+
+  global:
+    home: "Домой"
+    categories: "Категории"
+    about: "О проекте"
+    login: "Войти"
+    create_account: "Создать аккаунт"
+    learn_more: "Узнать подробнее"
+    forms:
+      submit: "Отправить"
+    hero:
+      title: "Изучайте качественные курсы вместе с Lessoner"
+      lead: "Лучшая и бесплатная платформа для удаленного обучения"
+      
+  static_pages:
+    about:
+      description: "Информация о нашем проекте"
+

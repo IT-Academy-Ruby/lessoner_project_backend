@@ -31,3 +31,4 @@
 /config/master.key
 # Ignore idea files
 .idea
+.env

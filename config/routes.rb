@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
-  get '/about', to: 'static_pages#about'
+  root to: redirect("/#{I18n.default_locale}"), as: :redirected_root
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    resources :categories
+    root 'static_pages#home'
+    get '/about', to: 'static_pages#about'
+  
+    resources :lessons do
+      resources :comments
+    end
 
-  resources :categories
-
-  resources :lessons do
-    resources :comments
+    resources :users do
+      resources :comments
+    end
   end
-
-  resources :users do
-    resources :comments
-  end
-
 end
