@@ -1,0 +1,24 @@
+- menu_links  = {'home' => root_path, 'categories' => categories_path, 'about' => about_path}
+- menu_locales = {'English' => :en, 'Русский' => :ru}
+
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark.p-1
+  .container-fluid
+    a.navbar-brand href=root_path
+      | Lessoner
+    ul.navbar-nav.me-auto
+      - for label in menu_links.keys
+        li.nav-item
+          a.nav-link class=('active' if current_page?(menu_links[label])) href=menu_links[label]
+            = t("global.#{label}")
+    ul.navbar-nav.me-auto
+      - for label in menu_locales.keys
+        li.nav-item
+          a.nav-link class=('active' if current_locale == menu_locales[label]) href=url_for(locale: menu_locales[label])
+            = label
+    - if user_signed_in?
+        = button_to "#{t('global.logout')}", destroy_user_session_path, method: :delete, :class=>"btn btn-outline-light btn-sm"
+    - else
+      = button_to "#{t('global.login')}", new_user_session_path, :class=>"btn btn-outline-light btn-sm"
+
+
+
