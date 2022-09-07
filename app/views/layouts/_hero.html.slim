@@ -5,7 +5,11 @@ div.hero.bg-light
     p.lead
       = t('global.hero.lead')
   .hero_button-wrapper.mt-3
-    a.btn.btn-outline-primary
-      = t('global.create_account')
-    a.btn.btn-outline-primary href = about_path
-      = t('global.learn_more')
+    - if user_signed_in?
+        a.btn.btn-outline-primary href = about_path
+          = t('global.learn_more')
+    - else
+        a.btn.btn-outline-primary href = new_user_registration_path
+          = t('global.create_account')
+        a.btn.btn-outline-primary href = about_path
+          = t('global.learn_more')
