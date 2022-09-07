@@ -77,9 +77,3 @@ jobs:
       #           rubocop_version: gemfile
       #           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
       #           github_token: ${{ secrets.github_token }}
-
-      - name: reek
-        uses: reviewdog/action-reek@v1
-        with:
-          reek_version: gemfile
-          github_token: ${{ secrets.github_token }}
