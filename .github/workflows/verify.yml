@@ -71,9 +71,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
 
-      #       - name: rubocop
-      #         uses: reviewdog/action-rubocop@v1
-      #         with:
-      #           rubocop_version: gemfile
-      #           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
-      #           github_token: ${{ secrets.github_token }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2.3.1
+        with:
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile
+          github_token: ${{ secrets.github_token }}
