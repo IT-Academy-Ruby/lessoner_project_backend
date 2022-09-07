@@ -83,9 +83,3 @@ jobs:
         with:
           reek_version: gemfile
           github_token: ${{ secrets.github_token }}
-
-      - name: fasterer
-        uses: vk26/action-fasterer@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          
