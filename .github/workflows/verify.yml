@@ -70,6 +70,7 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v1
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.2
@@ -79,15 +80,3 @@ jobs:
           rubocop_version: gemfile
           rubocop_extensions: rubocop-rails:gemfile
           github_token: ${{ secrets.github_token }}
-
-      - name: reek
-        uses: reviewdog/action-reek@v1
-        with:
-          reek_version: gemfile
-          github_token: ${{ secrets.github_token }}
-
-      - name: fasterer
-        uses: vk26/action-fasterer@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          
