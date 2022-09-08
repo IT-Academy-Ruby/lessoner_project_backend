@@ -9,5 +9,6 @@ AllCops:
   - bin/bundle
 
 Metrics/BlockLength:
-  - config/environments/development.rb
-  - config/environments/production.rb
+  Exclude:
+    - config/environments/development.rb
+    - config/environments/production.rb
