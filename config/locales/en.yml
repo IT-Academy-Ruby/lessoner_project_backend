@@ -49,3 +49,7 @@ en:
     send: "Send me reset password instructions"
     resendcon: "Resend confirmation instructions"
     change: "Change your password"
+    description: "Description"
+    users: "Users:"
+    newuser: "New user"
+    delete: "Delete"
