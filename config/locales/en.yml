@@ -4,7 +4,10 @@ en:
       category:
         name: "Name"
         description: "Description"
-
+      lessons:
+        title: "Title"
+        description: "Description"
+        video_link: "Video link"
   global:
     home: "Home"
     categories: "Categories"

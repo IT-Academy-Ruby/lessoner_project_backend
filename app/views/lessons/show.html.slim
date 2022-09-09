@@ -1,11 +1,6 @@
 h1 = @lesson.title
-<video poster="/path/to/poster.jpg" id="player" playsinline controls>
-    <source src="/path/to/video.mp4" type="video/mp4">
-    <source src="/path/to/video.webm" type="video/webm">
-
-    <!-- Captions are optional -->
-    <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default>
-</video>
+player.plyr__video-embed
+  iframe allow="autoplay" allowfullscreen="" allowtransparency="" src==@lesson.video_link
 p = @lesson.description
 ul = link_to "Edit", edit_lesson_path(@lesson)
 ul = link_to "Back", lessons_path

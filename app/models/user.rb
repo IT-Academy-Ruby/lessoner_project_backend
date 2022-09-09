@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   has_many :comments, dependent: :destroy
+  has_many :lessons, class_name: "Lesson", foreign_key: "author_id"
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider

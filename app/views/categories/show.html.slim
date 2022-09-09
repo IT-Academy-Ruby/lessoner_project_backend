@@ -5,3 +5,8 @@ p = @category.description
   = link_to t('global.edit'), edit_category_path(@category)
 .mt-3
   = link_to t('global.back'), categories_path
+ul.list-group.list-group-numbered
+   - @category.lessons.each do |lesson|
+      li
+        = link_to lesson.title, lesson, class: "list-group-item"
+ul = link_to "New Lesson", new_lesson_path, class: "btn btn-primary"

@@ -12,7 +12,7 @@ class LessonsController < ApplicationController
   end
 
   def create
-    @lesson = curent_user.lessons.new(lesson_params)
+    @lesson = current_user.lessons.new(lesson_params)
     if @lesson.save
       redirect_to @lesson
     else
