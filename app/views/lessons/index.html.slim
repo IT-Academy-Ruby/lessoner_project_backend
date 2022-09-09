@@ -1,0 +1,7 @@
+h1 Lessons
+ul.list-group.list-group-numbered
+   - @lessons.each do |lesson|
+      li
+        = link_to lesson.title, lesson, class: "list-group-item"
+ul = link_to "New Lesson", new_lesson_path, class: "btn btn-primary"
+

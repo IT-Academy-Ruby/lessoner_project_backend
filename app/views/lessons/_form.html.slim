@@ -1,0 +1,24 @@
+= form_with model: lesson do |form|
+  div
+    = form.label :title
+    = form.text_field :title
+    - lesson.errors.full_messages_for(:title).each do |message|
+      div = message
+  div
+    = form.label :description
+    = form.text_area :description
+    - lesson.errors.full_messages_for(:description).each do |message|
+      div = message
+  div
+    = form.label :video_link
+    = form.text_area :video_link
+    - lesson.errors.full_messages_for(:video_link).each do |message|
+      div = message
+  div
+    = form.label :status
+    = form.select :status, ['active', 'archived'], selected: 'public'
+  div
+    = form.label :category
+    = form.collection_select :category_id, Category.all, :id, :name
+  div
+    = form.submit t('global.forms.submit')
