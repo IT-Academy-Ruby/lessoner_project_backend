@@ -45,7 +45,6 @@ gem 'kaminari'
 # Videoplayer for rails [https://github.com/sadiqmmm/plyr-rails]
 gem 'plyr-rails'
 
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

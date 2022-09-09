@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class LessonsController < ApplicationController
-  before_action :lesson_find, only: [:show, :edit, :update]
+  before_action :lesson_find, only: %i[show edit update]
   def index
     @lessons = Lesson.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @lesson = Lesson.new
@@ -20,18 +21,17 @@ class LessonsController < ApplicationController
     end
   end
 
-  def edit
+  def edit; end
+
+  def update; end
+
+  private
+
+  def lesson_params
+    params.require(:lesson).permit(:title, :description, :status, :video_link, :author_id, :category_id)
   end
 
-  def update
+  def lesson_find
+    @lesson = Lesson.find(params[:id])
   end
-private
-def lesson_params
-  params.require(:lesson).permit(:title, :description, :status, :video_link, :author_id , :category_id)
-end
-
-def lesson_find
-  @lesson = Lesson.find(params[:id])
-end
-
 end
