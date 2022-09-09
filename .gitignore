@@ -32,6 +32,3 @@
 # Ignore idea files
 .idea
 .env
-
-# Ignore application configuration
-/config/application.yml
