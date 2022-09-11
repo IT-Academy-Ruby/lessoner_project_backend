@@ -1,0 +1,26 @@
+= form_with model: user do |f|
+
+  div.field
+    = f.label t('data.name')
+    br
+    = f.text_field :name
+    - user.errors.full_messages_for(:name).each do |message|
+      div = message
+
+  div.field
+    = f.label t('data.email')
+    br
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+    - user.errors.full_messages_for(:name).each do |message|
+      div = message
+
+  div.field
+    = f.label t('data.description')
+    br
+    = f.text_area :description
+    - user.errors.full_messages_for(:description).each do |message|
+      div = message
+
+  div.actions
+    = f.submit t('global.forms.submit')
+
