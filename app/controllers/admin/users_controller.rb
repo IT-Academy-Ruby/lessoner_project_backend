@@ -18,8 +18,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to @user
     else
-      render :new, status: :unprocessable_
-      entity
+      render :new, status: :unprocessable_entity
     end
   end
 
