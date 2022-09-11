@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       resources :comments
     end
 
-    resources :admins, controller: 'users'
+    namespace :admin do
+      resources :users
+    end
+
   end
 end
