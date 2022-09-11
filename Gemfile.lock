@@ -312,7 +312,7 @@ DEPENDENCIES
   capybara
   debug
   devise
-  dotenv-rails
+  dotenv-rails (~> 2.8, >= 2.8.1)
   importmap-rails
   jbuilder
   jquery-rails (~> 4.5)
