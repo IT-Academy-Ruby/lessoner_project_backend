@@ -1,1 +1,9 @@
 require: rubocop-rails
+
+Documentation:
+  Enabled: false
+
+AllCops:
+ Exclude:
+  - db/**/*
+  - bin/bundle
