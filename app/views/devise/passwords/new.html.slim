@@ -1,14 +1,14 @@
-h2 = t('data.forgot')
+div.container-md.standart-form
+  h2 = t('data.forgot')
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = render "devise/shared/error_messages", resource: resource
 
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+    div.field.mt-3
+      = f.label t('data.email'), class: "form-label"
+      br
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
 
-  div.field
-    = f.label t('data.email')
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+    div.actions.mt-3
+      = f.submit t('data.send'), class: "btn btn-outline-primary"
 
-  div.actions
-    = f.submit t('data.send')
-
-= render "devise/shared/links"
+    div.mt-3 = render "devise/shared/links"
