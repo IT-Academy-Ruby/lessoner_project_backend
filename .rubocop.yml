@@ -7,3 +7,8 @@ AllCops:
  Exclude:
   - db/**/*
   - bin/bundle
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/development.rb
+    - config/environments/production.rb
