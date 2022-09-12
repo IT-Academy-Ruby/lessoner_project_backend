@@ -1,4 +1,4 @@
-= form_with model: user do |f|
+= form_with model: [:admin, @user] do |f|
 
   div.field
     = f.label t('data.name')
@@ -6,7 +6,6 @@
     = f.text_field :name
     - user.errors.full_messages_for(:name).each do |message|
       div = message
-
 
   div.field
     = f.label t('data.email')

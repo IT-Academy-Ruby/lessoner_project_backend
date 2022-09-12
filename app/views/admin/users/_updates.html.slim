@@ -1,4 +1,4 @@
-= form_with model: user do |f|
+= form_with model: [:admin, @user] do |f|
 
   div.field
     = f.label t('data.name')
@@ -20,6 +20,11 @@
     = f.text_area :description
     - user.errors.full_messages_for(:description).each do |message|
       div = message
+
+  div.field
+    = f.label t('data.password')
+    br
+    = f.password_field :password, autocomplete: "current-password"
 
   div.actions
     = f.submit t('global.forms.submit')
