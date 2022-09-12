@@ -1,23 +1,22 @@
-div.container-md
-    h2 = t('global.login')
+div.container-md.standart-form
+  h2 = t('global.login')
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    div.field.mt-3
+      = f.label t('data.email'), class: "form-label"
+      br
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
 
-    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    div.field.mt-3
+      = f.label t('data.password'), class: "form-label"
+      br
+      = f.password_field :password, autocomplete: "current-password", class: "form-control"
+
+    - if devise_mapping.rememberable?
       div.field.mt-3
-        = f.label t('data.email'), class: "form-label"
-        br
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
-
-      div.field.mt-3
-        = f.label t('data.password'), class: "form-label"
-        br
-        = f.password_field :password, autocomplete: "current-password", class: "form-control"
-
-      - if devise_mapping.rememberable?
-        div.field.mt-3
-         = f.check_box :remember_me
-         = f.label t('data.remember')
+        = f.check_box :remember_me, class: "form-check-input"
+        = f.label t('data.remember'), class: "form-check-label"
 
       div.actions.mt-3
-        = f.submit t('global.login')
+      = f.submit t('global.login'), class: "btn btn-outline-primary"
 
-    = render "devise/shared/links"
+    div.mt-3 = render "devise/shared/links"
