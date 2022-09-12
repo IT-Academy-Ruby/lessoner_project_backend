@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_183710) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.string "full_name"
     t.string "uid"
     t.string "avatar_url"
     t.string "provider"
