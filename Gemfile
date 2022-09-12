@@ -9,7 +9,7 @@ ruby '3.1.2'
 gem 'rollbar'
 
 # ENV
-gem 'dotenv', '~> 2.8', '>= 2.8.1'
+gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
@@ -92,3 +92,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
