@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_action :category_find, only: %i[show edit update]
 
   def index
-    @categories = Category.all
+    @categories = Category.page(params[:page])
   end
 
   def show; end
