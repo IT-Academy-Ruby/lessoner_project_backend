@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
-         omniauth_providers: [:google_oauth2, :facebook]
+         omniauth_providers: %i[google_oauth2 facebook]
 
   validates :name, presence: true
   validates :email, presence: true, length: { maximum: 255 },
@@ -23,7 +23,7 @@ class User < ApplicationRecord
       user.uid = auth.uid
 
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
       user.avatar_url = auth.info.image
     end
