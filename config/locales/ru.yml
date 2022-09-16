@@ -67,10 +67,3 @@ ru:
     newuser: "Новый пользователь"
     delete: "Удалить"
 
-  views:
-    pagination:
-      next: ">"
-      previous: "<"
-      first: "<<"
-      last: ">>"
-      truncate: "..."

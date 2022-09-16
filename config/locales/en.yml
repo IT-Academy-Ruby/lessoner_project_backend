@@ -67,10 +67,4 @@ en:
     newuser: "New user"
     delete: "Delete"
 
-  views:
-    pagination:
-      next: ">"
-      previous: "<"
-      first: "<<"
-      last: ">>"
-      truncate: "..."
+
