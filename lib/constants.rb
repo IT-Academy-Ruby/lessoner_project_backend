@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Constants
   PAGE1 = 1
   PAGE10 = 10
