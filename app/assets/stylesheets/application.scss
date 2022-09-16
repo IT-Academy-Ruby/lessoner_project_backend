@@ -17,3 +17,26 @@ i svg {
   fill: currentColor;
   margin: 0 4px 4px;
 }
+
+// toast
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.toast-container {
+  animation: 0.5s ease-in-out 0s 1 slide;
+}
+
+.toast {
+  display: block !important;
+}
+
+.toast-header {
+  justify-content: space-between;
+  background: none;
+}
