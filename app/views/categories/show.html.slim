@@ -1,5 +1,5 @@
 h1 = @category.name
 
 p = @category.description
-ul = link_to "Edit", edit_category_path(@category)
-ul = link_to "Back", categories_path
+ul = link_to t('global.edit'), edit_category_path(@category)
+ul = link_to t('global.back'), categories_path

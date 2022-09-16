@@ -18,10 +18,23 @@ en:
     hero:
       title: "Learn dozens of quality courses with Lessoner"
       lead: "Best & free web platform for online learning"
+    back: "Back"
+    edit: "Изменить"
 
   static_pages:
     about:
       description: "Information about out project"
+    home:
+      description: "Main content"
+
+  categories:
+    index:
+      categories: "Categories"
+      new: "New Category"
+    edit:
+      edit: "Edit Category"
+    new:
+      new: "Новая категория"
 
   data:
     signup: "Sign up"
@@ -49,3 +62,7 @@ en:
     send: "Send me reset password instructions"
     resendcon: "Resend confirmation instructions"
     change: "Change your password"
+    description: "Description"
+    users: "Users:"
+    newuser: "New user"
+    delete: "Delete"

@@ -73,6 +73,9 @@ group :development, :test do
   # Testing
   gem 'rspec', '~> 3.11'
   gem 'rubocop-rails', '~> 2.15.2'
+
+  # ENV
+  gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 end
 
 group :development do

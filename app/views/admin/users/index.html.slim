@@ -1,0 +1,8 @@
+h1 =t('data.users')
+ul.list-group.list-group-numbered
+  - @users.each do |user|
+    li
+      = link_to user.name, admin_user_path(user), class: "list-group-item"
+ul
+  = link_to t('data.newuser'), new_admin_user_path, class: "btn btn-primary"
+
