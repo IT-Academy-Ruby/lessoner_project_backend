@@ -49,3 +49,6 @@ en:
     send: "Send me reset password instructions"
     resendcon: "Resend confirmation instructions"
     change: "Change your password"
+
+  lessons:
+    add_new_lesson: "Add new lesson"
