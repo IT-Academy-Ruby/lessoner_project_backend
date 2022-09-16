@@ -67,3 +67,6 @@ ru:
     newuser: "Новый пользователь"
     delete: "Удалить"
 
+  lessons:
+    add_new_lesson: "Добавить урок"
+

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'boot'
-
 require 'rails/all'
+require 'octicons'
 
 Bundler.require(*Rails.groups)
 

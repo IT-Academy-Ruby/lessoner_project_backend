@@ -67,4 +67,5 @@ en:
     newuser: "New user"
     delete: "Delete"
 
-
+  lessons:
+    add_new_lesson: "Add new lesson"
