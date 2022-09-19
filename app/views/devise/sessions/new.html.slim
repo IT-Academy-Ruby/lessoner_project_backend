@@ -1,4 +1,4 @@
-div.container-md.standart-form
+div.container-md.standart-form.shadow
   h2 = t('global.login')
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     div.field.mt-3
@@ -13,7 +13,7 @@ div.container-md.standart-form
 
     - if devise_mapping.rememberable?
       div.field.mt-3
-        = f.check_box :remember_me, class: "form-check-input"
+        = f.check_box :remember_me, class: "form-check-input custom-mr-12"
         = f.label t('data.remember'), class: "form-check-label"
 
       div.actions.mt-3

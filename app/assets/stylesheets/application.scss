@@ -6,7 +6,7 @@ h1 {
 }
 
 .standart-form {
-  width: 320px;
+  width: 400px;
   border: 1px solid gray;
   border-radius: 12px;
   padding: 24px;
@@ -39,4 +39,9 @@ i svg {
 .toast-header {
   justify-content: space-between;
   background: none;
+}
+
+// margins
+.custom-mr-12 {
+  margin-right: 12px;
 }

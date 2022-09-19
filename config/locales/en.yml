@@ -33,8 +33,6 @@ en:
       new: "New Category"
     edit:
       edit: "Edit Category"
-    new:
-      new: "Новая категория"
 
   data:
     signup: "Sign up"
