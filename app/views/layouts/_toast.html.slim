@@ -1,5 +1,5 @@
 .toast-container.position-fixed.bottom-0.end-0.p-3
-  - if !!alert
+  - if alert
     div id='toast-warning'
       .toast.bg-warning
         .toast-header
@@ -7,7 +7,7 @@
             i == Octicons::Octicon.new("alert").to_svg
             = alert
           button.btn-close type='button' onclick="document.getElementById('toast-warning').style.display='none'"
-  - if !!notice
+  - if notice
     div id='toast-notice'
       .toast.bg-light
         .toast-header
