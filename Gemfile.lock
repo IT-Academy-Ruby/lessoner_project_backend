@@ -134,6 +134,18 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.6.2)
     jwt (2.5.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -358,6 +370,7 @@ DEPENDENCIES
   omniauth-facebook (~> 9.0)
   omniauth-google-oauth2 (~> 1.1, >= 1.1.1)
   omniauth-rails_csrf_protection
+  kaminari
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
