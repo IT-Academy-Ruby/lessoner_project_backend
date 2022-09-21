@@ -1,16 +1,16 @@
 = form_with model: category do |form|
-  div
-    = form.label :name
-    = form.text_field :name 
+  div.field.mt-3
+    = form.label :name, class: "form-label"
+    = form.text_field :name, class: "form-control"
     - category.errors.full_messages_for(:name).each do |message|
       div = message
-  div
-    = form.label :description
-    = form.text_area :description
+  div.field.mt-3
+    = form.label :description, class: "form-label"
+    = form.text_area :description, class: "form-control"
     - category.errors.full_messages_for(:description).each do |message|
       div = message
-  div
-    = form.label :status
-    = form.select :status, ['active', 'archived'], selected: 'active'
-  div
-    = form.submit t('global.forms.submit')
+  div.field.mt-3
+    = form.label :status, class: "form-label custom-mr-12"
+    = form.select :status, ['active', 'archived'], selected: 'active', class: "form-control"
+  div.field.mt-3
+    = form.submit t('global.forms.submit'), class: "btn btn-outline-primary"

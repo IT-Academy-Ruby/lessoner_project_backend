@@ -33,8 +33,6 @@ en:
       new: "New Category"
     edit:
       edit: "Edit Category"
-    new:
-      new: "Новая категория"
 
   data:
     signup: "Sign up"
@@ -67,4 +65,5 @@ en:
     newuser: "New user"
     delete: "Delete"
 
-
+  lessons:
+    add_new_lesson: "Add new lesson"
