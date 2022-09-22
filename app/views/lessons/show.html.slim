@@ -1,0 +1,23 @@
+.mt-3.d-flex.small.p-2.custom-breadcrumbs
+  div
+    a title = t('global.home') href = root_path
+      i == Octicons::Octicon.new("home").to_svg
+  div
+    i == Octicons::Octicon.new("arrow-right").to_svg
+  div
+    = link_to t('global.lessons'), lessons_path
+  div
+    i == Octicons::Octicon.new("arrow-right").to_svg
+  div
+    = @lesson.title
+
+.my-3.p-3.bg-body.rounded.shadow-sm
+  h1 = @lesson.title
+  player.plyr__video-embed
+    iframe allow="autoplay" allowfullscreen="" allowtransparency="" src==@lesson.video_link
+  p = @lesson.description
+  .mt-3
+    - if user_signed_in?
+      a.btn.btn-outline-primary href = edit_lesson_path(@lesson)
+        i == Octicons::Octicon.new("pencil").to_svg
+        = t('global.edit')

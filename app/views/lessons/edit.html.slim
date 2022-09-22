@@ -5,12 +5,12 @@
   div
     i == Octicons::Octicon.new("arrow-right").to_svg
   div
-    = link_to t('global.categories'), categories_path
+    = link_to t('global.lessons'), lessons_path
   div
     i == Octicons::Octicon.new("arrow-right").to_svg
   div
-    = t('categories.edit.edit')
+    = t('lessons.edit_lesson')
 
 .container-md.standart-form.shadow
-  h2 = t('.edit')
-  = render "form", category: @category
+  h2 = t('lessons.edit_lesson')
+  = render "form", lesson: @lesson

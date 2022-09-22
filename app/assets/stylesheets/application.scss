@@ -1,15 +1,32 @@
 @import "bootstrap";
 @import "_hero";
 
+// body
+body {
+  background-color: rgb(248, 249, 250);
+}
+
+// links
+.custom-breadcrumbs a {
+  text-decoration: none;
+}
+
+// titles
 h1 {
   font-size: 20px;
 }
 
+h2 {
+  font-size: 18px;
+}
+
+// forms
 .standart-form {
   width: 400px;
   border: 1px solid gray;
   border-radius: 12px;
   padding: 24px;
+  background: #ffffff;
 }
 
 // icons
@@ -44,4 +61,19 @@ i svg {
 // margins
 .custom-mr-12 {
   margin-right: 12px;
+}
+
+// lists
+.custom-list-group {
+  width: 400px;
+}
+
+// pagination
+.custom-pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination li {
+  margin: 0 8px;
 }
