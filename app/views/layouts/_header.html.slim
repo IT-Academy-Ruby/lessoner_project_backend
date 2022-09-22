@@ -16,7 +16,8 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark.p-1
           a.nav-link class=('active' if current_locale == menu_locales[label]) href=url_for(locale: menu_locales[label])
             = label
     - if user_signed_in?
-      = button_to "#{t('global.logout')}", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm"
+        = link_to "#{current_user.name}", users_path, :class=>"heder-link"
+        = button_to "#{t('global.logout')}", destroy_user_session_path, method: :delete, :class=>"btn btn-outline-light btn-sm"
     - else
       = button_to "#{t('global.login')}", new_user_session_path, method: :get, class: "btn btn-outline-light btn-sm"
 
