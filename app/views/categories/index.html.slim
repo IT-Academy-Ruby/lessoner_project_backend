@@ -1,10 +1,21 @@
-h1 = t('.categories')
-ul.list-group.list-group-numbered
-   - @categories.each do |category|
+.mt-3.d-flex.small.p-2.custom-breadcrumbs
+  div
+    a title = t('global.home') href = root_path
+      i == Octicons::Octicon.new("home").to_svg
+  div
+    i == Octicons::Octicon.new("arrow-right").to_svg
+  div
+    = t('global.categories')
+
+.my-3.p-3.bg-body.rounded.shadow-sm
+  h1 = t('.categories')
+  - @categories.each do |category|
     - unless category.archived?
-      li.list-group-item
-        = link_to category.name, category, class: 'list-group-item'
-= paginate @categories
-.mt-3
-  = link_to t('.new'), new_category_path, class: 'btn btn-primary'
+    .border-bottom.p-3
+      div = link_to category.name, category
+      span.small = category.description
+  .mt-3.custom-pagination-wrapper
+    = paginate @categories
+  .mt-3
+    = link_to t('.new'), new_category_path, class: 'btn btn-outline-primary'
 

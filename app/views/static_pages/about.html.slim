@@ -1,2 +1,12 @@
-h1 = t('global.about')
-p = t('.description')
+.mt-3.d-flex.small.p-2.custom-breadcrumbs
+  div
+    a title = t('global.home') href = root_path
+      i == Octicons::Octicon.new("home").to_svg
+  div
+    i == Octicons::Octicon.new("arrow-right").to_svg
+  div
+    = t('global.about')
+
+.my-3.p-3.bg-body.rounded.shadow-sm style = "height: 350px;"
+  h1 = t('global.about')
+  p = t('.description')

@@ -4,13 +4,16 @@ en:
       category:
         name: "Name"
         description: "Description"
-      lessons:
+      lesson:
         title: "Title"
         description: "Description"
         video_link: "Video link"
+        status: "Status"
+        category: "Category"
   global:
     home: "Home"
     categories: "Categories"
+    lessons: "Lessons"
     about: "About"
     login: "Log in"
     logout: "Log out"
@@ -22,7 +25,7 @@ en:
       title: "Learn dozens of quality courses with Lessoner"
       lead: "Best & free web platform for online learning"
     back: "Back"
-    edit: "Изменить"
+    edit: "Edit"
 
   static_pages:
     about:
@@ -70,3 +73,5 @@ en:
 
   lessons:
     add_new_lesson: "Add new lesson"
+    category_lessons: "Lessons from this category"
+    edit_lesson: "Edit lesson"

@@ -23,18 +23,17 @@ class LessonsController < ApplicationController
 
   def edit; end
 
-  def update;
+  def update
     if @lesson.update(lesson_params)
       redirect_to @lesson
     else
       render :edit, status: :unprocessable_entity
     end
-   end
+  end
 
-   def destroy
+  def destroy
     @lesson.destroy
-   end
-
+  end
 
   private
 
@@ -43,6 +42,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_find
-    @lesson = current_user.lessons.find(params[:id])
+    @lesson = Lesson.all.find(params[:id])
   end
 end

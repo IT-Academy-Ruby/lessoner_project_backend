@@ -45,7 +45,6 @@ gem 'kaminari'
 # Videoplayer for rails [https://github.com/sadiqmmm/plyr-rails]
 gem 'plyr-rails'
 
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -63,7 +62,6 @@ gem 'bootsnap', require: false
 
 # Template language
 gem 'slim-rails', '~> 3.1', '>= 3.5.1'
-
 
 # Front-end framework
 gem 'bootstrap', '~> 5.2'

@@ -5,10 +5,16 @@ ru:
         name: "Название"
         description: "Описание"
         status: 'Статус'
-
+      lesson:
+        title: "Заголовок"
+        description: "Описание"
+        video_link: "Ссылка на видео"
+        status: "Статус"
+        category: "Категория"
   global:
     home: "Домой"
     categories: "Категории"
+    lessons: "Уроки"
     about: "О проекте"
     login: "Войти"
     logout: "Выйти"
@@ -67,4 +73,5 @@ ru:
 
   lessons:
     add_new_lesson: "Добавить урок"
-
+    category_lessons: "Уроки в этой категории"
+    edit_lesson: "Редактировать урок"

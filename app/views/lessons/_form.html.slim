@@ -1,24 +1,24 @@
 = form_with model: lesson do |form|
-  div
-    = form.label :title
-    = form.text_field :title
+  .field.mt-3
+    = form.label :title, class: "form-label"
+    = form.text_field :title, class: "form-control"
     - lesson.errors.full_messages_for(:title).each do |message|
-      div = message
-  div
-    = form.label :description
-    = form.text_area :description
+      .text-danger = message
+  .field.mt-3
+    = form.label :description, class: "form-label"
+    = form.text_area :description, class: "form-control"
     - lesson.errors.full_messages_for(:description).each do |message|
-      div = message
-  div
-    = form.label :video_link
-    = form.text_area :video_link
+      .text-danger = message
+  .field.mt-3
+    = form.label :video_link, class: "form-label"
+    = form.text_area :video_link, class: "form-control"
     - lesson.errors.full_messages_for(:video_link).each do |message|
-      div = message
-  div
-    = form.label :status
-    = form.select :status, ['active', 'archived'], selected: 'public'
-  div
-    = form.label :category
-    = form.collection_select :category_id, Category.all, :id, :name
-  div
-    = form.submit t('global.forms.submit')
+      .text-danger = message
+  .input-group.mt-5
+    = form.label :status, class: "input-group-text"
+    = form.select :status, ['active', 'archived'], {}, {class: "form-select"}
+  .input-group.mt-5
+    = form.label :category, class: "input-group-text"
+    = form.collection_select :category_id, Category.all, :id, :name, {}, {class: "form-select"}
+  .field.mt-5
+    = form.submit t('global.forms.submit'), class: "btn btn-outline-primary"
