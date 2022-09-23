@@ -1,10 +1,13 @@
-class UsersController < ApplicationController
-end
+# frozen_string_literal: true
 
-  def show
+class UsersController < ApplicationController
+  before_action :user_find, only: %i[show]
+
+  def show; end
+
+  private
+
+  def user_find
     @user = User.find(params[:id])
   end
-
-  def index
-    @users = User.all
-  end
+end
