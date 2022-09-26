@@ -4,10 +4,16 @@ en:
       category:
         name: "Name"
         description: "Description"
-
+      lesson:
+        title: "Title"
+        description: "Description"
+        video_link: "Video link"
+        status: "Status"
+        category: "Category"
   global:
     home: "Home"
     categories: "Categories"
+    lessons: "Lessons"
     about: "About"
     login: "Log in"
     logout: "Log out"
@@ -18,10 +24,21 @@ en:
     hero:
       title: "Learn dozens of quality courses with Lessoner"
       lead: "Best & free web platform for online learning"
+    back: "Back"
+    edit: "Edit"
 
   static_pages:
     about:
       description: "Information about out project"
+    home:
+      description: "Main content"
+
+  categories:
+    index:
+      categories: "Categories"
+      new: "New Category"
+    edit:
+      edit: "Edit Category"
 
   data:
     signup: "Sign up"
@@ -49,3 +66,12 @@ en:
     send: "Send me reset password instructions"
     resendcon: "Resend confirmation instructions"
     change: "Change your password"
+    description: "Description"
+    users: "Users:"
+    newuser: "New user"
+    delete: "Delete"
+
+  lessons:
+    add_new_lesson: "Add new lesson"
+    category_lessons: "Lessons from this category"
+    edit_lesson: "Edit lesson"

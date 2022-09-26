@@ -6,10 +6,13 @@ div.hero.bg-light
       = t('global.hero.lead')
   .hero_button-wrapper.mt-3
     - if user_signed_in?
-        a.btn.btn-outline-primary href = about_path
-          = t('global.learn_more')
+      a.btn.btn-outline-primary href = new_lesson_path
+        i == Octicons::Octicon.new("plus-circle").to_svg
+        = t('lessons.add_new_lesson')
     - else
         a.btn.btn-outline-primary href = new_user_registration_path
+          i == Octicons::Octicon.new("person-add").to_svg
           = t('global.create_account')
-        a.btn.btn-outline-primary href = about_path
-          = t('global.learn_more')
+    a.btn.btn-outline-primary href = about_path
+      i == Octicons::Octicon.new("milestone").to_svg
+      = t('global.learn_more')

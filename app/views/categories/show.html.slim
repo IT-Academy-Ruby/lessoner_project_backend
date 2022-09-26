@@ -1,5 +1,31 @@
-h1 = @category.name
+.mt-3.d-flex.small.p-2.custom-breadcrumbs
+  div
+    a title = t('global.home') href = root_path
+      i == Octicons::Octicon.new("home").to_svg
+  div
+    i == Octicons::Octicon.new("arrow-right").to_svg
+  div
+    = link_to t('global.categories'), categories_path
+  div
+    i == Octicons::Octicon.new("arrow-right").to_svg
+  div
+    = @category.name
 
-p = @category.description
-ul = link_to "Edit", edit_category_path(@category)
-ul = link_to "Back", categories_path
+
+.my-3.p-3.bg-body.rounded.shadow-sm.d-flex.justify-content-between.align-items-end
+  div.flex-grow-1
+    h1.border-bottom.pb-2.mb-0 = @category.name
+    p = @category.description
+  div.small
+    = link_to t('global.edit'), edit_category_path(@category)
+
+.my-3.p-3.bg-body.rounded.shadow-sm
+  h2.border-bottom.pb-2.mb-0 = t('lessons.category_lessons')
+  - @category.lessons.each do |lesson|
+    .border-bottom.p-3
+      div = link_to lesson.title, lesson
+      span.small = lesson.description
+  .mt-3
+    a.btn.btn-outline-primary href = new_lesson_path
+      i == Octicons::Octicon.new("plus-circle").to_svg
+      = t('lessons.add_new_lesson')

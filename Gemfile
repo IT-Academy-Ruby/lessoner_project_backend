@@ -8,9 +8,6 @@ ruby '3.1.2'
 # Error Tracking
 gem 'rollbar'
 
-# ENV
-gem 'dotenv', '~> 2.8', '>= 2.8.1'
-
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
 
@@ -36,6 +33,17 @@ gem 'stimulus-rails'
 gem 'jbuilder'
 
 gem 'devise'
+
+# Omniauth
+gem 'omniauth', '~> 2.1'
+gem 'omniauth-facebook', '~> 9.0'
+gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
+gem 'omniauth-rails_csrf_protection'
+
+gem 'kaminari'
+
+# Videoplayer for rails [https://github.com/sadiqmmm/plyr-rails]
+gem 'plyr-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -67,12 +75,17 @@ gem 'rails-i18n', '~> 7.0', '>= 7.0.5'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem 'octicons'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   # Testing
   gem 'rspec', '~> 3.11'
   gem 'rubocop-rails', '~> 2.15.2'
+
+  # ENV
+  gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 end
 
 group :development do

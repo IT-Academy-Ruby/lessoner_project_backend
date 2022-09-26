@@ -12,12 +12,10 @@ html lang = current_locale
   body
     header
       = render "layouts/header"
-      main
-        - if current_page?(root_path)
-          .container-fluid.p-0
-            = render "layouts/hero"
-        .container-fluid.mt-3
-          p.notice = notice
-          p.alert = alert
-          = yield
-
+    main
+      - if current_page?(root_path)
+        .container-fluid.p-0
+          = render "layouts/hero"
+      .container-fluid.mt-3
+        = render "layouts/toast"
+        = yield

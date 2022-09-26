@@ -7,3 +7,23 @@ AllCops:
  Exclude:
   - db/**/*
   - bin/bundle
+  
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/development.rb
+    - config/environments/production.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/users/omniauth_callbacks_controller.rb
+    - app/models/user.rb
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - app/controllers/users/omniauth_callbacks_controller.rb
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/Rails/InverseOf:
+  Enabled: false

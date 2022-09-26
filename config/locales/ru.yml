@@ -4,10 +4,17 @@ ru:
       category:
         name: "Название"
         description: "Описание"
-
+        status: 'Статус'
+      lesson:
+        title: "Заголовок"
+        description: "Описание"
+        video_link: "Ссылка на видео"
+        status: "Статус"
+        category: "Категория"
   global:
     home: "Домой"
     categories: "Категории"
+    lessons: "Уроки"
     about: "О проекте"
     login: "Войти"
     logout: "Выйти"
@@ -18,10 +25,21 @@ ru:
     hero:
       title: "Изучайте качественные курсы вместе с Lessoner"
       lead: "Лучшая и бесплатная платформа для удаленного обучения"
-      
+    back: "Назад"
+    edit: "Изменить"
+
   static_pages:
     about:
       description: "Информация о нашем проекте"
+    home:
+      description: "Что-то там..."
+
+  categories:
+    index:
+      categories: "Категории"
+      new: "Создать Категорию"
+    edit:
+      edit: "Изменить Категорию"
 
   data:
     signup: "Зарегистрироваться"
@@ -48,5 +66,12 @@ ru:
     send: "Пришлите мне инструкции по сбросу пароля"
     resendcon: "Повторно отправить инструкции по подтверждению"
     change: "Изменить пароль"
+    description: "Описание"
+    users: "Пользователи:"
+    newuser: "Новый пользователь"
+    delete: "Удалить"
 
-
+  lessons:
+    add_new_lesson: "Добавить урок"
+    category_lessons: "Уроки в этой категории"
+    edit_lesson: "Редактировать урок"
