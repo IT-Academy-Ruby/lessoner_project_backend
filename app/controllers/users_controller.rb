@@ -6,10 +6,7 @@ class UsersController < ApplicationController
   def show; end
 
   def check_email
-    @user = User.find_by('email = ?', params[:email])
-    respond_to do |format|
-      format.json { render json: { email_exists: @user.present? } }
-    end
+    @user = User.find_by(email: params[:email])
   end
 
   private
