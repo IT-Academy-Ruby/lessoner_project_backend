@@ -5,12 +5,10 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.page(params[:page])
-
-    render json: @categories, only: %i[id name description]
   end
 
   def show
-    render json: @category
+
   end
 
   def new

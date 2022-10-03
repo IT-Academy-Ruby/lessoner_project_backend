@@ -101,6 +101,105 @@ paths:
       responses:
         '200':
           description: successful
+  "(/{locale)}/lessons":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list lessons
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+    post:
+      summary: create lesson
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: 'Ruby on Rails '
+                    description: Introduce
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              required:
+              - title
+              - description
+  "(/{locale)}/lessons/new":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: new lesson
+      responses:
+        '200':
+          description: successful
+  "(/{locale)}/lessons/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show lesson
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update lesson
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update lesson
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete lesson
+      responses:
+        '200':
+          description: successful
 servers:
 - url: http://{defaultHost}
   variables:
