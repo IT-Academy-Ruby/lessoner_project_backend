@@ -7,9 +7,7 @@ class CategoriesController < ApplicationController
     @categories = Category.page(params[:page])
   end
 
-  def show
-
-  end
+  def show; end
 
   def new
     @category = Category.new

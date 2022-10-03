@@ -6,8 +6,7 @@ class LessonsController < ApplicationController
     @lessons = Lesson.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @lesson = Lesson.new
@@ -44,7 +43,7 @@ class LessonsController < ApplicationController
 
   def lesson_find
     @lesson = Lesson.all.find(params[:id])
-    rescue StandardError => e
-      render json: {error: e}, status: :not_found
+  rescue StandardError => e
+    render json: { error: e }, status: :not_found
   end
 end

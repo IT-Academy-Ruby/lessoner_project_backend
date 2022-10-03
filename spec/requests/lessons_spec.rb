@@ -1,7 +1,6 @@
 require 'swagger_helper'
 
 RSpec.describe 'lessons', type: :request do
-
   path '(/{locale)}/lessons' do
     # You'll want to customize the parameter types...
     parameter name: 'locale', in: :path, type: :string, description: 'locale'
@@ -11,13 +10,13 @@ RSpec.describe 'lessons', type: :request do
 
       response(200, 'successful') do
         schema type: :array,
-                items: {
-                  type: :object,
-                  properties: {
-                    id: {type: :integer},
-                    title: {type: :string },
-                    description: {type: :string}
-                  }
+               items: {
+                 type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   title: { type: :string },
+                   description: { type: :string }
+                 }
                }
         run_test!
       end
