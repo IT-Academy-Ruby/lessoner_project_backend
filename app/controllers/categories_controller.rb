@@ -5,9 +5,13 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.page(params[:page])
+
+    render json: @categories, only: %i[id name description]
   end
 
-  def show; end
+  def show
+    render json: @category
+  end
 
   def new
     @category = Category.new
@@ -40,5 +44,7 @@ class CategoriesController < ApplicationController
 
   def category_find
     @category = Category.find(params[:id])
+  rescue StandardError => e
+    render json: { error: e }, status: :not_found
   end
 end
