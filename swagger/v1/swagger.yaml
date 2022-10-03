@@ -1,0 +1,108 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/{locale}/categories":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list categories
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+    post:
+      summary: create category
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    name: Web development
+                    description: All web-developer stacks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+              required:
+              - name
+              - description
+  "/{locale}/categories/new":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: new category
+      responses:
+        '200':
+          description: successful
+  "/{locale}/categories/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show category
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    error: Couldn't find Category with 'id'=wrong_id
+    put:
+      summary: update category
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/
