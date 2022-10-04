@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   devise_for :users, only: [:omniauth_callbacks], controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: redirect("/#{I18n.default_locale}"), as: :redirected_root
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do

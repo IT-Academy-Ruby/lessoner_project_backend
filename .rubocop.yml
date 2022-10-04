@@ -12,6 +12,11 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/development.rb
     - config/environments/production.rb
+    - spec/requests/*.rb
+
+Style/StringConcatenation:
+  Exclude:
+    - config/initializers/rswag_api.rb
 
 Metrics/AbcSize:
   Exclude:
@@ -26,4 +31,10 @@ Rails/HasManyOrHasOneDependent:
   Enabled: false
 
 Rails/Rails/InverseOf:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
