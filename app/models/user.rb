@@ -10,7 +10,7 @@ class User < ApplicationRecord
          omniauth_providers: %i[google_oauth2 facebook]
   validates :birthday, presence: true, date: { after: Proc.new { Date.today - 120.year },
                        before: Proc.new { Date.today } }
-  validates :name, presence: true, length: { in: 3..50 }, format: { with: /[a-z0-9]+/i },
+  validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true,
                     format: { with: /\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ }
@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
-                       format: { with: /[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+/i }
+                       format: { with: /\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }
   validates :phone, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
