@@ -8,7 +8,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: %i[google_oauth2 facebook]
-  validates :birthday, presence: true, date: { after: proc { Time.zone.today - 120.years },
+  validates :birthday, date: { after: proc { Time.zone.today - 120.years },
                                                before: proc { Time.zone.today } }
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
