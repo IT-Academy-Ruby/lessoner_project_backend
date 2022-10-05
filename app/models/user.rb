@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: %i[google_oauth2 facebook]
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
-                                               before: proc { Time.zone.today } }
+                               before: proc { Time.zone.today } }
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
