@@ -8,8 +8,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: %i[google_oauth2 facebook]
-
-  validates :name, presence: true, length: { in: 3..50 }, format: { with: /[a-z0-9]+/i }, uniqueness: true
+  validates :birthday, presence: true, date: { after: Proc.new { Date.today - 120.year },
+                       before: Proc.new { Date.today } }
+  validates :name, presence: true, length: { in: 3..50 }, format: { with: /[a-z0-9]+/i },
+                   uniqueness: true
   validates :email, presence: true,
                     format: { with: /\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ }
   validate :email_dots, if: -> { email.present? }
@@ -17,7 +19,7 @@ class User < ApplicationRecord
   validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
                        format: { with: /[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+/i }
-  validates :phone, format: { with: /\A\+/ }, if: -> { phone.present? }
+  validates :phone, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
   has_many :lessons, class_name: 'Lesson', foreign_key: 'author_id'
@@ -35,7 +37,8 @@ class User < ApplicationRecord
   end
 
 
-  # 
+  # Validation for email: symbol . (dot) provided that it is neither the first nor the last,
+  # and also if it is not repeated more than once in a row.
   def email_dots
     login = email.scan(/\S+@/).join
     if login.count('.')>1 || login[0]=='.' || login[-2]=='.'
@@ -43,7 +46,7 @@ class User < ApplicationRecord
     end
   end
 
-  #
+  # Validation for password: must contain at least 1 special character.
   def password_special_character
     if password.count("!#$%&'*+\-\/=?^_`{|}~")==0
       errors.add(:password, 'must contain at least 1 special character')
