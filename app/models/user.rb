@@ -12,7 +12,7 @@ class User < ApplicationRecord
                        before: Proc.new { Date.today } }
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
-  validates :email, presence: true,
+  validates :email, presence: true, length: { in: 3..256 },
                     format: { with: /\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ }
   validate :email_dots, if: -> { email.present? }
 
