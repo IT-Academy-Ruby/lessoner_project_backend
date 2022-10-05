@@ -32,3 +32,4 @@
 # Ignore idea files
 .idea
 .env
+.vscode
