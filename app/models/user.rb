@@ -9,16 +9,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: %i[google_oauth2 facebook]
   validates :birthday, presence: true, date: { after: proc { Time.zone.today - 120.years },
-                         before: proc { Time.zone.today } }
+                       before: proc { Time.zone.today } }
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
-                    format: { with: %r{\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z} }
+                    format: { with: %r/\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ }
   validate :email_dots, if: -> { email.present? }
 
   validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
-                       format: { with: %r{\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z}i }
+                       format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }
   validates :phone, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
