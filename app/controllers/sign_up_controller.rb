@@ -4,7 +4,7 @@ class SignUpController < ApplicationController
     if @user.save
       render :create
     else
-      render json: {errors: @user.errors.full_messages}
+      render json: { errors: @user.errors.full_messages }
     end
   end
 
