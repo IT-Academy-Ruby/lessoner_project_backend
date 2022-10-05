@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: %i[google_oauth2 facebook]
   validates :birthday, presence: true, date: { after: proc { Time.zone.today - 120.years },
-                       before: proc { Time.zone.today } }
+                                               before: proc { Time.zone.today } }
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
@@ -40,15 +40,11 @@ class User < ApplicationRecord
   # and also if it is not repeated more than once in a row.
   def email_dots
     login = email.scan(/\S+@/).join
-    if login.count('.') > 1 || login[0] == '.' || login[-2] == '.'
-      errors.add(:email, 'has too many dots')
-    end
+    errors.add(:email, 'has too many dots') if login.count('.') > 1 || login[0] == '.' || login[-2] == '.'
   end
 
   # Validation for password: must contain at least 1 special character.
   def password_special_character
-    if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
-      errors.add(:password, 'must contain at least 1 special character')
-    end
+    errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
   end
 end
