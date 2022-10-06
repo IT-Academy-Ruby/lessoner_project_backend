@@ -43,6 +43,9 @@ paths:
                   value:
                     title: 'Ruby on Rails '
                     description: Introduce
+                    video_link: link
+                    status: status
+                    author_id: '01'
       requestBody:
         content:
           application/json:
@@ -53,22 +56,15 @@ paths:
                   type: string
                 description:
                   type: string
+                video_link:
+                  type: string
+                status:
+                  type: string
+                author_id:
+                  type: integer
               required:
               - title
               - description
-  "(/{locale)}/lessons/new":
-    parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
-    get:
-      summary: new lesson
-      responses:
-        '200':
-          description: successful
   "(/{locale)}/lessons/{id}":
     parameters:
     - name: locale
@@ -85,24 +81,76 @@ paths:
         type: string
     get:
       summary: show lesson
+      parameters: []
       responses:
         '200':
           description: successful
-    patch:
-      summary: update lesson
-      responses:
-        '200':
-          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: 'Ruby on Rails '
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: '01'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
     put:
       summary: update lesson
+      parameters: []
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: 'Ruby on Rails '
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: '01'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
     delete:
       summary: delete lesson
+      parameters: []
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: 'Ruby on Rails '
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: '01'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
 servers:
 - url: http://{defaultHost}
   variables:

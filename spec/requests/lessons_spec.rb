@@ -26,7 +26,10 @@ RSpec.describe 'lessons', type: :request do
       response(200, 'successful') do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails ',
-          description: 'Introduce'
+          description: 'Introduce',
+          video_link: 'link',
+          status: 'status',
+          author_id: '01'
         }
 
         consumes 'application/json'
@@ -34,7 +37,11 @@ RSpec.describe 'lessons', type: :request do
           type: :object,
           properties: {
             title: { type: :string },
-            description: { type: :string }
+            description: { type: :string },
+            video_link: { type: :string },
+            status: {type: :string},
+            author_id: {type: :integer}
+
           },
           required: %w[title description]
         }
@@ -52,7 +59,21 @@ RSpec.describe 'lessons', type: :request do
       response(200, 'successful') do
         let(:locale) { '123' }
         let(:id) { '123' }
+        example 'application/json', :example_key, {
+          title: 'Ruby on Rails ',
+          description: 'Introduce',
+          vvideo_link: 'link',
+          status: 'status',
+          author_id: '01'
+        }
 
+        consumes 'application/json'
+        parameter title: :lesson, in: :body, schema: {
+          type: :object,
+          properties: {
+            id: { type: :integer }
+          }
+        }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -64,27 +85,26 @@ RSpec.describe 'lessons', type: :request do
       end
     end
 
-    patch('update lesson') do
-      response(200, 'successful') do
-        let(:locale) { '123' }
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
 
     put('update lesson') do
       response(200, 'successful') do
         let(:locale) { '123' }
         let(:id) { '123' }
+        example 'application/json', :example_key, {
+          title: 'Ruby on Rails ',
+          description: 'Introduce',
+          vvideo_link: 'link',
+          status: 'status',
+          author_id: '01'
+        }
 
+        consumes 'application/json'
+        parameter title: :lesson, in: :body, schema: {
+          type: :object,
+          properties: {
+            id: { type: :integer }
+          }
+        }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -100,7 +120,21 @@ RSpec.describe 'lessons', type: :request do
       response(200, 'successful') do
         let(:locale) { '123' }
         let(:id) { '123' }
+        example 'application/json', :example_key, {
+          title: 'Ruby on Rails ',
+          description: 'Introduce',
+          vvideo_link: 'link',
+          status: 'status',
+          author_id: '01'
+        }
 
+        consumes 'application/json'
+        parameter title: :lesson, in: :body, schema: {
+          type: :object,
+          properties: {
+            id: { type: :integer }
+          }
+        }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
