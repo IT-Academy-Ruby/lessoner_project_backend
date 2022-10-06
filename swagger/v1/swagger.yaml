@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "(/{locale)}/lessons":
+  "/{locale}/lessons":
     parameters:
     - name: locale
       in: path
@@ -26,10 +26,15 @@ paths:
                   properties:
                     id:
                       type: integer
+                      minimum: 1
                     title:
                       type: string
                     description:
                       type: string
+                  required:
+                  - id
+                  - title
+                  - description
     post:
       summary: create lesson
       parameters: []
@@ -41,11 +46,11 @@ paths:
               examples:
                 example_key:
                   value:
-                    title: 'Ruby on Rails '
+                    title: Ruby on Rails
                     description: Introduce
                     video_link: link
                     status: status
-                    author_id: '01'
+                    author_id: 1
       requestBody:
         content:
           application/json:
@@ -62,10 +67,14 @@ paths:
                   type: string
                 author_id:
                   type: integer
+                  minimum: 1
               required:
               - title
               - description
-  "(/{locale)}/lessons/{id}":
+              - status
+              - video_link
+              - author_id
+  "/{locale}/lessons/{id}":
     parameters:
     - name: locale
       in: path
@@ -81,7 +90,6 @@ paths:
         type: string
     get:
       summary: show lesson
-      parameters: []
       responses:
         '200':
           description: successful
@@ -90,19 +98,11 @@ paths:
               examples:
                 example_key:
                   value:
-                    title: 'Ruby on Rails '
+                    title: Ruby on Rails
                     description: Introduce
                     vvideo_link: link
                     status: status
-                    author_id: '01'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: integer
+                    author_id: 1
     put:
       summary: update lesson
       parameters: []
@@ -114,11 +114,12 @@ paths:
               examples:
                 example_key:
                   value:
-                    title: 'Ruby on Rails '
+                    title: Ruby on Rails
                     description: Introduce
                     vvideo_link: link
                     status: status
-                    author_id: '01'
+                    author_id: 1
+                    id: 1
       requestBody:
         content:
           application/json:
@@ -127,6 +128,24 @@ paths:
               properties:
                 id:
                   type: integer
+                  minimum: 1
+                title:
+                  type: string
+                description:
+                  type: string
+                video_link:
+                  type: string
+                status:
+                  type: string
+                author_id:
+                  type: integer
+                  minimum: 1
+              required:
+              - title
+              - description
+              - status
+              - video_link
+              - author_id
     delete:
       summary: delete lesson
       parameters: []
@@ -138,11 +157,7 @@ paths:
               examples:
                 example_key:
                   value:
-                    title: 'Ruby on Rails '
-                    description: Introduce
-                    vvideo_link: link
-                    status: status
-                    author_id: '01'
+                    id: 1
       requestBody:
         content:
           application/json:
@@ -151,6 +166,7 @@ paths:
               properties:
                 id:
                   type: integer
+                  minimum: 1
 servers:
 - url: http://{defaultHost}
   variables:

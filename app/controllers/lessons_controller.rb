@@ -43,5 +43,5 @@ class LessonsController < ApplicationController
 
   def lesson_find
     @lesson = Lesson.all.find(params[:id])
-
+  end
 end
