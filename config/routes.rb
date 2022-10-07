@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     devise_for :users, skip: [:omniauth_callbacks]
     resources :categories
+    resources :users, defaults: { format: :json }
     root 'static_pages#home'
     get '/about', to: 'static_pages#about'
 
