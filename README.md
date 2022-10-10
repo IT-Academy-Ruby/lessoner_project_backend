@@ -67,3 +67,22 @@ rails server
 ```
 rubocop --require rubocop-rails
 ```
+
+### Updating swagger
+
+Link to the swagger: `/api-docs`, e.g. `http://127.0.0.1:3000/api-docs/index.html`
+
+Spec files for generating swagger are located in the `/spec/requests` folder. To add new one choose a controller (e.g. `categories`) and run:
+
+```
+rails generate rspec:swagger categories
+```
+it will create `/spec/requests/categories.spec.rb` file. Edit it according to the API to be used. See [documentation of rswag gem](https://github.com/rswag/rswag) for details.
+
+Data types can be also pick up [here](https://swagger.io/docs/specification/data-models/data-types/)
+
+For updating API docs run (*it is not necessary to restart rails server*)
+
+```
+rails rswag
+```

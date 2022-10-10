@@ -1,0 +1,210 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/{locale}/categories":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list categories
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/category"
+    post:
+      summary: create category
+      tags:
+      - Categories
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/category"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              examples:
+                example_blank_name:
+                  value:
+                    errors:
+                      name:
+                      - can't be blank
+                example_blank_description:
+                  value:
+                    errors:
+                      description:
+                      - can't be blank
+              schema:
+                "$ref": "#/components/schemas/errors_object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_category"
+  "/{locale}/categories/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show category
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/category"
+    put:
+      summary: update category
+      tags:
+      - Categories
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/category"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_category"
+  "/{locale}/users/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  email:
+                    type: string
+                  avatar_url:
+                    type: string
+                required:
+                - id
+                - name
+                - description
+                - email
+                - avatar_url
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/
+components:
+  schemas:
+    errors_object:
+      type: object
+      properties:
+        errors:
+          "$ref": "#/components/schemas/errors_map"
+    errors_map:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+      required:
+      - id
+      - name
+      - description
+      - status
+    create_category:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+      required:
+      - name
+      - description
+    update_category:
+      type: object
+      minProperties: 1
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
