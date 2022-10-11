@@ -37,7 +37,6 @@ RSpec.describe 'lessons', type: :request do
   end
 
   path '/{locale}/lessons/{id}' do
-
     parameter name: 'locale', in: :path, type: :string, description: 'locale'
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
@@ -75,7 +74,7 @@ RSpec.describe 'lessons', type: :request do
         }
 
         consumes 'application/json'
-        parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/update_lesson'}
+        parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/update_lesson' }
         schema '$ref' => '#/components/schemas/lesson'
         run_test!
       end
@@ -91,7 +90,7 @@ RSpec.describe 'lessons', type: :request do
         }
 
         consumes 'application/json'
-        parameter title: :lesson, in: :body, schema: {'$ref' => '#/components/schemas/update_lesson'}
+        parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/update_lesson' }
         schema '$ref' => '#/components/schemas/update_lesson'
         run_test!
       end
