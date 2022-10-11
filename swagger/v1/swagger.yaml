@@ -101,6 +101,130 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/update_category"
+  "/{locale}/lessons":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list lessons
+      tags:
+      - Lessons
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    id: '1'
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/lesson"
+    post:
+      summary: create lesson
+      tags:
+      - Lessons
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    video_link: link
+                    status: status
+                    author_id: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_lesson"
+  "/{locale}/lessons/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show lesson
+      tags:
+      - Lessons
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: 1
+    put:
+      summary: update lesson
+      tags:
+      - Lessons
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: 1
+                    id: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_lesson"
+    delete:
+      summary: delete lesson
+      tags:
+      - Lessons
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    id: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_lesson"
   "/{locale}/users/{id}":
     parameters:
     - name: locale
@@ -208,3 +332,83 @@ components:
           enum:
           - active
           - archived
+    lesson:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+        description:
+          type: string
+      required:
+      - id
+      - title
+      - description
+    create_lesson:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        video_link:
+          type: string
+        status:
+          type: string
+        author_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - status
+      - video_link
+      - author_id
+    lesson_extended:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+        description:
+          type: string
+        video_link:
+          type: string
+        status:
+          type: string
+        author_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - status
+      - video_link
+      - author_id
+    update_lesson:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+        description:
+          type: string
+        video_link:
+          type: string
+        status:
+          type: string
+        author_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - status
+      - video_link
+      - author_id

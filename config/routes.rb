@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     devise_for :users, skip: [:omniauth_callbacks]
     resources :categories, defaults: { format: :json }
     resources :users, defaults: { format: :json }
+    resources :lessons, defaults: { format: :json }
     root 'static_pages#home'
     get '/about', to: 'static_pages#about'
 
