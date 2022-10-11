@@ -62,6 +62,50 @@ SWAGGER_DOCS = {
             description: { type: :string },
             status: { type: :string, enum: Category::STATUSES }
           }
+        },
+        lesson: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            title: { type: :string },
+            description: { type: :string }
+          },
+          required: %w[id title description]
+        },
+        create_lesson: {
+          type: :object,
+          properties: {
+            title: { type: :string },
+            description: { type: :string },
+            video_link: { type: :string },
+            status: { type: :string },
+            author_id: { type: :integer, minimum: 1 }
+          },
+          required: %w[title description status video_link author_id]
+        },
+        lesson_extended: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            title: { type: :string },
+            description: { type: :string },
+            video_link: { type: :string },
+            status: { type: :string },
+            author_id: { type: :integer, minimum: 1 }
+          },
+          required: %w[title description status video_link author_id]
+        },
+        update_lesson: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            title: { type: :string },
+            description: { type: :string },
+            video_link: { type: :string },
+            status: { type: :string },
+            author_id: { type: :integer, minimum: 1 }
+          },
+          required: %w[title description status video_link author_id]
         }
       }
     }
