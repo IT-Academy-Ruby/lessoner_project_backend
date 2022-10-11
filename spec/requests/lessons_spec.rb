@@ -16,7 +16,6 @@ RSpec.describe 'lessons', type: :request do
           id: '1'
         }
 
-
         schema type: :array, items: { '$ref' => '#/components/schemas/lesson' }
 
         let(:locale) { 'en' }
