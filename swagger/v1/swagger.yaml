@@ -118,6 +118,12 @@ paths:
           description: successful
           content:
             application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    id: '1'
               schema:
                 type: array
                 items:

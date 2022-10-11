@@ -10,6 +10,13 @@ RSpec.describe 'lessons', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
+        example 'application/json', :example_key, {
+          title: 'Ruby on Rails',
+          description: 'Introduce',
+          id: '1'
+        }
+
+
         schema type: :array, items: { '$ref' => '#/components/schemas/lesson' }
 
         let(:locale) { 'en' }
