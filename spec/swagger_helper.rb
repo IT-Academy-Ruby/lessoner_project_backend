@@ -122,6 +122,12 @@ SWAGGER_DOCS = {
             author_id: { type: :integer, minimum: 1 }
           },
           required: %w[title description status video_link author_id]
+        },
+        delete_lesson: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 }
+          }
         }
       }
     }

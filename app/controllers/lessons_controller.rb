@@ -13,9 +13,9 @@ class LessonsController < ApplicationController
   end
 
   def create
-    @lesson = current_user.lessons.new(lesson_params)
+    @lesson = Lesson.new(lesson_params)
     if @lesson.save
-      redirect_to @lesson
+      render 'lessons/show'
     else
       render :new, status: :unprocessable_entity
     end
