@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 
   def show; end
 
+  def check_username
+    @user = User.find_by(name: params[:name])
+  end
+
   private
 
   def user_find
