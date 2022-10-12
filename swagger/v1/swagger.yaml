@@ -155,6 +155,7 @@ paths:
                     video_link: link
                     status: status
                     author_id: 1
+                    category_id: 1
       requestBody:
         content:
           application/json:
@@ -191,6 +192,7 @@ paths:
                     vvideo_link: link
                     status: status
                     author_id: 1
+                    category_id: 1
     put:
       summary: update lesson
       tags:
@@ -210,6 +212,7 @@ paths:
                     status: status
                     author_id: 1
                     id: 1
+                    category_id: 1
       requestBody:
         content:
           application/json:
@@ -558,6 +561,9 @@ components:
         author_id:
           type: integer
           minimum: 1
+        category_id:
+          type: integer
+          minimum: 1
       required:
       - title
       - description
@@ -581,6 +587,9 @@ components:
         author_id:
           type: integer
           minimum: 1
+        category_id:
+          type: integer
+          minimum: 1
       required:
       - title
       - description
@@ -602,6 +611,9 @@ components:
         status:
           type: string
         author_id:
+          type: integer
+          minimum: 1
+        category_id:
           type: integer
           minimum: 1
       required:

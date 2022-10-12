@@ -31,7 +31,8 @@ RSpec.describe 'lessons', type: :request do
           description: 'Introduce',
           video_link: 'link',
           status: 'status',
-          author_id: 1
+          author_id: 1,
+          category_id: 1
         }
 
         consumes 'application/json'
@@ -54,7 +55,8 @@ RSpec.describe 'lessons', type: :request do
           description: 'Introduce',
           vvideo_link: 'link',
           status: 'status',
-          author_id: 1
+          author_id: 1,
+          category_id: 1
         }
 
         schema '$ref' => '#/components/schemas/lesson'
@@ -76,7 +78,8 @@ RSpec.describe 'lessons', type: :request do
           vvideo_link: 'link',
           status: 'status',
           author_id: 1,
-          id: 1
+          id: 1,
+          category_id: 1
         }
 
         consumes 'application/json'
