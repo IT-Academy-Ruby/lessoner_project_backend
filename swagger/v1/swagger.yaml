@@ -14,6 +14,8 @@ paths:
         type: string
     get:
       summary: list categories
+      tags:
+      - Categories
       responses:
         '200':
           description: successful
@@ -22,53 +24,41 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    name:
-                      type: string
-                    description:
-                      type: string
+                  "$ref": "#/components/schemas/category"
     post:
       summary: create category
+      tags:
+      - Categories
       parameters: []
       responses:
         '200':
           description: successful
           content:
             application/json:
+              schema:
+                "$ref": "#/components/schemas/category"
+        '422':
+          description: invalid request
+          content:
+            application/json:
               examples:
-                example_key:
+                example_blank_name:
                   value:
-                    name: Web development
-                    description: All web-developer stacks
+                    errors:
+                      name:
+                      - can't be blank
+                example_blank_description:
+                  value:
+                    errors:
+                      description:
+                      - can't be blank
+              schema:
+                "$ref": "#/components/schemas/errors_object"
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-              required:
-              - name
-              - description
-  "/{locale}/categories/new":
-    parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
-    get:
-      summary: new category
-      responses:
-        '200':
-          description: successful
+              "$ref": "#/components/schemas/create_category"
   "/{locale}/categories/{id}":
     parameters:
     - name: locale
@@ -85,24 +75,348 @@ paths:
         type: string
     get:
       summary: show category
+      tags:
+      - Categories
       responses:
         '200':
           description: successful
-        '404':
-          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/category"
+    put:
+      summary: update category
+      tags:
+      - Categories
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/category"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_category"
+  "/{locale}/lessons":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list lessons
+      tags:
+      - Lessons
+      responses:
+        '200':
+          description: successful
           content:
             application/json:
               examples:
                 example_key:
                   value:
-                    error: Couldn't find Category with 'id'=wrong_id
-    put:
-      summary: update category
+                    title: Ruby on Rails
+                    description: Introduce
+                    id: '1'
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/lesson"
+    post:
+      summary: create lesson
+      tags:
+      - Lessons
+      parameters: []
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    video_link: link
+                    status: status
+                    author_id: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_lesson"
+  "/{locale}/lessons/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show lesson
+      tags:
+      - Lessons
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: 1
+    put:
+      summary: update lesson
+      tags:
+      - Lessons
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    title: Ruby on Rails
+                    description: Introduce
+                    vvideo_link: link
+                    status: status
+                    author_id: 1
+                    id: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_lesson"
+    delete:
+      summary: delete lesson
+      tags:
+      - Lessons
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    id: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_lesson"
+  "/{locale}/users/{id}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  email:
+                    type: string
+                  avatar_url:
+                    type: string
+                required:
+                - id
+                - name
+                - description
+                - email
+                - avatar_url
 servers:
-- url: http://{defaultHost}
+- url: http://{herokuapp}
   variables:
-    defaultHost:
+    herokuapp:
+      default: lessoner.herokuapp.com/
+- url: http://{localHost1}
+  variables:
+    localHost1:
       default: localhost:3000/
+- url: http://{localHost2}
+  variables:
+    localHost2:
+      default: 127.0.0.1:3000/
+components:
+  schemas:
+    errors_object:
+      type: object
+      properties:
+        errors:
+          "$ref": "#/components/schemas/errors_map"
+    errors_map:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+      required:
+      - id
+      - name
+      - description
+      - status
+    create_category:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+      required:
+      - name
+      - description
+    update_category:
+      type: object
+      minProperties: 1
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+    lesson:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+        description:
+          type: string
+      required:
+      - id
+      - title
+      - description
+    create_lesson:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        video_link:
+          type: string
+        status:
+          type: string
+        author_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - status
+      - video_link
+      - author_id
+    lesson_extended:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+        description:
+          type: string
+        video_link:
+          type: string
+        status:
+          type: string
+        author_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - status
+      - video_link
+      - author_id
+    update_lesson:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+        description:
+          type: string
+        video_link:
+          type: string
+        status:
+          type: string
+        author_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - status
+      - video_link
+      - author_id

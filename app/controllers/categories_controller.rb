@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_action :category_find, only: %i[show edit update]
 
   def index
-    @categories = Category.page(params[:page])
+    @categories = Category.all
   end
 
   def show; end
@@ -16,9 +16,9 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to @category
+      render 'categories/show'
     else
-      render :new, status: :unprocessable_entity
+      render 'categories/errors', status: :unprocessable_entity
     end
   end
 
@@ -26,16 +26,16 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to @category
+      render 'categories/show'
     else
-      render :edit, status: :unprocessable_entity
+      render 'categories/errors', status: :unprocessable_entity
     end
   end
 
   private
 
   def category_params
-    params.require(:category).permit(:name, :description, :status)
+    params.permit(:name, :description, :status)
   end
 
   def category_find

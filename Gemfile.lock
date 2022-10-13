@@ -220,6 +220,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.2.2)
       rack
     rack-test (2.0.2)
@@ -406,6 +408,7 @@ DEPENDENCIES
   phonelib (~> 0.7.3)
   plyr-rails
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.3, >= 7.0.3.1)
   rails-i18n (~> 7.0, >= 7.0.5)
   rollbar
