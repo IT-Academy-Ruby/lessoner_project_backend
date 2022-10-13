@@ -292,10 +292,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  username_exists:
+                  usernameExists:
                     type: boolean
                 required:
-                  - username_exists
+                  - usernameExists
 servers:
 - url: http://{defaultHost}
   variables:
