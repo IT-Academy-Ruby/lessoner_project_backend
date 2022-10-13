@@ -29,10 +29,10 @@ RSpec.describe 'lessons', type: :request do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails',
           description: 'Introduce',
-          video_link: 'link',
+          videoLink: 'link',
           status: 'status',
-          author_id: 1,
-          category_id: 1
+          authorId: 1,
+          categoryId: 1
         }
 
         consumes 'application/json'
@@ -53,13 +53,24 @@ RSpec.describe 'lessons', type: :request do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails',
           description: 'Introduce',
-          vvideo_link: 'link',
+          vvideoLink: 'link',
           status: 'status',
-          author_id: 1,
-          category_id: 1
+          authorId: 1,
+          categoryId: 1
         }
 
         schema '$ref' => '#/components/schemas/lesson'
+        let(:locale) { 'en' }
+        let(:id) { '1' }
+
+        run_test!
+      end
+      response(404, 'not found') do
+        example 'application/json', :example_not_found, {
+          "status": 404,
+          "error": 'Not Found'
+        }
+
         let(:locale) { 'en' }
         let(:id) { '1' }
 
@@ -75,11 +86,10 @@ RSpec.describe 'lessons', type: :request do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails',
           description: 'Introduce',
-          vvideo_link: 'link',
+          vvideoLink: 'link',
           status: 'status',
-          author_id: 1,
-          id: 1,
-          category_id: 1
+          authorId: 1,
+          categoryId: 1
         }
 
         consumes 'application/json'

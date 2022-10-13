@@ -93,12 +93,12 @@ SWAGGER_DOCS = {
           properties: {
             title: { type: :string },
             description: { type: :string },
-            video_link: { type: :string },
-            status: { type: :string },
-            author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            videoLink: { type: :string },
+            status: { type: :integer, enum: Category::STATUSES },
+            authorId: { type: :integer, minimum: 1 },
+            categoryId: { type: :integer, minimum: 1 }
           },
-          required: %w[title description status video_link author_id]
+          required: %w[title description videoLink authorId]
         },
         lesson_extended: {
           type: :object,
@@ -106,25 +106,25 @@ SWAGGER_DOCS = {
             id: { type: :integer, minimum: 1 },
             title: { type: :string },
             description: { type: :string },
-            video_link: { type: :string },
-            status: { type: :string },
-            author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            videoLink: { type: :string },
+            status: { type: :integer, enum: Category::STATUSES },
+            authorId: { type: :integer, minimum: 1 },
+            categoryId: { type: :integer, minimum: 1 }
           },
-          required: %w[title description status video_link author_id]
+          required: %w[title description status videoLink authorId]
         },
         update_lesson: {
           type: :object,
+          minProperties: 1,
           properties: {
-            id: { type: :integer, minimum: 1 },
             title: { type: :string },
             description: { type: :string },
-            video_link: { type: :string },
-            status: { type: :string },
-            author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
-          },
-          required: %w[title description status video_link author_id]
+            videoLink: { type: :string },
+            status: { type: :integer, enum: Lesson::STATUSES },
+            authorId: { type: :integer, minimum: 1 },
+            categoryId: { type: :integer, minimum: 1 }
+          }
+
         },
         delete_lesson: {
           type: :object,

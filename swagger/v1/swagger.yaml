@@ -193,6 +193,15 @@ paths:
                     status: status
                     author_id: 1
                     category_id: 1
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not Found
     put:
       summary: update lesson
       tags:
@@ -211,7 +220,6 @@ paths:
                     vvideo_link: link
                     status: status
                     author_id: 1
-                    id: 1
                     category_id: 1
       requestBody:
         content:
@@ -557,7 +565,10 @@ components:
         video_link:
           type: string
         status:
-          type: string
+          type: integer
+          enum:
+          - active
+          - archived
         author_id:
           type: integer
           minimum: 1
@@ -567,7 +578,6 @@ components:
       required:
       - title
       - description
-      - status
       - video_link
       - author_id
     lesson_extended:
@@ -583,7 +593,10 @@ components:
         video_link:
           type: string
         status:
-          type: string
+          type: integer
+          enum:
+          - active
+          - archived
         author_id:
           type: integer
           minimum: 1
@@ -598,10 +611,8 @@ components:
       - author_id
     update_lesson:
       type: object
+      minProperties: 1
       properties:
-        id:
-          type: integer
-          minimum: 1
         title:
           type: string
         description:
@@ -609,19 +620,16 @@ components:
         video_link:
           type: string
         status:
-          type: string
+          type: integer
+          enum:
+          - active
+          - archived
         author_id:
           type: integer
           minimum: 1
         category_id:
           type: integer
           minimum: 1
-      required:
-      - title
-      - description
-      - status
-      - video_link
-      - author_id
     delete_lesson:
       type: object
       properties:

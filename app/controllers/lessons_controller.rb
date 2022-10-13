@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LessonsController < ApplicationController
-  before_action :lesson_find, only: %i[show edit update]
+  before_action :lesson_find, only: %i[show edit update destroy]
   def index
     @lessons = Lesson.all
   end
@@ -32,16 +32,20 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    @lesson.destroy
+    if @lesson&.destroy
+      render :destroy
+    else
+      render :error, status: :unprocessable_entity
+    end
   end
 
   private
 
   def lesson_params
-    params.require(:lesson).permit(:title, :description, :status, :video_link, :author_id, :category_id)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id)
   end
 
   def lesson_find
-    @lesson = Lesson.all.find(params[:id])
+    @lesson = Lesson.all.find_by(id: params[:id])
   end
 end
