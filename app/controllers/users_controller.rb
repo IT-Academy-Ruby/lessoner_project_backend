@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 
   def show; end
 
+  def check_email
+    @user = User.find_by(email: params[:email])
+  end
+
   private
 
   def user_find
