@@ -1,13 +1,11 @@
 require 'swagger_helper'
 
 RSpec.describe 'sign_up', type: :request do
-
   path '/sign_up' do
-
     post('create sign_up') do
       tags 'Sign_up'
       produces 'application/json'
-      parameter name: :signup, in: :body, schema:{
+      parameter name: :signup, in: :body, schema: {
         type: :object,
         properties: {
           name: { type: :string },
@@ -22,22 +20,22 @@ RSpec.describe 'sign_up', type: :request do
       response(201, 'created') do
         consumes 'application/json'
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            phone: { type: :string },
-            gender: { type: :string, enum: %w[male female other] },
-            email: { type: :string },
-            birthday: { type: :string }
-          },
-          required: %w[id name gender email]
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 phone: { type: :string },
+                 gender: { type: :string, enum: %w[male female other] },
+                 email: { type: :string },
+                 birthday: { type: :string }
+               },
+               required: %w[id name gender email]
         run_test!
       end
       response(400, 'bad request') do
         example 'application/json', :example_already_exists, {
           errors: [
-              "Email has already been taken",
-              "Name has already been taken"
+            'Email has already been taken',
+            'Name has already been taken'
           ]
         }
         run_test!
