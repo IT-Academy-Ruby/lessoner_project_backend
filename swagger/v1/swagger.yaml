@@ -225,6 +225,79 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/update_lesson"
+  "/sign_up":
+    post:
+      summary: create sign_up
+      tags:
+      - Sign_up
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  phone:
+                    type: string
+                  gender:
+                    type: string
+                    enum:
+                    - male
+                    - female
+                    - other
+                  email:
+                    type: string
+                  birthday:
+                    type: string
+                required:
+                - id
+                - name
+                - gender
+                - email
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                example_already_exists:
+                  value:
+                    errors:
+                    - Email has already been taken
+                    - Name has already been taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                phone:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                  - male
+                  - female
+                  - other
+                email:
+                  type: string
+                birthday:
+                  type: string
+                password:
+                  type: string
+              required:
+              - id
+              - name
+              - gender
+              - email
+              - password
   "/{locale}/users/{id}":
     parameters:
     - name: locale
