@@ -5,6 +5,7 @@ RSpec.describe 'sign_up', type: :request do
     post('create sign_up') do
       tags 'Sign_up'
       produces 'application/json'
+      
       parameter name: :signup, in: :body, schema: {
         type: :object,
         properties: {
@@ -15,13 +16,13 @@ RSpec.describe 'sign_up', type: :request do
           birthday: { type: :string },
           password: { type: :string }
         },
-        required: %w[id name gender email password]
+        required: %w[name gender email password]
       }
       response(201, 'created') do
         consumes 'application/json'
         schema type: :object,
                properties: {
-                 id: { type: :integer },
+                 id: { type: :integer, minimum: 1 },
                  name: { type: :string },
                  phone: { type: :string },
                  gender: { type: :string, enum: %w[male female other] },
