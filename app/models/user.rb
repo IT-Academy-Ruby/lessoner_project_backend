@@ -1,24 +1,29 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  has_secure_password
   paginates_per MAX_ITEMS_PER_PAGE
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  enum :gender, %i[male female other]
+  validates :gender, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: %i[google_oauth2 facebook]
+  validates :birthday, date: { after: proc { Time.zone.today - 120.years },
+                               before: proc { Time.zone.today } }
+  validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
+                   uniqueness: true
+  validates :email, presence: true, length: { in: 3..256 },
+                    format: { with: %r/\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ }
+  validate :email_dots, if: -> { email.present? }
 
-  validates :name, presence: true
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: true
-  before_validation { self.email = email.downcase }
-  validates :password, presence: true, length: { minimum: 6 }
+  validate :password_special_character, if: -> { password.present? }
+  validates :password, presence: true, length: { in: 6..256 },
+                       format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }
+  validates :phone, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
   has_many :lessons, class_name: 'Lesson', foreign_key: 'author_id'
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
@@ -29,5 +34,17 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.avatar_url = auth.info.image
     end
+  end
+
+  # Validation for email: symbol . (dot) provided that it is neither the first nor the last,
+  # and also if it is not repeated more than once in a row.
+  def email_dots
+    login = email.scan(/\S+@/).join
+    errors.add(:email, 'has too many dots') if login.count('.') > 1 || login[0] == '.' || login[-2] == '.'
+  end
+
+  # Validation for password: must contain at least 1 special character.
+  def password_special_character
+    errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
   end
 end

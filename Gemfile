@@ -84,6 +84,10 @@ gem 'rspec-rails'
 
 gem 'rswag'
 
+gem 'date_validator', '~> 0.12.0'
+
+gem 'phonelib', '~> 0.7.3'
+
 gem 'rack-cors'
 
 group :development, :test do
