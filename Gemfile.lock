@@ -384,6 +384,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   bootstrap (~> 5.2)
   capybara
@@ -393,6 +394,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails (~> 4.5)
+  jwt
   kaminari
   octicons
   omniauth (~> 2.1)

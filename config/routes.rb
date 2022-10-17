@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     root 'static_pages#home'
     get '/about', to: 'static_pages#about'
     get '/check_email', to: 'users#check_email', defaults: { format: :json }
+    post '/login', to: 'users#login', defaults: { format: :json }
     resources :lessons do
       resources :comments
     end
