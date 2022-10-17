@@ -16,9 +16,9 @@ RSpec.describe 'users', type: :request do
                  name: { type: :string },
                  description: { type: :string },
                  email: { type: :string },
-                 avatarUrl: { type: :string }
+                 avatar_url: { type: :string }
                },
-               required: %w[id name description email avatarUrl]
+               required: %w[id name description email avatar_url]
         let(:locale) { 'en' }
         let(:id) { '3' }
 

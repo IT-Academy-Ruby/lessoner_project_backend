@@ -189,7 +189,7 @@ paths:
                   value:
                     title: Ruby on Rails
                     description: Introduce
-                    vvideo_link: link
+                    video_link: link
                     status: status
                     author_id: 1
                     category_id: 1
@@ -217,7 +217,7 @@ paths:
                   value:
                     title: Ruby on Rails
                     description: Introduce
-                    vvideo_link: link
+                    video_link: link
                     status: status
                     author_id: 1
                     category_id: 1
@@ -636,3 +636,5 @@ components:
         id:
           type: integer
           minimum: 1
+      required:
+      - id

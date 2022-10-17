@@ -29,10 +29,10 @@ RSpec.describe 'lessons', type: :request do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails',
           description: 'Introduce',
-          videoLink: 'link',
+          video_link: 'link',
           status: 'status',
-          authorId: 1,
-          categoryId: 1
+          author_id: 1,
+          category_id: 1
         }
 
         consumes 'application/json'
@@ -53,10 +53,10 @@ RSpec.describe 'lessons', type: :request do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails',
           description: 'Introduce',
-          vvideoLink: 'link',
+          video_link: 'link',
           status: 'status',
-          authorId: 1,
-          categoryId: 1
+          author_id: 1,
+          category_id: 1
         }
 
         schema '$ref' => '#/components/schemas/lesson'
@@ -86,10 +86,10 @@ RSpec.describe 'lessons', type: :request do
         example 'application/json', :example_key, {
           title: 'Ruby on Rails',
           description: 'Introduce',
-          vvideoLink: 'link',
+          video_link: 'link',
           status: 'status',
-          authorId: 1,
-          categoryId: 1
+          author_id: 1,
+          category_id: 1
         }
 
         consumes 'application/json'
