@@ -1,0 +1,1 @@
+json.usernameExists @user.present?

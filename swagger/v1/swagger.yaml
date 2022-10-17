@@ -266,6 +266,36 @@ paths:
                 - description
                 - email
                 - avatar_url
+  "/{locale}/check_username?name={username}":
+    parameters:
+      - name: locale
+        in: path
+        description: locale
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: path
+        description: username
+        required: true
+        schema:
+          type: string
+    get:
+      summary: check username
+      tags:
+        - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  usernameExists:
+                    type: boolean
+                required:
+                  - usernameExists
 servers:
 - url: http://{herokuapp}
   variables:

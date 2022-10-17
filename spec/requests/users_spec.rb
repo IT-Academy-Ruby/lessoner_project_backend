@@ -25,4 +25,21 @@ RSpec.describe 'users', type: :request do
       end
     end
   end
+  path '/{locale}/check_username?name={username}' do
+    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+    parameter name: 'username', in: :path, type: :string, description: 'username'
+
+    get('check username') do
+      tags 'Users'
+      produces 'application/json'
+      response(200, 'successful') do
+        schema type: :object,
+               properties: {
+                 usernameExists: { type: :boolean }
+               },
+               required: %w[usernameExists]
+        run_test!
+      end
+    end
+  end
 end
