@@ -12,10 +12,26 @@ SWAGGER_DOCS = {
     paths: {},
     servers: [
       {
-        url: 'http://{defaultHost}',
+        url: 'http://{herokuapp}',
         variables: {
-          defaultHost: {
+          herokuapp: {
+            default: 'lessoner.herokuapp.com/'
+          }
+        }
+      },
+      {
+        url: 'http://{localHost1}',
+        variables: {
+          localHost1: {
             default: 'localhost:3000/'
+          }
+        }
+      },
+      {
+        url: 'http://{localHost2}',
+        variables: {
+          localHost2: {
+            default: '127.0.0.1:3000/'
           }
         }
       }
