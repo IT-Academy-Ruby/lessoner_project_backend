@@ -310,13 +310,10 @@ paths:
           description: successful
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  jwt:
-                    type: string
-                required:
-                  - jwt
+              examples:
+                example_key:
+                  value:
+                    jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
         '401':
           description: unauthorized
           content:
@@ -324,8 +321,7 @@ paths:
               examples:
                 unauthorized:
                   value:
-                    error:
-                      - unauthorized
+                    error: unauthorized
       requestBody:
         content:
           application/json:

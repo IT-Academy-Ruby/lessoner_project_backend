@@ -1,5 +1,5 @@
 class JsonWebToken
-  def self.issue(payload)
+  def self.encode(payload)
     JWT.encode(payload, ENV['SECRET_KEY'], ENV['ALGORITHM'])
   end
 
