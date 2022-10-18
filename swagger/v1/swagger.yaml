@@ -299,6 +299,46 @@ paths:
               - gender
               - email
               - password
+  "/login":
+    post:
+      summary: give jwt
+      tags:
+        - Sign_up
+      parameters: [ ]
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                required:
+                  - jwt
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    error:
+                      - unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
   "/{locale}/users/{id}":
     parameters:
     - name: locale

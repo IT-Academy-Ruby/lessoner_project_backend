@@ -42,4 +42,32 @@ RSpec.describe 'sign_up', type: :request do
       end
     end
   end
+  path '/login' do
+    post('give jwt') do
+      tags 'Sign_up'
+      produces 'application/json'
+      parameter name: :signup, in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string },
+          password: { type: :string }
+        },
+        required: %w[email password]
+      }
+      response(200, 'successful') do
+        schema type: :object,
+               properties: {
+                 jwt: { type: :string }
+               },
+               required: %w[jwt]
+        run_test!
+      end
+      response(401, 'unauthorized') do
+        example 'application/json', :unauthorized, {
+          error: 'unathorized'
+        }
+        run_test!
+      end
+    end
+  end
 end

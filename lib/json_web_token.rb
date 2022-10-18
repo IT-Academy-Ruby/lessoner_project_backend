@@ -1,13 +1,9 @@
 class JsonWebToken
-  SECRET_KEY = 'hello'
-  ALGORITHM = 'HS256'
-
   def self.issue(payload)
-    JWT.encode(payload, SECRET_KEY,ALGORITHM)
+    JWT.encode(payload, ENV['SECRET_KEY'], ENV['ALGORITHM'])
   end
 
   def self.decode(token)
-    JWT.decode(token, SECRET_KEY, true, { algorithm: ALGORITHM}).first
+    JWT.decode(token, ENV['SECRET_KEY'], true, { algorithm: ENV['ALGORITHM'] }).first
   end
-
 end
