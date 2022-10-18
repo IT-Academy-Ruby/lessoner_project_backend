@@ -3,7 +3,13 @@
 class UsersController < ApplicationController
   before_action :user_find, only: %i[show]
 
-  def show; end
+  def show
+    if @user
+      render 'users/show'
+    else
+      render 'users/error', status: :not_found
+    end
+  end
 
   def check_username
     @user = User.find_by(name: params[:name])
@@ -16,6 +22,6 @@ class UsersController < ApplicationController
   private
 
   def user_find
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
   end
 end
