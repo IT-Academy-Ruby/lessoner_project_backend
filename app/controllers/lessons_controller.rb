@@ -15,7 +15,7 @@ class LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
     if @lesson.save
-      render 'lessons/show'
+      render :show
     else
       render :new, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_find
-    @lesson = Lesson.all.find_by(id: params[:id])
+    @lesson = Lesson.find_by(id: params[:id])
   end
 end
