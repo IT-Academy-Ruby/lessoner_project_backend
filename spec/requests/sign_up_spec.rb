@@ -57,7 +57,8 @@ RSpec.describe 'sign_up', type: :request do
       response(200, 'successful') do
         schema type: :object,
                properties: {
-                 jwt: { type: :string }
+                 jwt: { type: :string,
+                        example: 'eyJhbGciOi.InR5cCI6Ik.eyJzdWIiOiI' }
                },
                required: %w[jwt]
         run_test!
