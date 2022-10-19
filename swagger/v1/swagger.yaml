@@ -370,6 +370,33 @@ paths:
                     type: boolean
                 required:
                   - usernameExists
+  "/{locale}/check_email?email={email}":
+    parameters:
+      - name: locale
+        in: path
+        description: locale
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        description: email
+        required: true
+        schema:
+          type: string
+    get:
+      summary: check email
+      tags:
+        - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    username_exists: true/false
 servers:
 - url: http://{herokuapp}
   variables:
