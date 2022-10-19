@@ -396,7 +396,7 @@ paths:
               examples:
                 example_key:
                   value:
-                    username_exists: true/false
+                    emailExists: true/false
 servers:
 - url: http://{herokuapp}
   variables:
