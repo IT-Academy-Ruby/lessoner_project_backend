@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   post '/sign_up', to: 'sign_up#create'
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  # devise_for :users, skip: [:omniauth_callbacks]
   resources :categories, defaults: { format: :json }
   resources :users, defaults: { format: :json }
   resources :lessons, defaults: { format: :json }

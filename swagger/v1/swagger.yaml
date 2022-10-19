@@ -410,6 +410,7 @@ paths:
       required: true
       schema:
         type: string
+<<<<<<< HEAD
     get:
       summary: check username
       tags:
@@ -440,10 +441,12 @@ paths:
         required: true
         schema:
           type: string
+=======
+>>>>>>> c0e03de (delete views)
     get:
       summary: check email
       tags:
-        - Users
+      - Users
       responses:
         '200':
           description: successful
@@ -455,7 +458,11 @@ paths:
                   email_exists:
                     type: boolean
                 required:
+<<<<<<< HEAD
                   - email_exists
+=======
+                - usernameExists
+>>>>>>> c0e03de (delete views)
 servers:
 - url: http://{herokuapp}
   variables:
