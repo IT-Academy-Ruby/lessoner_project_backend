@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.emailExists @user.present?
+json.email_exists @user.present?

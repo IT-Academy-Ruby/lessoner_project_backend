@@ -34,9 +34,9 @@ RSpec.describe 'users', type: :request do
       response(200, 'successful') do
         schema type: :object,
                properties: {
-                 emailExists: { type: :boolean }
+                 email_exists: { type: :boolean, example: 'true' }
                },
-               required: %w[emailExists]
+               required: %w[email_exists]
         run_test!
       end
     end
@@ -51,9 +51,9 @@ RSpec.describe 'users', type: :request do
       response(200, 'successful') do
         schema type: :object,
                properties: {
-                 usernameExists: { type: :boolean }
+                 username_exists: { type: :boolean, example: 'true' }
                },
-               required: %w[usernameExists]
+               required: %w[username_exists]
         run_test!
       end
     end

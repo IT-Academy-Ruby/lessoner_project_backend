@@ -1,1 +1,1 @@
-json.usernameExists @user.present?
+json.username_exists @user.present?
