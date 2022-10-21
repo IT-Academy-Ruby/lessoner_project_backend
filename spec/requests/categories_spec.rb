@@ -67,6 +67,17 @@ RSpec.describe 'categories', type: :request do
         let(:id) { 1 }
         run_test!
       end
+
+      response(404, 'not found') do
+        example 'application/json', :example_not_found, {
+          status: 404,
+          error: 'Not found'
+        }
+
+        let(:locale) { 'en' }
+        let(:id) { 1 }
+        run_test!
+      end
     end
 
     put('update category') do

@@ -84,6 +84,15 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/category"
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not found
     put:
       summary: update category
       tags:
@@ -378,22 +387,22 @@ paths:
                 - avatar_url
   "/{locale}/check_username?name={username}":
     parameters:
-      - name: locale
-        in: path
-        description: locale
-        required: true
-        schema:
-          type: string
-      - name: username
-        in: path
-        description: username
-        required: true
-        schema:
-          type: string
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: username
+      in: path
+      description: username
+      required: true
+      schema:
+        type: string
     get:
       summary: check username
       tags:
-        - Users
+      - Users
       responses:
         '200':
           description: successful
@@ -405,7 +414,7 @@ paths:
                   usernameExists:
                     type: boolean
                 required:
-                  - usernameExists
+                - usernameExists
 servers:
 - url: http://{herokuapp}
   variables:
