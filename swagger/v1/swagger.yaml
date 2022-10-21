@@ -360,6 +360,8 @@ paths:
         type: string
     get:
       summary: show user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
@@ -385,6 +387,15 @@ paths:
                 - description
                 - email
                 - avatar_url
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not Found
   "/{locale}/check_username?name={username}":
     parameters:
     - name: locale
