@@ -38,6 +38,22 @@ RSpec.describe 'users', type: :request do
       end
     end
   end
+  path '/{locale}/check_email?email={email}' do
+    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+    parameter name: 'email', in: :path, type: :string, description: 'email'
+
+    get('check email') do
+      produces 'application/json'
+      response(200, 'successful') do
+        schema type: :object,
+               properties: {
+                 email_exists: { type: :boolean, example: 'true' }
+               },
+               required: %w[email_exists]
+        run_test!
+      end
+    end
+  end
   path '/{locale}/check_username?name={username}' do
     parameter name: 'locale', in: :path, type: :string, description: 'locale'
     parameter name: 'username', in: :path, type: :string, description: 'username'
@@ -48,9 +64,9 @@ RSpec.describe 'users', type: :request do
       response(200, 'successful') do
         schema type: :object,
                properties: {
-                 usernameExists: { type: :boolean }
+                 username_exists: { type: :boolean, example: 'true' }
                },
-               required: %w[usernameExists]
+               required: %w[username_exists]
         run_test!
       end
     end

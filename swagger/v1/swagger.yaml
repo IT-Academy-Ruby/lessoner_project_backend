@@ -422,10 +422,40 @@ paths:
               schema:
                 type: object
                 properties:
-                  usernameExists:
+                  username_exists:
                     type: boolean
                 required:
-                - usernameExists
+                  - username_exists
+  "/{locale}/check_email?email={email}":
+    parameters:
+      - name: locale
+        in: path
+        description: locale
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        description: email
+        required: true
+        schema:
+          type: string
+    get:
+      summary: check email
+      tags:
+        - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email_exists:
+                    type: boolean
+                required:
+                  - email_exists
 servers:
 - url: http://{herokuapp}
   variables:
