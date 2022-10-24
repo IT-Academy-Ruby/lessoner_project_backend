@@ -17,7 +17,7 @@ class LessonsController < ApplicationController
     if @lesson.save
       render :show
     else
-      render :new, status: :unprocessable_entity
+      render :error, status: :unprocessable_entity
     end
   end
 
@@ -32,7 +32,7 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    if @lesson&.destroy
+    if @lesson.destroy
       render :destroy
     else
       render :error, status: :unprocessable_entity

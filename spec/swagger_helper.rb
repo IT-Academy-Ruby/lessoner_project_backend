@@ -88,17 +88,17 @@ SWAGGER_DOCS = {
           },
           required: %w[id title description]
         },
-        create_lesson: {
+        lesson_create: {
           type: :object,
           properties: {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :integer, enum: Category::STATUSES },
+            status: { type: :string, enum: Category::STATUSES },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           },
-          required: %w[title description video_link author_id]
+          required: %w[title description video_link author_id category_id]
         },
         lesson_extended: {
           type: :object,
@@ -107,29 +107,29 @@ SWAGGER_DOCS = {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :integer, enum: Category::STATUSES },
+            status: { type: :string, enum: Category::STATUSES },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           },
-          required: %w[title description status video_link author_id]
+          required: %w[id title description status video_link author_id category_id]
         },
-        update_lesson: {
+        lesson_update: {
           type: :object,
           minProperties: 1,
           properties: {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :integer, enum: Lesson::STATUSES },
+            status: { type: :string, enum: Lesson::STATUSES },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           }
 
         },
-        delete_lesson: {
+        lesson_delete: {
           type: :object,
           properties: {
-            id: { type: :integer, minimum: 1 }
+            id: { type: :integer, minimum: 1, example: 22 }
           },
           required: %w[id]
         }

@@ -1,1 +1,1 @@
-json.deleted false
+json.errors @lesson.errors
