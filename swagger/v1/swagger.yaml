@@ -84,6 +84,15 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/category"
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not found
     put:
       summary: update category
       tags:
@@ -299,6 +308,42 @@ paths:
               - gender
               - email
               - password
+  "/login":
+    post:
+      summary: give jwt
+      tags:
+        - Sign_up
+      parameters: [ ]
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    error: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
   "/{locale}/users/{id}":
     parameters:
     - name: locale
@@ -315,6 +360,8 @@ paths:
         type: string
     get:
       summary: show user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
@@ -340,7 +387,46 @@ paths:
                 - description
                 - email
                 - avatar_url
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not Found
   "/{locale}/check_username?name={username}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: username
+      in: path
+      description: username
+      required: true
+      schema:
+        type: string
+    get:
+      summary: check username
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username_exists:
+                    type: boolean
+                required:
+                  - username_exists
+  "/{locale}/check_email?email={email}":
     parameters:
       - name: locale
         in: path
@@ -348,14 +434,14 @@ paths:
         required: true
         schema:
           type: string
-      - name: username
+      - name: email
         in: path
-        description: username
+        description: email
         required: true
         schema:
           type: string
     get:
-      summary: check username
+      summary: check email
       tags:
         - Users
       responses:
@@ -366,10 +452,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  usernameExists:
+                  email_exists:
                     type: boolean
                 required:
-                  - usernameExists
+                  - email_exists
 servers:
 - url: http://{herokuapp}
   variables:
