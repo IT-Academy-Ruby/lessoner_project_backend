@@ -15,14 +15,13 @@ Rails.application.routes.draw do
 
   resources :lessons do
     resources :comments
-    end
+  end
 
   resources :users do
     resources :comments
-    end
+  end
 
   namespace :admin do
     resources :users
   end
-
 end

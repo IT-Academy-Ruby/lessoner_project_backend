@@ -312,17 +312,21 @@ paths:
     post:
       summary: give jwt
       tags:
-        - Sign_up
-      parameters: [ ]
+      - Sign_up
+      parameters: []
       responses:
         '200':
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                    example: eyJhbGciOi.InR5cCI6Ik.eyJzdWIiOiI
+                required:
+                - jwt
         '401':
           description: unauthorized
           content:
@@ -330,20 +334,7 @@ paths:
               examples:
                 unauthorized:
                   value:
-                    error: unauthorized
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-              required:
-                - email
-                - password
+                    error: unathorized
   "/{locale}/users/{id}":
     parameters:
     - name: locale
@@ -396,6 +387,35 @@ paths:
                   value:
                     status: 404
                     error: Not Found
+  "/{locale}/check_email?email={email}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: email
+      in: path
+      description: email
+      required: true
+      schema:
+        type: string
+    get:
+      summary: check email
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email_exists:
+                    type: boolean
+                    example: 'true'
+                required:
+                - email_exists
   "/{locale}/check_username?name={username}":
     parameters:
     - name: locale
@@ -410,7 +430,6 @@ paths:
       required: true
       schema:
         type: string
-<<<<<<< HEAD
     get:
       summary: check username
       tags:
@@ -425,44 +444,9 @@ paths:
                 properties:
                   username_exists:
                     type: boolean
+                    example: 'true'
                 required:
-                  - username_exists
-  "/{locale}/check_email?email={email}":
-    parameters:
-      - name: locale
-        in: path
-        description: locale
-        required: true
-        schema:
-          type: string
-      - name: email
-        in: path
-        description: email
-        required: true
-        schema:
-          type: string
-=======
->>>>>>> c0e03de (delete views)
-    get:
-      summary: check email
-      tags:
-      - Users
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  email_exists:
-                    type: boolean
-                required:
-<<<<<<< HEAD
-                  - email_exists
-=======
-                - usernameExists
->>>>>>> c0e03de (delete views)
+                - username_exists
 servers:
 - url: http://{herokuapp}
   variables:
