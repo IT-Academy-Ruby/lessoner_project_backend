@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_secure_password
   paginates_per MAX_ITEMS_PER_PAGE
 
   enum :gender, %i[male female other]
@@ -10,7 +11,8 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
-                    format: { with: %r/\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ }
+                    format: { with: %r/\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ },
+                    uniqueness: true
   validate :email_dots, if: -> { email.present? }
 
   validate :password_special_character, if: -> { password.present? }

@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :user_find, only: %i[show]
-
+  before_action :authorize_request, only: %i[show]
   def show
     if @user
       render 'users/show'
@@ -23,5 +23,6 @@ class UsersController < ApplicationController
 
   def user_find
     @user = User.find_by(id: params[:id])
+    p params
   end
 end
