@@ -1,5 +1,3 @@
-require './lib/json_web_token'
-
 class JwtAuth
   def initialize app
     @app = app
