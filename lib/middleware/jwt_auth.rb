@@ -17,7 +17,6 @@ class JwtAuth
       return [401, { 'Content-Type' => 'application/json' }, [e.message]]
     end
     env[:current_user] = @current_user
-    p @current_user
     @app.call env
   end
 end
