@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  
+
   before_action :set_locale
   helper_method :current_locale
   protect_from_forgery unless: -> { request.format.json? }
-  
+
   private
 
   def default_url_options

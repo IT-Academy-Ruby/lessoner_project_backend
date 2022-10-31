@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :user_find, only: %i[show]
-  
+
   def show
     if @user
       render 'users/show'
