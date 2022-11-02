@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_27_173806) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_29_142411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,11 +36,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_27_173806) do
     t.string "description"
     t.string "title"
     t.string "video_link"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "author_id"
     t.bigint "category_id"
-    t.integer "status", default: 0
     t.index ["author_id"], name: "index_lessons_on_author_id"
     t.index ["category_id"], name: "index_lessons_on_category_id"
   end
@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_27_173806) do
     t.integer "gender", default: 0
     t.date "birthday"
     t.string "password_digest"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end

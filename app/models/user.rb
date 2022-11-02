@@ -34,4 +34,26 @@ class User < ApplicationRecord
   def password_special_character
     errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
   end
+
+  def generate_password_token!
+    self.password_reset_token = generate_token
+    self.password_reset_sent_at = Time.now.utc
+    save!(validate: false)
+  end
+
+  def password_token_valid?
+    (self.password_reset_sent_at + 4.hours) > Time.now.utc
+  end
+
+  def reset_password!(password)
+    self.password_reset_token = nil
+    self.password = password
+    save!
+  end
+
+  private
+
+  def generate_token
+    SecureRandom.hex(10)
+  end
 end
