@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   post '/sign_up', to: 'sign_up#create'
   post '/login', to: 'sign_up#login', defaults: { format: :json }
+  post 'password/forgot', to: 'passwords#forgot'
+  post 'password/reset', to: 'passwords#reset'
 
   devise_for :users, only: [:omniauth_callbacks], controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: redirect("/#{I18n.default_locale}"), as: :redirected_root
