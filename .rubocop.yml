@@ -23,6 +23,7 @@ Metrics/AbcSize:
     - app/controllers/users/omniauth_callbacks_controller.rb
     - app/models/user.rb
     - app/controllers/sign_up_controller.rb
+    - app/controllers/passwords_controller.rb
 
 Style/ClassAndModuleChildren:
   Exclude:
