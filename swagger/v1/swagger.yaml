@@ -456,6 +456,86 @@ paths:
                     type: boolean
                 required:
                   - email_exists
+  "/password/forgot":
+    post:
+      summary: send reset link to email
+      tags:
+        - Sign_up
+      parameters: [ ]
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    alert: We've sent a link to restore access to your account to the address email.
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    error: User is not found. Please enter a valid email address.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+  "/password/reset":
+    post:
+      summary: reset password
+      tags:
+        - Sign_up
+      parameters: [ ]
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    status: ok
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    error: Link not valid or expired. Try generating a new link.
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              examples:
+                unprocessable entity:
+                  value:
+                    error: User errors full messages.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                token:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - token
+                - password
 servers:
 - url: http://{herokuapp}
   variables:
