@@ -8,10 +8,8 @@ Rails.application.routes.draw do
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'
 
-  devise_for :users, only: [:omniauth_callbacks], controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: redirect("/#{I18n.default_locale}"), as: :redirected_root
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
-    devise_for :users, skip: [:omniauth_callbacks]
     resources :categories, defaults: { format: :json }
     resources :users, defaults: { format: :json }
     resources :lessons, defaults: { format: :json }

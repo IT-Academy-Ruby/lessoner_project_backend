@@ -58,8 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_27_173806) do
     t.integer "gender", default: 0
     t.date "birthday"
     t.string "password_digest"
-    t.string "password_reset_token"
-    t.datetime "password_reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end
