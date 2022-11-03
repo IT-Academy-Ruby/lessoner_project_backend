@@ -2,17 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'Passwords', type: :request do
   path '/password/forgot' do
-
     post('send reset link to email') do
       tags 'Sign_up'
       produces 'application/json'
       parameter name: :signup, in: :body, schema: {
         type: :object,
         properties: {
-          email: { type: :string },
-        } ,
+          email: { type: :string }
+        },
         required: %w[email]
-    }
+      }
     end
     response(200, 'successful') do
       schema type: :object,
@@ -32,7 +31,6 @@ RSpec.describe 'Passwords', type: :request do
   end
 
   path '/password/reset' do
-
     post('reset password') do
       tags 'Sign_up'
       produces 'application/json'
@@ -41,8 +39,8 @@ RSpec.describe 'Passwords', type: :request do
         properties: {
           email: { type: :string },
           token: { type: :string },
-          password: { type: :string}
-        } ,
+          password: { type: :string }
+        },
         required: %w[email token password]
       }
     end
@@ -50,7 +48,7 @@ RSpec.describe 'Passwords', type: :request do
       schema type: :object,
              properties: {
                status: { type: :string,
-                         example: "ok" }
+                         example: 'ok' }
              },
              required: %w[status]
       run_test!
@@ -68,5 +66,4 @@ RSpec.describe 'Passwords', type: :request do
       run_test!
     end
   end
-
 end
