@@ -6,7 +6,13 @@ class LessonsController < ApplicationController
     @lessons = Lesson.all
   end
 
-  def show; end
+  def show
+    if @lesson
+      render :show
+    else
+      render :not_found, status: :not_found
+    end
+  end
 
   def new
     @lesson = Lesson.new
@@ -32,7 +38,9 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    if @lesson.destroy
+    if !@lesson
+      render :not_found, status: :not_found
+    elsif @lesson.destroy
       render :destroy
     else
       render :error, status: :unprocessable_entity

@@ -127,12 +127,6 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                one_item_in_list:
-                  value:
-                  - title: Ruby on Rails
-                    description: Introduce
-                    id: '1'
               schema:
                 type: array
                 items:
@@ -147,16 +141,6 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    id: 22
-                    title: Ruby on Rails
-                    description: Introduce
-                    video_link: link
-                    status: status
-                    author_id: 1
-                    category_id: 1
               schema:
                 "$ref": "#/components/schemas/lesson_extended"
         '422':
@@ -204,24 +188,14 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    title: Ruby on Rails
-                    description: Introduce
-                    video_link: link
-                    status: status
-                    author_id: 1
-                    category_id: 1
+              schema:
+                "$ref": "#/components/schemas/lesson_extended"
         '404':
           description: not found
           content:
             application/json:
-              examples:
-                example_not_found:
-                  value:
-                    status: 404
-                    error: Not Found
+              schema:
+                "$ref": "#/components/schemas/error_not_found"
     put:
       summary: update lesson
       tags:
@@ -232,16 +206,6 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    id: 22
-                    title: Ruby on Rails
-                    description: Introduce
-                    video_link: link
-                    status: status
-                    author_id: 1
-                    category_id: 1
               schema:
                 "$ref": "#/components/schemas/lesson_extended"
       requestBody:
@@ -260,6 +224,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/lesson_delete"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_not_found"
   "/sign_up":
     post:
       summary: create sign_up
@@ -499,6 +469,17 @@ components:
         type: array
         items:
           type: string
+    error_not_found:
+      type: object
+      properties:
+        status:
+          type: integer
+          enum:
+          - '404'
+          example: 404
+        error:
+          type: string
+          example: Not found
     category:
       type: object
       properties:
@@ -575,6 +556,7 @@ components:
           enum:
           - active
           - archived
+          example: active
         author_id:
           type: integer
           minimum: 1
@@ -604,6 +586,7 @@ components:
           enum:
           - active
           - archived
+          example: active
         author_id:
           type: integer
           minimum: 1
@@ -633,6 +616,7 @@ components:
           enum:
           - active
           - archived
+          example: active
         author_id:
           type: integer
           minimum: 1
