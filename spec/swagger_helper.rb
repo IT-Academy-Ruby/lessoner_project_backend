@@ -55,7 +55,7 @@ SWAGGER_DOCS = {
           type: 'object',
           properties: {
             status: { type: :integer, enum: %i[404], example: 404 },
-            error: {type: :string, example: 'Not found'}
+            error: { type: :string, example: 'Not found' }
           }
         },
         category: {
