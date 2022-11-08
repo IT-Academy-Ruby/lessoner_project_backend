@@ -1,9 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'users', type: :request do
-  path '/{locale}/users/{id}' do
-    # You'll want to customize the parameter types...
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+  path '/users/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show user') do
@@ -19,7 +17,6 @@ RSpec.describe 'users', type: :request do
                  avatar_url: { type: :string }
                },
                required: %w[id name description email avatar_url]
-        let(:locale) { 'en' }
         let(:id) { '3' }
 
         run_test!
@@ -31,15 +28,13 @@ RSpec.describe 'users', type: :request do
           "error": 'Not Found'
         }
 
-        let(:locale) { 'en' }
         let(:id) { '1' }
 
         run_test!
       end
     end
   end
-  path '/{locale}/check_email?email={email}' do
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+  path '/check_email?email={email}' do
     parameter name: 'email', in: :path, type: :string, description: 'email'
 
     get('check email') do
@@ -54,8 +49,7 @@ RSpec.describe 'users', type: :request do
       end
     end
   end
-  path '/{locale}/check_username?name={username}' do
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+  path '/check_username?name={username}' do
     parameter name: 'username', in: :path, type: :string, description: 'username'
 
     get('check username') do

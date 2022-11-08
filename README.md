@@ -2,7 +2,7 @@
 
 An app for tutorial lessons site.
 
-Used stack: Ruby on Rails, Postgresql, JQuery, CSS Bootstrap.
+Used stack: Ruby on Rails, Postgresql.
 
 ## Local development
 ### Prerequisites. Required software

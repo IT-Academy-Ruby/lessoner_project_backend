@@ -1,9 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'categories', type: :request do
-  path '/{locale}/categories' do
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
-
+  path '/categories' do
     get('list categories') do
       tags 'Categories'
       produces 'application/json'
@@ -11,7 +9,6 @@ RSpec.describe 'categories', type: :request do
       response(200, 'successful') do
         schema type: :array, items: { '$ref' => '#/components/schemas/category' }
 
-        let(:locale) { 'en' }
         run_test!
       end
     end
@@ -25,7 +22,6 @@ RSpec.describe 'categories', type: :request do
         parameter name: :new_category, in: :body, schema: { '$ref' => '#/components/schemas/create_category' }
         schema '$ref' => '#/components/schemas/category'
 
-        let(:locale) { 'en' }
         run_test!
       end
       response(422, 'invalid request') do
@@ -45,15 +41,13 @@ RSpec.describe 'categories', type: :request do
         }
         schema '$ref' => '#/components/schemas/errors_object'
 
-        let(:locale) { 'en' }
         let(:id) { 1 }
         run_test!
       end
     end
   end
 
-  path '/{locale}/categories/{id}' do
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+  path '/categories/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show category') do
@@ -63,7 +57,6 @@ RSpec.describe 'categories', type: :request do
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/category'
 
-        let(:locale) { 'en' }
         let(:id) { 1 }
         run_test!
       end
@@ -74,7 +67,6 @@ RSpec.describe 'categories', type: :request do
           error: 'Not found'
         }
 
-        let(:locale) { 'en' }
         let(:id) { 1 }
         run_test!
       end
@@ -89,7 +81,6 @@ RSpec.describe 'categories', type: :request do
         parameter name: :updated_category, in: :body, schema: { '$ref' => '#/components/schemas/update_category' }
         schema '$ref' => '#/components/schemas/category'
 
-        let(:locale) { 'en' }
         let(:id) { 1 }
         run_test!
       end
