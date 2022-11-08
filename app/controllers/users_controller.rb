@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
+class UsersController < AuthorizationController
   before_action :user_find, only: %i[show]
 
   def show

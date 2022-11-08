@@ -10,12 +10,12 @@ class SignUpController < ApplicationController
 
   def login
     @user = User.find_by(email: params[:email])
-    if @user&.valid_password?(params[:password])
+    if @user&.authenticate(params[:password])
       token = JsonWebToken.encode(name: @user.name, email: @user.email,
                                   description: @user.description, phone: @user.phone,
                                   gender: @user.gender, birthday: @user.birthday.to_s,
                                   exp: 1.hour.from_now.to_i)
-      render json: { jwt: token }
+      render json: { jwt: token }, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
     end
@@ -24,6 +24,6 @@ class SignUpController < ApplicationController
   private
 
   def user_params
-    params.require(:sign_up).permit(:email, :name, :password, :gender, :birthday, :phone)
+    params.permit(:email, :name, :password, :gender, :birthday, :phone)
   end
 end
