@@ -51,6 +51,13 @@ SWAGGER_DOCS = {
             items: { type: 'string' }
           }
         },
+        error_not_found: {
+          type: 'object',
+          properties: {
+            status: { type: :integer, enum: %i[404], example: 404 },
+            error: { type: :string, example: 'Not found' }
+          }
+        },
         category: {
           type: 'object',
           properties: {
@@ -88,16 +95,17 @@ SWAGGER_DOCS = {
           },
           required: %w[id title description]
         },
-        create_lesson: {
+        lesson_create: {
           type: :object,
           properties: {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :string },
-            author_id: { type: :integer, minimum: 1 }
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
+            author_id: { type: :integer, minimum: 1 },
+            category_id: { type: :integer, minimum: 1 }
           },
-          required: %w[title description status video_link author_id]
+          required: %w[title description video_link author_id category_id]
         },
         lesson_extended: {
           type: :object,
@@ -106,22 +114,31 @@ SWAGGER_DOCS = {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :string },
-            author_id: { type: :integer, minimum: 1 }
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
+            author_id: { type: :integer, minimum: 1 },
+            category_id: { type: :integer, minimum: 1 }
           },
-          required: %w[title description status video_link author_id]
+          required: %w[id title description status video_link author_id category_id]
         },
-        update_lesson: {
+        lesson_update: {
           type: :object,
+          minProperties: 1,
           properties: {
-            id: { type: :integer, minimum: 1 },
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :string },
-            author_id: { type: :integer, minimum: 1 }
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
+            author_id: { type: :integer, minimum: 1 },
+            category_id: { type: :integer, minimum: 1 }
+          }
+
+        },
+        lesson_delete: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1, example: 22 }
           },
-          required: %w[title description status video_link author_id]
+          required: %w[id]
         }
       }
     }
