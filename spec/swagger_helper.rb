@@ -51,6 +51,13 @@ SWAGGER_DOCS = {
             items: { type: 'string' }
           }
         },
+        error_not_found: {
+          type: 'object',
+          properties: {
+            status: { type: :integer, enum: %i[404], example: 404 },
+            error: { type: :string, example: 'Not found' }
+          }
+        },
         category: {
           type: 'object',
           properties: {
@@ -94,7 +101,7 @@ SWAGGER_DOCS = {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :string, enum: Category::STATUSES },
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           },
@@ -107,7 +114,7 @@ SWAGGER_DOCS = {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :string, enum: Category::STATUSES },
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           },
@@ -120,7 +127,7 @@ SWAGGER_DOCS = {
             title: { type: :string },
             description: { type: :string },
             video_link: { type: :string },
-            status: { type: :string, enum: Lesson::STATUSES },
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           }
