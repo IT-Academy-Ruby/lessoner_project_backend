@@ -127,12 +127,6 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    title: Ruby on Rails
-                    description: Introduce
-                    id: '1'
               schema:
                 type: array
                 items:
@@ -147,19 +141,30 @@ paths:
           description: successful
           content:
             application/json:
+              schema:
+                "$ref": "#/components/schemas/lesson_extended"
+        '422':
+          description: invalid request
+          content:
+            application/json:
               examples:
-                example_key:
+                example_blank_author:
                   value:
-                    title: Ruby on Rails
-                    description: Introduce
-                    video_link: link
-                    status: status
-                    author_id: 1
+                    errors:
+                      author:
+                      - must exist
+                example_blank_description:
+                  value:
+                    errors:
+                      description:
+                      - can't be blank
+              schema:
+                "$ref": "#/components/schemas/errors_object"
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/create_lesson"
+              "$ref": "#/components/schemas/lesson_create"
   "/{locale}/lessons/{id}":
     parameters:
     - name: locale
@@ -183,14 +188,14 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    title: Ruby on Rails
-                    description: Introduce
-                    vvideo_link: link
-                    status: status
-                    author_id: 1
+              schema:
+                "$ref": "#/components/schemas/lesson_extended"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_not_found"
     put:
       summary: update lesson
       tags:
@@ -201,39 +206,30 @@ paths:
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    title: Ruby on Rails
-                    description: Introduce
-                    vvideo_link: link
-                    status: status
-                    author_id: 1
-                    id: 1
+              schema:
+                "$ref": "#/components/schemas/lesson_extended"
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/update_lesson"
+              "$ref": "#/components/schemas/lesson_update"
     delete:
       summary: delete lesson
       tags:
       - Lessons
-      parameters: []
       responses:
         '200':
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    id: 1
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/update_lesson"
+              schema:
+                "$ref": "#/components/schemas/lesson_delete"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_not_found"
   "/sign_up":
     post:
       summary: create sign_up
@@ -312,17 +308,21 @@ paths:
     post:
       summary: give jwt
       tags:
-        - Sign_up
-      parameters: [ ]
+      - Sign_up
+      parameters: []
       responses:
         '200':
           description: successful
           content:
             application/json:
-              examples:
-                example_key:
-                  value:
-                    jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                    example: eyJhbGciOi.InR5cCI6Ik.eyJzdWIiOiI
+                required:
+                - jwt
         '401':
           description: unauthorized
           content:
@@ -330,20 +330,7 @@ paths:
               examples:
                 unauthorized:
                   value:
-                    error: unauthorized
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-              required:
-                - email
-                - password
+                    error: unathorized
   "/{locale}/users/{id}":
     parameters:
     - name: locale
@@ -396,6 +383,35 @@ paths:
                   value:
                     status: 404
                     error: Not Found
+  "/{locale}/check_email?email={email}":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    - name: email
+      in: path
+      description: email
+      required: true
+      schema:
+        type: string
+    get:
+      summary: check email
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email_exists:
+                    type: boolean
+                    example: 'true'
+                required:
+                - email_exists
   "/{locale}/check_username?name={username}":
     parameters:
     - name: locale
@@ -424,38 +440,9 @@ paths:
                 properties:
                   username_exists:
                     type: boolean
+                    example: 'true'
                 required:
-                  - username_exists
-  "/{locale}/check_email?email={email}":
-    parameters:
-      - name: locale
-        in: path
-        description: locale
-        required: true
-        schema:
-          type: string
-      - name: email
-        in: path
-        description: email
-        required: true
-        schema:
-          type: string
-    get:
-      summary: check email
-      tags:
-        - Users
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  email_exists:
-                    type: boolean
-                required:
-                  - email_exists
+                - username_exists
 servers:
 - url: http://{herokuapp}
   variables:
@@ -482,6 +469,17 @@ components:
         type: array
         items:
           type: string
+    error_not_found:
+      type: object
+      properties:
+        status:
+          type: integer
+          enum:
+          - '404'
+          example: 404
+        error:
+          type: string
+          example: Not found
     category:
       type: object
       properties:
@@ -544,7 +542,7 @@ components:
       - id
       - title
       - description
-    create_lesson:
+    lesson_create:
       type: object
       properties:
         title:
@@ -555,15 +553,22 @@ components:
           type: string
         status:
           type: string
+          enum:
+          - active
+          - archived
+          example: active
         author_id:
+          type: integer
+          minimum: 1
+        category_id:
           type: integer
           minimum: 1
       required:
       - title
       - description
-      - status
       - video_link
       - author_id
+      - category_id
     lesson_extended:
       type: object
       properties:
@@ -578,21 +583,28 @@ components:
           type: string
         status:
           type: string
+          enum:
+          - active
+          - archived
+          example: active
         author_id:
           type: integer
           minimum: 1
+        category_id:
+          type: integer
+          minimum: 1
       required:
+      - id
       - title
       - description
       - status
       - video_link
       - author_id
-    update_lesson:
+      - category_id
+    lesson_update:
       type: object
+      minProperties: 1
       properties:
-        id:
-          type: integer
-          minimum: 1
         title:
           type: string
         description:
@@ -601,12 +613,22 @@ components:
           type: string
         status:
           type: string
+          enum:
+          - active
+          - archived
+          example: active
         author_id:
           type: integer
           minimum: 1
+        category_id:
+          type: integer
+          minimum: 1
+    lesson_delete:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+          example: 22
       required:
-      - title
-      - description
-      - status
-      - video_link
-      - author_id
+      - id
