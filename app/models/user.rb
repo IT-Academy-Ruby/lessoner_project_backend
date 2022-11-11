@@ -56,7 +56,7 @@ class User < ApplicationRecord
     self.confirm_token = nil
     save!(validate: false)
   end
-  
+
   private
 
   def generate_token
@@ -64,8 +64,8 @@ class User < ApplicationRecord
   end
 
   def confirmation_token
-    if self.confirm_token.blank?
-      self.confirm_token = generate_token
-    end
+    return if confirm_token.present?
+
+    self.confirm_token = generate_token
   end
 end
