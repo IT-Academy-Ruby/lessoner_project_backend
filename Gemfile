@@ -70,13 +70,8 @@ gem 'bootstrap', '~> 5.2'
 # This gem provides jQuery and the jQuery-ujs driver
 gem 'jquery-rails', '~> 4.5'
 
-# A set of common locale data and translations to internationalize and/or localize application
-gem 'rails-i18n', '~> 7.0', '>= 7.0.5'
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-
-gem 'octicons'
 
 gem 'rspec-rails'
 
