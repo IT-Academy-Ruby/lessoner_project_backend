@@ -39,14 +39,14 @@ RSpec.describe 'comments', type: :request do
           required: %w[body]
         }
         schema type: 'object',
-        properties: {
-          id: { type: :integer, minimum: 1 },
-          body: { type: :string },
-          lesson_id: { type: :integer, minimum: 1 },
-          user_id: { type: :integer, minimum: 1 },
-          created_at: { type: :string }
-        },
-        required: %w[id body lesson_id user_id created_at]
+               properties: {
+                 id: { type: :integer, minimum: 1 },
+                 body: { type: :string },
+                 lesson_id: { type: :integer, minimum: 1 },
+                 user_id: { type: :integer, minimum: 1 },
+                 created_at: { type: :string }
+               },
+               required: %w[id body lesson_id user_id created_at]
         run_test!
       end
 
@@ -79,15 +79,15 @@ RSpec.describe 'comments', type: :request do
           required: %w[body]
         }
         schema type: 'object',
-        properties: {
-          id: { type: :integer, minimum: 1 },
-          body: { type: :string },
-          lesson_id: { type: :integer, minimum: 1 },
-          user_id: { type: :integer, minimum: 1 },
-          created_at: { type: :string },
-          updated_at: { type: :string }
-        },
-        required: %w[id body lesson_id user_id created_at updated_at]
+               properties: {
+                 id: { type: :integer, minimum: 1 },
+                 body: { type: :string },
+                 lesson_id: { type: :integer, minimum: 1 },
+                 user_id: { type: :integer, minimum: 1 },
+                 created_at: { type: :string },
+                 updated_at: { type: :string }
+               },
+               required: %w[id body lesson_id user_id created_at updated_at]
         run_test!
       end
 
@@ -102,7 +102,7 @@ RSpec.describe 'comments', type: :request do
 
       response(404, 'not found') do
         example 'application/json', :example_not_found, {
-          error: "not found"
+          error: 'not found'
         }
         run_test!
       end
@@ -114,23 +114,23 @@ RSpec.describe 'comments', type: :request do
 
       response(200, 'successful') do
         schema type: 'object',
-        properties: {
-          id: { type: :integer, minimum: 1 }
-        },
-        required: %w[id]
+               properties: {
+                 id: { type: :integer, minimum: 1 }
+               },
+               required: %w[id]
         run_test!
       end
 
       response(401, 'unauthorized') do
         example 'application/json', :example_unauthorized, {
-          error: "unauthorized"
+          error: 'unauthorized'
         }
         run_test!
       end
 
       response(404, 'not found') do
         example 'application/json', :example_not_found, {
-          error: "not found"
+          error: 'not found'
         }
         run_test!
       end
