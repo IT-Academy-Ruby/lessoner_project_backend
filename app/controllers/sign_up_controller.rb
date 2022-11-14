@@ -12,7 +12,7 @@ class SignUpController < ApplicationController
   def login
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
-      if @user.email_confirmed
+      if @user.email_confirmed?
         token = JsonWebToken.encode(name: @user.name, email: @user.email,
                                     description: @user.description, phone: @user.phone,
                                     gender: @user.gender, birthday: @user.birthday.to_s,
@@ -29,7 +29,7 @@ class SignUpController < ApplicationController
   def confirm_email
     @user = User.find_by(confirm_token: params[:token])
     if @user
-      @user.email_activate
+      @user.email_activate!
       render json: { user: 'confirmed' }, status: :ok
     else
       render json: { error: 'not found' }, status: :not_found
