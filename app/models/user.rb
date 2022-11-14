@@ -51,7 +51,7 @@ class User < ApplicationRecord
     save!
   end
 
-  def email_activate
+  def email_activate!
     self.email_confirmed = true
     self.confirm_token = nil
     save!(validate: false)
