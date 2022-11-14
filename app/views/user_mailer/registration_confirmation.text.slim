@@ -2,4 +2,4 @@ p Hi #{@user.name},
 
 p Thanks for registering! To confirm your registration click the URL below.
 
-href="http://localhost:3000/sign_up/confirm_email?token=#{@user.confirm_token}"
+href="#{ENV['FRONTEND_URL']}/sign_up/confirm_email?token=#{@user.confirm_token}"
