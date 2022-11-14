@@ -33,7 +33,7 @@ class LessonsController < ApplicationController
     if @lesson.update(lesson_params)
       redirect_to @lesson
     else
-      render :edit, status: :unprocessable_entity
+      render :error, status: :unprocessable_entity
     end
   end
 
