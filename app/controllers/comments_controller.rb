@@ -1,44 +1,43 @@
 # frozen_string_literal: true
 
-class CommentsController < ApplicationController
-  before_action :lesson_find, only: %i[create edit update]
+class CommentsController < AuthorizationController
+  before_action :find_comment, only: %i[update destroy]
 
-  def create
-    @comment = current_user.comments.create(comment_params.merge(lesson: @lesson))
-    flash[:success] = if @comment.save
-                        'Comment successfully added'
-                      else
-                        'Comment not posted'
-                      end
-    redirect_to lesson_path(@lesson)
+  def index
+    @comments = Lesson.find_by(id: params[:lesson_id])&.comments
   end
 
-  def edit; end
+  def create
+    @comment = current_user.comments.create(comment_params)
+    if @comment.save
+      render :create
+    else
+      render :errors, status: :bad_request
+    end
+  end
 
   def update
     if @comment.update(comment_params)
-      redirect_to lesson_path(@lesson)
+      render :update
     else
-      render :edit, status: :unprocessable_entity
+      render :errors, status: :bad_request
     end
   end
 
   def destroy
-    @lesson = Lesson.find(params[:lesson_id])
-    @comment = @lesson.comment.find(params[:id])
-    return render file: 'public/403.html', status: :unauthorized if @comment.user != current.user
+    return render json: { error: 'unauthorized' }, status: :unauthorized if @comment.user != current_user
 
     @comment.destroy
-    redirect_to lesson_path(@lesson), status: :see_other
   end
 
   private
 
-  def comment_params
-    params.require(:comment).permit(:commenter, :body)
+  def find_comment
+    @comment = Comment.find_by(lesson_id: params[:lesson_id], id: params[:id])
+    return render json: { error: 'not found' }, status: :not_found unless @comment
   end
 
-  def lesson_find
-    @lesson = Lesson.find(params[:id])
+  def comment_params
+    params.permit(:user_id, :body, :lesson_id)
   end
 end
