@@ -183,7 +183,6 @@ GEM
       rack (>= 1.2, < 3)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
-    octicons (17.5.0)
     omniauth (2.1.0)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
@@ -238,9 +237,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
-    rails-i18n (7.0.5)
-      i18n (>= 0.7, < 2)
-      railties (>= 6.0.0, < 8)
     railties (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -388,7 +384,6 @@ DEPENDENCIES
   jquery-rails (~> 4.5)
   jwt
   kaminari
-  octicons
   omniauth (~> 2.1)
   omniauth-facebook (~> 9.0)
   omniauth-google-oauth2 (~> 1.1, >= 1.1.1)
@@ -399,7 +394,6 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.3, >= 7.0.3.1)
-  rails-i18n (~> 7.0, >= 7.0.5)
   rollbar
   rspec (~> 3.11)
   rspec-rails

@@ -1,10 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'lessons', type: :request do
-  path '/{locale}/lessons' do
-    # You'll want to customize the parameter types...
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
-
+  path '/lessons' do
     get('list lessons') do
       tags 'Lessons'
       produces 'application/json'
@@ -12,7 +9,6 @@ RSpec.describe 'lessons', type: :request do
       response(200, 'successful') do
         schema type: :array, items: { '$ref' => '#/components/schemas/lesson' }
 
-        let(:locale) { 'en' }
         run_test!
       end
     end
@@ -51,8 +47,7 @@ RSpec.describe 'lessons', type: :request do
     end
   end
 
-  path '/{locale}/lessons/{id}' do
-    parameter name: 'locale', in: :path, type: :string, description: 'locale'
+  path '/lessons/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show lesson') do
@@ -60,7 +55,6 @@ RSpec.describe 'lessons', type: :request do
       produces 'application/json'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/lesson_extended'
-        let(:locale) { 'en' }
         let(:id) { '1' }
 
         run_test!
@@ -68,7 +62,6 @@ RSpec.describe 'lessons', type: :request do
       response(404, 'not found') do
         schema '$ref' => '#/components/schemas/error_not_found'
 
-        let(:locale) { 'en' }
         let(:id) { '1' }
 
         run_test!
@@ -79,7 +72,6 @@ RSpec.describe 'lessons', type: :request do
       tags 'Lessons'
       produces 'application/json'
       response(200, 'successful') do
-        let(:locale) { 'en' }
         let(:id) { '1' }
 
         consumes 'application/json'
@@ -94,14 +86,12 @@ RSpec.describe 'lessons', type: :request do
       produces 'application/json'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/lesson_delete'
-        let(:locale) { 'en' }
         let(:id) { '1' }
         run_test!
       end
       response(404, 'not found') do
         schema '$ref' => '#/components/schemas/error_not_found'
 
-        let(:locale) { 'en' }
         let(:id) { '1' }
 
         run_test!

@@ -4,14 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/{locale}/categories":
-    parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
+  "/categories":
     get:
       summary: list categories
       tags:
@@ -59,14 +52,8 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/create_category"
-  "/{locale}/categories/{id}":
+  "/categories/{id}":
     parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
       description: id
@@ -110,14 +97,7 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/update_category"
-  "/{locale}/lessons":
-    parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
+  "/lessons":
     get:
       summary: list lessons
       tags:
@@ -165,14 +145,8 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/lesson_create"
-  "/{locale}/lessons/{id}":
+  "/lessons/{id}":
     parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
       description: id
@@ -230,6 +204,95 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_not_found"
+  "/password/forgot":
+    post:
+      summary: send reset link to email
+      tags:
+      - Sign_up
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert:
+                    type: string
+                    example: We've sent a link to restore access to your account to
+                      the address email
+                required:
+                - alert
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    error: User is not found. Please enter a valid email address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+  "/password/reset":
+    post:
+      summary: reset password
+      tags:
+      - Sign_up
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                required:
+                - status
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    error: Link not valid or expired. Try generating a new link.
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              examples:
+                unprocessable_entity:
+                  value:
+                    error: User errors full messages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                token:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - token
+              - password
   "/sign_up":
     post:
       summary: create sign_up
@@ -331,14 +394,8 @@ paths:
                 unauthorized:
                   value:
                     error: unathorized
-  "/{locale}/users/{id}":
+  "/users/{id}":
     parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
       description: id
@@ -383,14 +440,8 @@ paths:
                   value:
                     status: 404
                     error: Not Found
-  "/{locale}/check_email?email={email}":
+  "/check_email?email={email}":
     parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
     - name: email
       in: path
       description: email
@@ -412,14 +463,8 @@ paths:
                     example: 'true'
                 required:
                 - email_exists
-  "/{locale}/check_username?name={username}":
+  "/check_username?name={username}":
     parameters:
-    - name: locale
-      in: path
-      description: locale
-      required: true
-      schema:
-        type: string
     - name: username
       in: path
       description: username
@@ -442,87 +487,7 @@ paths:
                     type: boolean
                     example: 'true'
                 required:
-                  - username_exists
-  "/password/forgot":
-    post:
-      summary: send reset link to email
-      tags:
-        - Sign_up
-      parameters: [ ]
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                example_key:
-                  value:
-                    alert: We've sent a link to restore access to your account to the address email.
-        '404':
-          description: not found
-          content:
-            application/json:
-              examples:
-                not_found:
-                  value:
-                    error: User is not found. Please enter a valid email address.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-              required:
-                - email
-  "/password/reset":
-    post:
-      summary: reset password
-      tags:
-        - Sign_up
-      parameters: [ ]
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                example_key:
-                  value:
-                    status: ok
-        '404':
-          description: not found
-          content:
-            application/json:
-              examples:
-                not_found:
-                  value:
-                    error: Link not valid or expired. Try generating a new link.
-        '422':
-          description: unprocessable entity
-          content:
-            application/json:
-              examples:
-                unprocessable entity:
-                  value:
-                    error: User errors full messages.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                token:
-                  type: string
-                password:
-                  type: string
-              required:
-                - email
-                - token
-                - password
+                - username_exists
 servers:
 - url: http://{herokuapp}
   variables:
