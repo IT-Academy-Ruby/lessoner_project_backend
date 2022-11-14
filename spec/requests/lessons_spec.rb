@@ -15,17 +15,16 @@ RSpec.describe 'lessons', type: :request do
 
     post('create lesson') do
       tags 'Lessons'
+      consumes 'application/json'
       produces 'application/json'
+      parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_create' }
+
       response(200, 'successful') do
-        consumes 'application/json'
-        parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_create' }
-        schema '$ref' => '#/components/schemas/lesson_extended'
+        schema '$ref' => '#/components/schemas/lesson'
 
         run_test!
       end
       response(422, 'invalid request') do
-        consumes 'application/json'
-        parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_create' }
         example 'application/json', :example_blank_author, {
           errors: {
             author: [
@@ -54,7 +53,7 @@ RSpec.describe 'lessons', type: :request do
       tags 'Lessons'
       produces 'application/json'
       response(200, 'successful') do
-        schema '$ref' => '#/components/schemas/lesson_extended'
+        schema '$ref' => '#/components/schemas/lesson'
         let(:id) { '1' }
 
         run_test!
@@ -70,13 +69,14 @@ RSpec.describe 'lessons', type: :request do
 
     put('update lesson') do
       tags 'Lessons'
+      consumes 'application/json'
       produces 'application/json'
-      response(200, 'successful') do
-        let(:id) { '1' }
+      parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_update' }
 
-        consumes 'application/json'
-        parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_update' }
-        schema '$ref' => '#/components/schemas/lesson_extended'
+      response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/lesson'
+
+        let(:id) { '1' }
         run_test!
       end
     end
@@ -84,14 +84,15 @@ RSpec.describe 'lessons', type: :request do
     delete('delete lesson') do
       tags 'Lessons'
       produces 'application/json'
+
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/lesson_delete'
         let(:id) { '1' }
+
         run_test!
       end
       response(404, 'not found') do
         schema '$ref' => '#/components/schemas/error_not_found'
-
         let(:id) { '1' }
 
         run_test!
