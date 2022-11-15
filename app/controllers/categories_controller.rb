@@ -7,7 +7,13 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def show; end
+  def show
+    if @category
+      render :show
+    else
+      render :not_found, status: :not_found
+    end
+  end
 
   def new
     @category = Category.new
@@ -16,7 +22,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      render 'categories/show'
+      render :show
     else
       render 'categories/errors', status: :unprocessable_entity
     end
@@ -35,10 +41,10 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :description, :status)
+    params.permit(:name, :description, :status)
   end
 
   def category_find
-    @category = Category.find(params[:id])
+    @category = Category.find_by(id: params[:id])
   end
 end

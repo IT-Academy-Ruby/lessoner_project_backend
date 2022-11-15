@@ -32,8 +32,6 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
-gem 'devise'
-
 # Omniauth
 gem 'omniauth', '~> 2.1'
 gem 'omniauth-facebook', '~> 9.0'
@@ -51,8 +49,11 @@ gem 'plyr-rails'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
+# Json Web Token
+gem 'jwt'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem 'bcrypt', '~> 3.1.7'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -69,17 +70,16 @@ gem 'bootstrap', '~> 5.2'
 # This gem provides jQuery and the jQuery-ujs driver
 gem 'jquery-rails', '~> 4.5'
 
-# A set of common locale data and translations to internationalize and/or localize application
-gem 'rails-i18n', '~> 7.0', '>= 7.0.5'
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-
-gem 'octicons'
 
 gem 'rspec-rails'
 
 gem 'rswag'
+
+gem 'date_validator', '~> 0.12.0'
+
+gem 'phonelib', '~> 0.7.3'
 
 gem 'rack-cors'
 
