@@ -1,5 +1,3 @@
 json.array! @lessons do |lesson|
-  json.id lesson.id
-  json.title lesson.title
-  json.description lesson.description
+  json.extract! lesson, :id, :title, :description, :video_link, :author_id, :category_id, :status
 end

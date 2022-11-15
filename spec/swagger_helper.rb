@@ -6,7 +6,7 @@ SWAGGER_DOCS = {
   'v1/swagger.yaml' => {
     openapi: '3.0.1',
     info: {
-      title: 'API V1',
+      title: 'Lessoner API',
       version: 'v1'
     },
     paths: {},
@@ -90,48 +90,38 @@ SWAGGER_DOCS = {
           type: :object,
           properties: {
             id: { type: :integer, minimum: 1 },
-            title: { type: :string },
-            description: { type: :string }
-          },
-          required: %w[id title description]
-        },
-        lesson_create: {
-          type: :object,
-          properties: {
-            title: { type: :string },
-            description: { type: :string },
-            video_link: { type: :string },
-            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
-            author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
-          },
-          required: %w[title description video_link author_id category_id]
-        },
-        lesson_extended: {
-          type: :object,
-          properties: {
-            id: { type: :integer, minimum: 1 },
-            title: { type: :string },
-            description: { type: :string },
-            video_link: { type: :string },
+            title: { type: :string, example: 'Lesson name' },
+            description: { type: :string, example: 'Lesson description' },
+            video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           },
           required: %w[id title description status video_link author_id category_id]
         },
+        lesson_create: {
+          type: :object,
+          properties: {
+            title: { type: :string, example: 'Lesson name' },
+            description: { type: :string, example: 'Lesson description' },
+            video_link: { type: :string, example: 'http://video.com/my-video' },
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
+            author_id: { type: :integer, minimum: 1 },
+            category_id: { type: :integer, minimum: 1 }
+          },
+          required: %w[title description video_link author_id category_id]
+        },
         lesson_update: {
           type: :object,
           minProperties: 1,
           properties: {
-            title: { type: :string },
-            description: { type: :string },
-            video_link: { type: :string },
+            title: { type: :string, example: 'Lesson name' },
+            description: { type: :string, example: 'Lesson description' },
+            video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 }
           }
-
         },
         lesson_delete: {
           type: :object,

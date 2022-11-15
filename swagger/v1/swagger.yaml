@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Lessoner API
   version: v1
 paths:
   "/categories":
@@ -326,7 +326,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/lesson_extended"
+                "$ref": "#/components/schemas/lesson"
         '422':
           description: invalid request
           content:
@@ -367,7 +367,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/lesson_extended"
+                "$ref": "#/components/schemas/lesson"
         '404':
           description: not found
           content:
@@ -385,7 +385,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/lesson_extended"
+                "$ref": "#/components/schemas/lesson"
       requestBody:
         content:
           application/json:
@@ -785,51 +785,13 @@ components:
           minimum: 1
         title:
           type: string
+          example: Lesson name
         description:
           type: string
-      required:
-      - id
-      - title
-      - description
-    lesson_create:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
+          example: Lesson description
         video_link:
           type: string
-        status:
-          type: string
-          enum:
-          - active
-          - archived
-          example: active
-        author_id:
-          type: integer
-          minimum: 1
-        category_id:
-          type: integer
-          minimum: 1
-      required:
-      - title
-      - description
-      - video_link
-      - author_id
-      - category_id
-    lesson_extended:
-      type: object
-      properties:
-        id:
-          type: integer
-          minimum: 1
-        title:
-          type: string
-        description:
-          type: string
-        video_link:
-          type: string
+          example: http://video.com/my-video
         status:
           type: string
           enum:
@@ -850,16 +812,49 @@ components:
       - video_link
       - author_id
       - category_id
+    lesson_create:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Lesson name
+        description:
+          type: string
+          example: Lesson description
+        video_link:
+          type: string
+          example: http://video.com/my-video
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+          example: active
+        author_id:
+          type: integer
+          minimum: 1
+        category_id:
+          type: integer
+          minimum: 1
+      required:
+      - title
+      - description
+      - video_link
+      - author_id
+      - category_id
     lesson_update:
       type: object
       minProperties: 1
       properties:
         title:
           type: string
+          example: Lesson name
         description:
           type: string
+          example: Lesson description
         video_link:
           type: string
+          example: http://video.com/my-video
         status:
           type: string
           enum:
