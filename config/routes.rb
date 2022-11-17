@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/'
   mount Rswag::Api::Engine => '/api-docs'
   post '/sign_up', to: 'sign_up#create'
+  get 'sign_up/confirm_email', to: 'sign_up#confirm_email'
   post '/login', to: 'sign_up#login', defaults: { format: :json }
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'

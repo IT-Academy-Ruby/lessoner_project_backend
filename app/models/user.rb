@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_secure_password
   paginates_per MAX_ITEMS_PER_PAGE
-
+  before_create :confirmation_token
   enum :gender, %i[male female other]
   validates :gender, presence: true
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
@@ -51,9 +51,21 @@ class User < ApplicationRecord
     save!
   end
 
+  def email_activate!
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(validate: false)
+  end
+
   private
 
   def generate_token
     SecureRandom.hex(10)
+  end
+
+  def confirmation_token
+    return if confirm_token.present?
+
+    self.confirm_token = generate_token
   end
 end
