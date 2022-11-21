@@ -15,7 +15,7 @@ class User < ApplicationRecord
                     uniqueness: true
   validate :email_dots, if: -> { email.present? }
 
-  validate :password_special_character, if: -> { password.present? }
+  # validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
                        format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }
   validates :phone, phone: true, if: -> { phone.present? }
@@ -31,9 +31,9 @@ class User < ApplicationRecord
   end
 
   # Validation for password: must contain at least 1 special character.
-  def password_special_character
-    errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
-  end
+  # def password_special_character
+  #  errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
+  # end
 
   def generate_password_token!
     self.password_reset_token = generate_token
