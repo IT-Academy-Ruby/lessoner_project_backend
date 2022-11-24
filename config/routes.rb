@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   end
 
   scope module: 'public' do
-    get '/check_username', to: 'users#check_username', defaults: { format: :json }
-    get '/check_email', to: 'users#check_email', defaults: { format: :json }
+    get '/check_username', to: 'users#check_username'
+    get '/check_email', to: 'users#check_email'
   end
 
   resources :users do

@@ -3,11 +3,13 @@
 module Public
   class UsersController < ApplicationController
     def check_username
-      @user = User.find_by(name: params[:name])
+      user_name = params[:name] ? params[:name].downcase : nil
+      @user = User.find_by(name: user_name)
     end
 
     def check_email
-      @user = User.find_by(email: params[:email])
+      user_email = params[:email] ? params[:email].downcase : nil
+      @user = User.find_by(email: user_email)
     end
   end
 end

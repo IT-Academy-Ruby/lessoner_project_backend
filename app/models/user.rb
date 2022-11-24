@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
-                    format: { with: %r/\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ },
+                    format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ },
                     uniqueness: true
   validate :email_dots, if: -> { email.present? }
 
