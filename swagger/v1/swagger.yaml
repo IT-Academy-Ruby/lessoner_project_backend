@@ -497,6 +497,56 @@ paths:
               - email
               - token
               - password
+  "/check_email?email={email}":
+    parameters:
+    - name: email
+      in: path
+      description: email
+      required: true
+      schema:
+        type: string
+    get:
+      summary: check email
+      tags:
+      - Users public
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email_exists:
+                    type: boolean
+                    example: 'true'
+                required:
+                - email_exists
+  "/check_username?name={username}":
+    parameters:
+    - name: username
+      in: path
+      description: username
+      required: true
+      schema:
+        type: string
+    get:
+      summary: check username
+      tags:
+      - Users public
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username_exists:
+                    type: boolean
+                    example: 'true'
+                required:
+                - username_exists
   "/sign_up":
     post:
       summary: create sign_up
@@ -644,54 +694,6 @@ paths:
                   value:
                     status: 404
                     error: Not Found
-  "/check_email?email={email}":
-    parameters:
-    - name: email
-      in: path
-      description: email
-      required: true
-      schema:
-        type: string
-    get:
-      summary: check email
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  email_exists:
-                    type: boolean
-                    example: 'true'
-                required:
-                - email_exists
-  "/check_username?name={username}":
-    parameters:
-    - name: username
-      in: path
-      description: username
-      required: true
-      schema:
-        type: string
-    get:
-      summary: check username
-      tags:
-      - Users
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  username_exists:
-                    type: boolean
-                    example: 'true'
-                required:
-                - username_exists
 servers:
 - url: http://{Lessoner Dev}
   variables:
