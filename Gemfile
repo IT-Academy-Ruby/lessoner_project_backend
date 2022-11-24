@@ -5,6 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+#Amazon Simple Storage Service (Amazon S3)
+gem "aws-sdk-s3", require: false
+
 # Error Tracking
 gem 'rollbar'
 

@@ -3,7 +3,8 @@
 class LessonsController < ApplicationController
   before_action :lesson_find, only: %i[show edit update destroy]
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.all.with_attached_lesson_image
+    render json: @lessons, include: ['lesson_image'], status: :ok
   end
 
   def show
@@ -50,7 +51,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.permit(:title, :description, :status, :video_link, :author_id, :category_id)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :lesson_image)
   end
 
   def lesson_find
