@@ -2,7 +2,6 @@
 
 module Public
   class UsersController < ApplicationController
-
     def check_username
       @user = User.find_by(name: params[:name])
     end
