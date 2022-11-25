@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_secure_password
   paginates_per MAX_ITEMS_PER_PAGE
   before_create :confirmation_token
+  before_save { self.email = email.downcase! }
+  before_save { self.name = name.downcase! }
   enum :gender, %i[male female other]
   validates :gender, presence: true
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
@@ -11,7 +13,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 3..50 }, format: { with: /\A[a-z0-9]+\z/i },
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
-                    format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ },
+                    format: { with: %r/\A[a-zA-Z0-9!#$%&'*+\-\/=?^_`{|}~.]+@[a-z0-9\-.]*\z/ },
                     uniqueness: true
   validate :email_dots, if: -> { email.present? }
 
