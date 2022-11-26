@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_secure_password
   paginates_per MAX_ITEMS_PER_PAGE
   before_create :confirmation_token
-  before_save { self.email = email.downcase! }
-  before_save { self.name = name.downcase! }
+  before_validation { email.downcase! }
+  before_validation { name.downcase! }
   enum :gender, %i[male female other]
   validates :gender, presence: true
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
