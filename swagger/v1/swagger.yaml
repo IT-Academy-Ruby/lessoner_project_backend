@@ -709,6 +709,10 @@ servers:
   variables:
     localHost2:
       default: 127.0.0.1:3000/
+- url: http://{Lessoner Prod Render}
+  variables:
+    dev:
+      default: lessoner-project-backend.onrender.com/
 components:
   schemas:
     errors_object:
