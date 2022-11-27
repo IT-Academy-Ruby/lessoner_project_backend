@@ -28,11 +28,8 @@
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
-#/config/master.key
+/config/master.key
 # Ignore idea files.
 .idea
 .env
 .vscode
-
-
-/config/master.key
