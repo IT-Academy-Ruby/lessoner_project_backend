@@ -302,6 +302,40 @@ paths:
                   value:
                     error: not found
   "/lessons":
+    parameters:
+    - name: page
+      in: query
+      default: 1
+      required: false
+      schema:
+        type: integer
+    - name: items
+      in: query
+      required: false
+      schema:
+        type: integer
+    - name: status
+      in: query
+      schema:
+        type: string
+        enum:
+        - active
+        - archived
+    - name: category_id
+      in: query
+      required: false
+      schema:
+        type: integer
+    - name: sort_field
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: sort_type
+      in: query
+      required: false
+      schema:
+        type: string
     get:
       summary: list lessons
       tags:
