@@ -5,7 +5,10 @@ class LessonsController < ApplicationController
 
   before_action :lesson_find, only: %i[show edit update destroy]
   def index
-    @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status, :category_id)), items: 3)
+    sort_field = params[:sort] || 'created_at'
+    sort_type = params[:sort_type] || 'DESC'
+    @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status,
+                                                             :category_id)).order("#{sort_field} #{sort_type}"))
   end
 
   def show
