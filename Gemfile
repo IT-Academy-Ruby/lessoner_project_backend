@@ -52,6 +52,9 @@ gem 'plyr-rails'
 # Json Web Token
 gem 'jwt'
 
+# URL validator
+gem 'validate_url'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'bcrypt', '~> 3.1.7'
 

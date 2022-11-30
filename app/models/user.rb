@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_secure_password
   paginates_per MAX_ITEMS_PER_PAGE
-
+  before_create :confirmation_token
   enum :gender, %i[male female other]
   validates :gender, presence: true
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
@@ -15,7 +15,7 @@ class User < ApplicationRecord
                     uniqueness: true
   validate :email_dots, if: -> { email.present? }
 
-  validate :password_special_character, if: -> { password.present? }
+  # validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
                        format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }
   validates :phone, phone: true, if: -> { phone.present? }
@@ -31,9 +31,9 @@ class User < ApplicationRecord
   end
 
   # Validation for password: must contain at least 1 special character.
-  def password_special_character
-    errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
-  end
+  # def password_special_character
+  #  errors.add(:password, 'must contain at least 1 special character') if password.count("!#$%&'*+\-\/=?^_`{|}~").zero?
+  # end
 
   def generate_password_token!
     self.password_reset_token = generate_token
@@ -51,9 +51,21 @@ class User < ApplicationRecord
     save!
   end
 
+  def email_activate!
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(validate: false)
+  end
+
   private
 
   def generate_token
     SecureRandom.hex(10)
+  end
+
+  def confirmation_token
+    return if confirm_token.present?
+
+    self.confirm_token = generate_token
   end
 end

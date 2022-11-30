@@ -12,10 +12,18 @@ SWAGGER_DOCS = {
     paths: {},
     servers: [
       {
-        url: 'http://{herokuapp}',
+        url: 'http://{Lessoner Dev}',
         variables: {
-          herokuapp: {
+          dev: {
             default: 'lessoner.herokuapp.com/'
+          }
+        }
+      },
+      {
+        url: 'http://{Lessoner Prod}',
+        variables: {
+          prod: {
+            default: 'lessoner-prod.herokuapp.com/'
           }
         }
       },
