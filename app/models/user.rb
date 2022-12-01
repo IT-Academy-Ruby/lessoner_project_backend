@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   # validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
-                       format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }, if: :password_required?
+                       format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }, if: -> { password.present? }
   validates :phone, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
@@ -57,14 +57,6 @@ class User < ApplicationRecord
     self.email_confirmed = true
     self.confirm_token = nil
     save!(validate: false)
-  end
-
-  def enforce_password_validation
-    @enforce_password_validation = true
-  end
-
-  def password_required?
-    @enforce_password_validation || password.present?
   end
 
   private
