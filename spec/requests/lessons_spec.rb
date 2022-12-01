@@ -8,7 +8,6 @@ RSpec.describe 'lessons', type: :request do
     parameter name: 'category_id', in: :query, type: :integer, required: false
     parameter name: 'sort_field', in: :query, type: :string, required: false
     parameter name: 'sort_type', in: :query, type: :string, required: false
-    parameter name: 'created_at', in: :query, type: :string, required: false
     get('list lessons') do
       tags 'Lessons'
       produces 'application/json'
