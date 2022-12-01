@@ -14,7 +14,7 @@ class UsersController < AuthorizationController
   def edit; end
 
   def update
-    if params[:avatar].present? && !@user.nil?
+    if params[:avatar].present? && @user.present?
       @user.avatar.attach(params[:avatar])
       @user.avatar_url = rails_blob_path(@user.avatar)
       @user.save!
