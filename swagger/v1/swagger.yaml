@@ -319,7 +319,7 @@ paths:
       schema:
         type: string
         enum:
-        - active
+        - published
         - archived
     - name: category_id
       in: query
@@ -731,6 +731,14 @@ servers:
   variables:
     dev:
       default: lessoner.herokuapp.com/
+- url: http://{Lessoner Prod Render}
+  variables:
+    prod:
+      default: https://lessoner-project-2w3h.onrender.com/
+- url: http://{Lessoner QA Render}
+  variables:
+    qa:
+      default: https://qa-test-pfm3.onrender.com/
 - url: http://{Lessoner Prod}
   variables:
     prod:
@@ -833,7 +841,7 @@ components:
         status:
           type: string
           enum:
-          - active
+          - published
           - archived
           example: active
         author_id:
@@ -842,6 +850,9 @@ components:
         category_id:
           type: integer
           minimum: 1
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
       required:
       - id
       - title
@@ -865,7 +876,7 @@ components:
         status:
           type: string
           enum:
-          - active
+          - published
           - archived
           example: active
         author_id:
@@ -874,6 +885,9 @@ components:
         category_id:
           type: integer
           minimum: 1
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
       required:
       - title
       - description
@@ -896,7 +910,7 @@ components:
         status:
           type: string
           enum:
-          - active
+          - published
           - archived
           example: active
         author_id:
@@ -905,6 +919,9 @@ components:
         category_id:
           type: integer
           minimum: 1
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
     lesson_delete:
       type: object
       properties:

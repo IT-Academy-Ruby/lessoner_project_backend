@@ -20,6 +20,22 @@ SWAGGER_DOCS = {
         }
       },
       {
+        url: 'http://{Lessoner Prod Render}',
+        variables: {
+          prod: {
+            default: 'https://lessoner-project-2w3h.onrender.com/'
+          }
+        }
+      },
+      {
+        url: 'http://{Lessoner QA Render}',
+        variables: {
+          qa: {
+            default: 'https://qa-test-pfm3.onrender.com/'
+          }
+        }
+      },
+      {
         url: 'http://{Lessoner Prod}',
         variables: {
           prod: {
@@ -103,7 +119,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
           required: %w[id title description status video_link author_id category_id]
         },
@@ -115,7 +132,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
           required: %w[title description video_link author_id category_id]
         },
@@ -128,7 +146,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           }
         },
         lesson_delete: {

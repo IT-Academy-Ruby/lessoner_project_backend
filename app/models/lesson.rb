@@ -3,7 +3,7 @@
 class Lesson < ApplicationRecord
   include Filterable
 
-  STATUSES = %i[active archived].freeze
+  STATUSES = %i[published archived].freeze
 
   paginates_per MAX_ITEMS_PER_PAGE
   has_many :comments, dependent: :destroy
