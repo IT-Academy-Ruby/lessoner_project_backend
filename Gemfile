@@ -41,8 +41,6 @@ gem 'omniauth-facebook', '~> 9.0'
 gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 
-gem 'kaminari'
-
 # Videoplayer for rails [https://github.com/sadiqmmm/plyr-rails]
 gem 'plyr-rails'
 
