@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < AuthorizationController
-  before_action :user_find, only: %i[show edit update]
+
 
   def show
-    if @user
+    if current_user
       render 'users/show'
     else
       render :not_found, status: :not_found
@@ -14,12 +14,12 @@ class UsersController < AuthorizationController
   def edit; end
 
   def update
-    if params[:avatar].present? && @user.present?
-      @user.avatar.attach(params[:avatar])
-      @user.avatar_url = rails_blob_path(@user.avatar)
-      @user.save!
+    if params[:avatar].present?
+      current_user.avatar.attach(params[:avatar])
+      current_user.avatar_url = rails_blob_path(current_user.avatar)
+      current_user.save!
     end
-    if @user.update(user_params)
+    if current_user.update(user_params)
       render 'users/show'
     else
       render :error, status: :unprocessable_entity
@@ -30,9 +30,5 @@ class UsersController < AuthorizationController
 
   def user_params
     params.permit(:name, :description, :avatar, :avatar_url, :gender, :birthday)
-  end
-
-  def user_find
-    @user = User.find_by(id: params[:id])
   end
 end

@@ -1,1 +1,1 @@
-json.errors @user.errors
+json.errors @current_user.errors
