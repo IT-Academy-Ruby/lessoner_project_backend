@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < AuthorizationController
-
-
   def show
     if current_user
       render 'users/show'
