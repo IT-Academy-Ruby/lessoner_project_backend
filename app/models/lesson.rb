@@ -5,6 +5,7 @@ class Lesson < ApplicationRecord
 
   paginates_per MAX_ITEMS_PER_PAGE
   has_many :comments, dependent: :destroy
+  has_many :lesson_views, dependent: :destroy
   belongs_to :author, class_name: 'User'
   enum :status, STATUSES
 
