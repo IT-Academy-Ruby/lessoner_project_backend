@@ -13,7 +13,7 @@ class LessonViewsController < ApplicationController
   def current_user_id
     @decoded = JsonWebToken.decode(jwt_token)
     @current_user_id = User.find_by(email: @decoded['email']).id
-  rescue StandardError
+  rescue
     nil
   end
 end
