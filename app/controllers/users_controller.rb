@@ -11,14 +11,6 @@ class UsersController < AuthorizationController
     end
   end
 
-  def check_username
-    @user = User.find_by(name: params[:name])
-  end
-
-  def check_email
-    @user = User.find_by(email: params[:email])
-  end
-
   private
 
   def user_find

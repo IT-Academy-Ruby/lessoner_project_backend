@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_162408) do
     t.datetime "password_reset_sent_at"
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
+    t.boolean "admin_type", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end
