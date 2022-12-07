@@ -91,7 +91,7 @@ SWAGGER_DOCS = {
           properties: {
             name: { type: :string },
             description: { type: :string },
-            status: { type: :string, enum: Category::STATUSES }
+            status: { type: :string, enum: Category::STATUSES, example: 'archived' }
           }
         },
         lesson: {
