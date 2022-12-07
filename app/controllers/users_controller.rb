@@ -14,7 +14,7 @@ class UsersController < AuthorizationController
   def update
     if params[:avatar].present?
       current_user.avatar.attach(params[:avatar])
-      current_user.avatar_url = rails_blob_path(current_user.avatar)
+      current_user.avatar_url = current_user.avatar&.url&.split("?")&.first
       current_user.save!
     end
     if current_user.update(user_params)
