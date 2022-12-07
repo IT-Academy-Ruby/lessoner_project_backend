@@ -22,7 +22,7 @@ class LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
     if @lesson.save
-      render :show
+      render json: @lesson
     else
       render :error, status: :unprocessable_entity
     end
@@ -51,7 +51,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :lesson_image)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :lesson_image, :lesson_image_url)
   end
 
   def lesson_find
