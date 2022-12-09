@@ -14,6 +14,7 @@ Metrics/BlockLength:
     - config/environments/production.rb
     - spec/requests/*.rb
     - config/routes.rb
+    - spec/requests/public/users_spec.rb
 
 Style/StringConcatenation:
   Exclude:
