@@ -50,7 +50,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id)
   end
 
   def lesson_find
