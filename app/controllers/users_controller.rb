@@ -20,5 +20,4 @@ class UsersController < AuthorizationController
   def user_params
     params.permit(:name, :description, :avatar, :avatar_url, :gender, :birthday, :phone, :created_at)
   end
-
 end
