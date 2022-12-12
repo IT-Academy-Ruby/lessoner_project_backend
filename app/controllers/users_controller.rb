@@ -16,4 +16,9 @@ class UsersController < AuthorizationController
   def user_find
     @user = User.find_by(id: params[:id])
   end
+
+  def user_params
+    params.permit(:name, :description, :avatar, :avatar_url, :gender, :birthday, :phone, :created_at)
+  end
+
 end

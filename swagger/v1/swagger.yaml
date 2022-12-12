@@ -578,6 +578,8 @@ paths:
                     type: string
                   birthday:
                     type: string
+                  created_at:
+                    type: string
                 required:
                 - id
                 - name
@@ -673,18 +675,38 @@ paths:
                     minimum: 1
                   name:
                     type: string
+                    example: User name
                   description:
                     type: string
+                    example: User description
                   email:
                     type: string
+                    example: user@gmail.com
                   avatar_url:
                     type: string
+                    example: https://lessoner.s3.amazonaws.com/image-url
+                  phone:
+                    type: string
+                    example: "+375291234567"
+                  gender:
+                    type: integer
+                    example: male
+                  birthday:
+                    type: string
+                    example: '2000-01-01'
+                  created_at:
+                    type: string
+                    example: '2022-12-01 14:11:33 +0300'
                 required:
                 - id
                 - name
                 - description
                 - email
                 - avatar_url
+                - phone
+                - gender
+                - birthday
+                - created_at
         '404':
           description: not found
           content:
@@ -711,10 +733,6 @@ servers:
   variables:
     localHost2:
       default: 127.0.0.1:3000/
-- url: http://{Lessoner Prod Render}
-  variables:
-    rend:
-      default: lessoner-project-backend.onrender.com/
 components:
   schemas:
     errors_object:
@@ -754,11 +772,15 @@ components:
           enum:
           - active
           - archived
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
       required:
       - id
       - name
       - description
       - status
+      - created_at
     create_category:
       type: object
       properties:
@@ -814,6 +836,9 @@ components:
         category_id:
           type: integer
           minimum: 1
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
       required:
       - id
       - title
@@ -822,6 +847,7 @@ components:
       - video_link
       - author_id
       - category_id
+      - created_at
     lesson_create:
       type: object
       properties:

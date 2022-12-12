@@ -38,6 +38,6 @@ class CommentsController < AuthorizationController
   end
 
   def comment_params
-    params.permit(:user_id, :body, :lesson_id)
+    params.permit(:user_id, :body, :lesson_id, :created_at)
   end
 end
