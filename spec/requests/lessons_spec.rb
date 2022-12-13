@@ -2,6 +2,12 @@ require 'swagger_helper'
 
 RSpec.describe 'lessons', type: :request do
   path '/lessons' do
+    parameter name: 'page', in: :query, type: :integer, default: 1, required: false
+    parameter name: 'items', in: :query, type: :integer, required: false
+    parameter name: 'status', in: :query, schema: { type: :string, enum: Lesson::STATUSES }
+    parameter name: 'category_id', in: :query, type: :integer, required: false
+    parameter name: 'sort_field', in: :query, type: :string, required: false
+    parameter name: 'sort_type', in: :query, type: :string, required: false
     get('list lessons') do
       tags 'Lessons'
       produces 'application/json'
