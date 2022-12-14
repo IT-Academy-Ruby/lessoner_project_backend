@@ -2,7 +2,6 @@
 
 class User < ApplicationRecord
   has_secure_password
-  paginates_per MAX_ITEMS_PER_PAGE
   before_create :confirmation_token
   before_validation { email.downcase! }
   before_validation { name.downcase! }
