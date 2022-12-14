@@ -5,7 +5,6 @@ class Lesson < ApplicationRecord
 
   STATUSES = %i[active archived].freeze
 
-  paginates_per MAX_ITEMS_PER_PAGE
   has_many :comments, dependent: :destroy
   belongs_to :author, class_name: 'User'
   enum :status, STATUSES
