@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LessonsController < ApplicationController
+class LessonsController < AuthorizationController
   include Pagy::Backend
 
   before_action :lesson_find, only: %i[show edit update destroy]
@@ -35,6 +35,7 @@ class LessonsController < ApplicationController
   def edit; end
 
   def update
+    CalculateLessonsRating.new(lesson: @lesson, current_user:, rating: lesson_rating_params[:rating]).call
     if @lesson.update(lesson_params)
       redirect_to @lesson
     else
@@ -56,6 +57,10 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.permit(:title, :description, :status, :video_link, :author_id, :category_id)
+  end
+
+  def lesson_rating_params
+    params.permit(:rating)
   end
 
   def lesson_find
