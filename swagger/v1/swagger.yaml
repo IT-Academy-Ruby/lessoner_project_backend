@@ -91,7 +91,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/category"
+                "$ref": "#/components/schemas/update_category"
       requestBody:
         content:
           application/json:
@@ -817,6 +817,7 @@ components:
           enum:
           - active
           - archived
+          example: archived
     lesson:
       type: object
       properties:

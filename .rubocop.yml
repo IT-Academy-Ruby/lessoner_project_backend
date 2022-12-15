@@ -45,3 +45,6 @@ Style/FrozenStringLiteralComment:
 
 Metrics/MethodLength:
   Max: 20
+
+Style/RescueStandardError:
+  Enabled: false

@@ -79,7 +79,7 @@ RSpec.describe 'categories', type: :request do
       response(200, 'successful') do
         consumes 'application/json'
         parameter name: :updated_category, in: :body, schema: { '$ref' => '#/components/schemas/update_category' }
-        schema '$ref' => '#/components/schemas/category'
+        schema '$ref' => '#/components/schemas/update_category'
 
         let(:id) { 1 }
         run_test!
