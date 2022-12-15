@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_one_attached :avatar, dependent: :destroy
   has_secure_password
   before_create :confirmation_token
   before_validation { email.downcase! }
   before_validation { name.downcase! }
   enum :gender, %i[male female other]
+  validates :avatar, attached: false, content_type: %w[image/jpeg image/png image/jpg]
   validates :gender, presence: true
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
                                before: proc { Time.zone.today } }
