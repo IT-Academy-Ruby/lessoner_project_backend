@@ -72,9 +72,10 @@ SWAGGER_DOCS = {
             id: { type: :integer, minimum: 1 },
             name: { type: :string },
             description: { type: :string },
-            status: { type: :string, enum: Category::STATUSES }
+            status: { type: :string, enum: Category::STATUSES },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
-          required: %w[id name description status]
+          required: %w[id name description status created_at]
         },
         create_category: {
           type: 'object',
@@ -106,7 +107,7 @@ SWAGGER_DOCS = {
             category_id: { type: :integer, minimum: 1 },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
-          required: %w[id title description status video_link author_id category_id]
+          required: %w[id title description status video_link author_id category_id created_at]
         },
         lesson_create: {
           type: :object,
