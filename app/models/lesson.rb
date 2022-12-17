@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Lesson < ApplicationRecord
+  include Filterable
+
   STATUSES = %i[active archived].freeze
 
-  paginates_per MAX_ITEMS_PER_PAGE
   has_many :comments, dependent: :destroy
   has_many :lesson_views, dependent: :destroy
   belongs_to :author, class_name: 'User'
@@ -20,4 +21,7 @@ class Lesson < ApplicationRecord
                                     message: 'This character is not available for input in this field' }
   validates :video_link, presence: true, url: { message: 'Please check the correctness of the link' }
   validates :category_id, presence: true
+
+  scope :filter_by_status, ->(status) { where status: }
+  scope :filter_by_category_id, ->(category_id) { where category_id: }
 end

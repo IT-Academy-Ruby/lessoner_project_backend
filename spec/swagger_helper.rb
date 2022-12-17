@@ -12,18 +12,18 @@ SWAGGER_DOCS = {
     paths: {},
     servers: [
       {
-        url: 'http://{Lessoner Dev}',
+        url: 'https://{lessonerTest}',
         variables: {
-          dev: {
-            default: 'lessoner.herokuapp.com/'
+          lessonerTest: {
+            default: 'qa-test-pfm3.onrender.com/'
           }
         }
       },
       {
-        url: 'http://{Lessoner Prod}',
+        url: 'https://{lessonerProd}',
         variables: {
-          prod: {
-            default: 'lessoner-prod.herokuapp.com/'
+          lessonerProd: {
+            default: 'lessoner-project-2w3h.onrender.com/'
           }
         }
       },
@@ -91,7 +91,7 @@ SWAGGER_DOCS = {
           properties: {
             name: { type: :string },
             description: { type: :string },
-            status: { type: :string, enum: Category::STATUSES }
+            status: { type: :string, enum: Category::STATUSES, example: 'archived' }
           }
         },
         lesson: {
@@ -103,7 +103,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
           required: %w[id title description status video_link author_id category_id]
         },
