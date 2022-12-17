@@ -12,18 +12,18 @@ SWAGGER_DOCS = {
     paths: {},
     servers: [
       {
-        url: 'http://{Lessoner Dev}',
+        url: 'https://{lessonerTest}',
         variables: {
-          dev: {
-            default: 'lessoner.herokuapp.com/'
+          lessonerTest: {
+            default: 'qa-test-pfm3.onrender.com/'
           }
         }
       },
       {
-        url: 'http://{Lessoner Prod}',
+        url: 'https://{lessonerProd}',
         variables: {
-          prod: {
-            default: 'lessoner-prod.herokuapp.com/'
+          lessonerProd: {
+            default: 'lessoner-project-2w3h.onrender.com/'
           }
         }
       },
@@ -92,7 +92,7 @@ SWAGGER_DOCS = {
           properties: {
             name: { type: :string },
             description: { type: :string },
-            status: { type: :string, enum: Category::STATUSES }
+            status: { type: :string, enum: Category::STATUSES, example: 'archived' }
           }
         },
         lesson: {

@@ -3,7 +3,6 @@
 class Category < ApplicationRecord
   STATUSES = %i[active archived].freeze
 
-  paginates_per MAX_ITEMS_PER_PAGE
   enum :status, STATUSES
 
   validates :name, presence: true

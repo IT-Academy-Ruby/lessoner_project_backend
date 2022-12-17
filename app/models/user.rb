@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_one_attached :avatar, dependent: :destroy
   has_secure_password
-  paginates_per MAX_ITEMS_PER_PAGE
   before_create :confirmation_token
   before_validation { email.downcase! }
   before_validation { name.downcase! }
   enum :gender, %i[male female other]
+  validates :avatar, attached: false, content_type: %w[image/jpeg image/png image/jpg]
   validates :gender, presence: true
   validates :birthday, date: { after: proc { Time.zone.today - 120.years },
                                before: proc { Time.zone.today } }
@@ -19,7 +20,7 @@ class User < ApplicationRecord
 
   # validate :password_special_character, if: -> { password.present? }
   validates :password, presence: true, length: { in: 6..256 },
-                       format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }
+                       format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }, if: -> { password.present? }
   validates :phone, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
