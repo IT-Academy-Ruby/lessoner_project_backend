@@ -6,6 +6,7 @@ class Lesson < ApplicationRecord
   STATUSES = %i[active archived].freeze
 
   has_many :comments, dependent: :destroy
+  has_many :lesson_views, dependent: :destroy
   belongs_to :author, class_name: 'User'
   enum :status, STATUSES
 

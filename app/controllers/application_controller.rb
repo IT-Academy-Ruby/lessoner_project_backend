@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     request.headers['Authorization']&.split&.last
   end
 
+  def client_ip
+    request.remote_ip
+  end
+
   def current_user
     @decoded = JsonWebToken.decode(jwt_token)
     @current_user = User.find_by(email: @decoded['email'])
