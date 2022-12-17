@@ -11,12 +11,16 @@ RSpec.describe 'users', type: :request do
         schema type: :object,
                properties: {
                  id: { type: :integer, minimum: 1 },
-                 name: { type: :string },
-                 description: { type: :string },
-                 email: { type: :string },
-                 avatar_url: { type: :string }
+                 name: { type: :string, example: 'User name' },
+                 description: { type: :string, example: 'User description' },
+                 email: { type: :string, example: 'user@gmail.com' },
+                 avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+                 phone: { type: :string, example: '+375291234567' },
+                 gender: { type: :integer, example: 'male' },
+                 birthday: { type: :string, example: '2000-01-01' },
+                 created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
                },
-               required: %w[id name description email avatar_url]
+               required: %w[id name description email avatar_url phone gender birthday created_at]
         let(:id) { '3' }
 
         run_test!

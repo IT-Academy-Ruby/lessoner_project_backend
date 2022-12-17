@@ -26,7 +26,8 @@ RSpec.describe 'sign_up', type: :request do
                  phone: { type: :string },
                  gender: { type: :string, enum: %w[male female other] },
                  email: { type: :string },
-                 birthday: { type: :string }
+                 birthday: { type: :string },
+                 created_at: { type: :string }
                },
                required: %w[id name gender email]
         run_test!

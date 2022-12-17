@@ -1,6 +1,5 @@
-# frozen_string_literal: true
-
 class CategoriesController < ApplicationController
+  before_action :for_admin, only: %i[new create edit update]
   before_action :category_find, only: %i[show edit update]
 
   def index

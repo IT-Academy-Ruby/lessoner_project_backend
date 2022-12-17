@@ -7,10 +7,6 @@ class AuthorizationController < ApplicationController
 
   attr_reader :current_user
 
-  def jwt_token
-    request.headers['Authorization']&.split&.last
-  end
-
   def initialize_user
     @current_user = request.env[:current_user]
   end

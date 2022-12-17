@@ -13,6 +13,7 @@ class LessonsController < ApplicationController
 
   def show
     if @lesson
+      @views_count = @lesson.lesson_views.size
       render :show
     else
       render :not_found, status: :not_found
