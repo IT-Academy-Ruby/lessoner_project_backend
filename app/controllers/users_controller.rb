@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < AuthorizationController
-
   def index
     @pagy, @users = pagy(User.all.order(sort_params))
   end
