@@ -72,11 +72,9 @@ class CategoriesController < ApplicationController
   end
 
   def check_size
-    if params[:image].present?
-      width, height = FastImage.size(params[:image])
-      if width<75 || width>4000 || height<75 || height>4000
-        render json: { error: "Image has an invalid size" }, status: :unsupported_media_type
-      end
-    end
+    width, height = FastImage.size(params[:image]) if params[:image].present?
+    return unless  width < 75 || width > 4000 || height < 75 || height > 4000
+
+    render json: { error: 'Image has an invalid size' }, status: :unsupported_media_type
   end
 end
