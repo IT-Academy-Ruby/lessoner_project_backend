@@ -1,7 +1,10 @@
+require 'fastimage'
+
 class CategoriesController < ApplicationController
   before_action :for_admin, only: %i[new create edit update destroy]
   before_action :category_find, only: %i[show edit update destroy]
   before_action :show_lessons, only: %i[show edit update]
+  before_action :check_size, only: %i[new create edit update]
 
   def index
     @categories = Category.all
@@ -66,5 +69,14 @@ class CategoriesController < ApplicationController
 
   def show_lessons
     @amount_lessons = @category&.lessons&.size
+  end
+
+  def check_size
+    if params[:image].present?
+      width, height = FastImage.size(params[:image])
+      if width<75 || width>4000 || height<75 || height>4000
+        render json: { error: "Image has an invalid size" }, status: :unsupported_media_type
+      end
+    end
   end
 end
