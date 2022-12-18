@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   protect_from_forgery unless: -> { request.format.json? }
+  
+  def sort_params
+    sort_field = params[:sort] || 'created_at'
+    sort_type = params[:sort_type] || 'DESC'
+    "#{sort_field} #{sort_type}"
+  end
 
   def jwt_token
     request.headers['Authorization']&.split&.last

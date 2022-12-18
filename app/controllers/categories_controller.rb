@@ -1,11 +1,9 @@
-# frozen_string_literal: true
-
 class CategoriesController < ApplicationController
   before_action :for_admin, only: %i[new create edit update]
   before_action :category_find, only: %i[show edit update]
 
   def index
-    @categories = Category.all
+    @pagy, @categories = pagy(Category.filter(category_params.slice(:status)).order(sort_params))
   end
 
   def show
