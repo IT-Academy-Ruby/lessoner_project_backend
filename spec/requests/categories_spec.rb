@@ -20,7 +20,7 @@ RSpec.describe 'categories', type: :request do
       response(200, 'successful') do
         consumes 'application/json'
         parameter name: :new_category, in: :body, schema: { '$ref' => '#/components/schemas/create_category' }
-        schema '$ref' => '#/components/schemas/category'
+        schema '$ref' => '#/components/schemas/show_category'
 
         run_test!
       end
@@ -44,6 +44,13 @@ RSpec.describe 'categories', type: :request do
         let(:id) { 1 }
         run_test!
       end
+
+      response(403, 'forbidden') do
+        example 'application/json', :forbidden, {
+          "error": "You don't have permission to access"
+        }
+        run_test!
+      end
     end
   end
 
@@ -55,7 +62,7 @@ RSpec.describe 'categories', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
-        schema '$ref' => '#/components/schemas/category'
+        schema '$ref' => '#/components/schemas/show_category'
 
         let(:id) { 1 }
         run_test!
@@ -79,9 +86,59 @@ RSpec.describe 'categories', type: :request do
       response(200, 'successful') do
         consumes 'application/json'
         parameter name: :updated_category, in: :body, schema: { '$ref' => '#/components/schemas/update_category' }
-        schema '$ref' => '#/components/schemas/update_category'
+        schema '$ref' => '#/components/schemas/show_category'
 
         let(:id) { 1 }
+        run_test!
+      end
+
+      response(404, 'not found') do
+        example 'application/json', :example_not_found, {
+          status: 404,
+          error: 'Not found'
+        }
+
+        let(:id) { 1 }
+        run_test!
+      end
+
+      response(403, 'forbidden') do
+        example 'application/json', :forbidden, {
+          "error": "You don't have permission to access"
+        }
+        run_test!
+      end
+    end
+
+    delete('delete category') do
+      tags 'Categories'
+      produces 'application/json'
+
+      response(200, 'successful') do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer, minimum: 1 }
+               },
+               required: %w[id]
+
+        let(:id) { 1 }
+        run_test!
+      end
+
+      response(404, 'not found') do
+        example 'application/json', :example_not_found, {
+          status: 404,
+          error: 'Not found'
+        }
+
+        let(:id) { 1 }
+        run_test!
+      end
+
+      response(403, 'forbidden') do
+        example 'application/json', :forbidden, {
+          "error": "You don't have permission to access"
+        }
         run_test!
       end
     end

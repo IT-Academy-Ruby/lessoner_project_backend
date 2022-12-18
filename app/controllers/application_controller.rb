@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
   protect_from_forgery unless: -> { request.format.json? }
 
@@ -20,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def for_admin
     if jwt_token.present?
-      render json: { error: "You don't have permission to access" }, status: :forbidden unless current_user.admin_type?
+      render json: { error: "You don't have permission to access" }, status: :forbidden unless current_user&.admin_type?
     else
       render json: { error: "You don't have permission to access" }, status: :forbidden
     end
