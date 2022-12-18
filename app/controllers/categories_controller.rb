@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :category_find, only: %i[show edit update]
 
   def index
-    @pagy, @categories = pagy(Category.filter(category_params.slice(:status)).order(sort_params))
+    @pagy, @categories = pagy(Category.all.order(sort_params))
   end
 
   def show

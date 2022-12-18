@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Lesson < ApplicationRecord
+  include Filterable
 
   STATUSES = %i[active archived].freeze
 

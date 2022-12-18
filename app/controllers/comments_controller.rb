@@ -4,7 +4,7 @@ class CommentsController < AuthorizationController
   before_action :find_comment, only: %i[update destroy]
 
   def index
-    @pagy, @comments = pagy(Comment.filter(comment_params.slice(:user_id, :lesson_id)).order(sort_params))
+    @pagy, @comments = pagy(Lesson.find_by(id: params[:lesson_id])&.comments&.order(sort_params))
   end
 
   def create
