@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include ActiveStorage::SetCurrent
   protect_from_forgery unless: -> { request.format.json? }
 
   def jwt_token

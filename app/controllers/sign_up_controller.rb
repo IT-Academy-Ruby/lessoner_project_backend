@@ -16,7 +16,7 @@ class SignUpController < ApplicationController
         token = JsonWebToken.encode(name: @user.name, email: @user.email,
                                     description: @user.description, phone: @user.phone,
                                     gender: @user.gender, birthday: @user.birthday.to_s,
-                                    exp: 1.hour.from_now.to_i)
+                                    exp: 3.hours.from_now.to_i)
         render json: { jwt: token }, status: :ok
       else
         render json: { error: 'unconfirmed' }, status: :unauthorized
@@ -31,6 +31,16 @@ class SignUpController < ApplicationController
     if @user
       @user.email_activate!
       render json: { user: 'confirmed' }, status: :ok
+    else
+      render json: { error: 'not found' }, status: :not_found
+    end
+  end
+
+  def update_email
+    @user = User.find_by(update_email_token: params[:token])
+    if @user&.update_email_token_valid?
+      @user.update_email!(params[:email])
+      render json: { user: 'email has been changed' }, status: :ok
     else
       render json: { error: 'not found' }, status: :not_found
     end

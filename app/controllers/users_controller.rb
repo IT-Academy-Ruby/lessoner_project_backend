@@ -3,7 +3,7 @@
 class UsersController < AuthorizationController
   def show
     if current_user
-      render 'users/show'
+      render :show
     else
       render :not_found, status: :not_found
     end
@@ -17,8 +17,14 @@ class UsersController < AuthorizationController
       current_user.avatar_url = current_user.avatar&.url&.split('?')&.first
       current_user.save!
     end
-    if current_user.update(user_params)
-      render 'users/show'
+    if params[:email].present?
+      current_user.generate_update_email_token!
+      new_email = params[:email]
+      UserMailer.update_email_information(current_user, new_email).deliver_now
+      UserMailer.update_email_confirmation(current_user, new_email).deliver_now
+      render json: { user: 'sent' }, status: :ok
+    elsif current_user.update(user_params)
+      render :show
     else
       render :error, status: :unprocessable_entity
     end
@@ -27,6 +33,6 @@ class UsersController < AuthorizationController
   private
 
   def user_params
-    params.permit(:name, :description, :avatar, :avatar_url, :gender, :birthday)
+    params.permit(:name, :email, :description, :avatar, :avatar_url, :gender, :birthday)
   end
 end
