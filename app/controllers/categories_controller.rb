@@ -24,7 +24,6 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.image.attach(params[:image])
     @category.image_url = @category.image&.url&.split('?')&.first
     if @category.save
       render :show
@@ -36,10 +35,7 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def update
-    if params[:image].present?
-      @category.image.attach(params[:image])
-      @category.update!(image_url: @category.image&.url&.split('?')&.first)
-    end
+    @category.update!(image_url: @category.image&.url&.split('?')&.first) if params[:image].present?
     if @category.update(category_params)
       render 'categories/show'
     else
@@ -72,9 +68,11 @@ class CategoriesController < ApplicationController
   end
 
   def check_size
-    width, height = FastImage.size(params[:image]) if params[:image].present?
-    return unless  width < 75 || width > 4000 || height < 75 || height > 4000
+    if params[:image].present?
+      width, height = FastImage.size(params[:image])
+      return unless  width < 75 || width > 4000 || height < 75 || height > 4000
 
-    render json: { error: 'Image has an invalid size' }, status: :unsupported_media_type
+      render json: { error: 'Image has an invalid size' }, status: :unsupported_media_type
+    end
   end
 end

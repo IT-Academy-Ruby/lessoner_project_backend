@@ -50,3 +50,6 @@ Metrics/MethodLength:
 
 Style/RescueStandardError:
   Enabled: false
+
+Style/GuardClause:
+  Enabled: false
