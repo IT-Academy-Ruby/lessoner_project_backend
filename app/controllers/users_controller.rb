@@ -1,6 +1,7 @@
 class UsersController < AuthorizationController
   before_action :update_password, only: :update
   before_action :send_email, only: :update
+  before_action :set_client, only: %i[update verify]
 
   def show
     if current_user
@@ -18,17 +19,30 @@ class UsersController < AuthorizationController
       current_user.avatar_url = current_user.avatar&.url&.split('?')&.first
       current_user.save!
     end
+    channel = params[:channel]
     if current_user.update(user_params)
+      start_verification(current_user.phone, channel)
       render :show
     else
       render :error, status: :unprocessable_entity
     end
   end
 
+  def verify
+    is_verified = check_verification(current_user.phone, params[:verification_code])
+    if is_verified
+      current_user.verified = true
+      current_user.save
+      render json: { user: 'phone number was successfully verified' }, status: :ok
+    else
+      render json: { error: 'the code was invalid' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
-    params.permit(:name, :description, :avatar, :avatar_url, :gender, :birthday)
+    params.permit(:name, :description, :avatar, :avatar_url, :gender, :birthday, :phone)
   end
 
   def update_password
@@ -52,5 +66,24 @@ class UsersController < AuthorizationController
     UserMailer.update_email_information(current_user, new_email).deliver_now
     UserMailer.update_email_confirmation(current_user, new_email).deliver_now
     render json: { user: 'sent' }, status: :ok
+  end
+
+  def set_client
+    @client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
+  end
+
+  def start_verification(to, channel = 'sms')
+    channel = 'sms' unless %w[sms voice].include? channel
+    verification = @client.verify.services(ENV['VERIFICATION_SID'])
+                          .verifications
+                          .create(to:, channel:)
+    verification.sid
+  end
+
+  def check_verification(phone, code)
+    verification_check = @client.verify.services(ENV['VERIFICATION_SID'])
+                                .verification_checks
+                                .create(to: phone, code:)
+    verification_check.status == 'approved'
   end
 end

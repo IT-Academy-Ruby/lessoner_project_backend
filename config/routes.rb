@@ -33,4 +33,5 @@ Rails.application.routes.draw do
   end
 
   post '/add_lesson_view', to: 'lesson_views#add_view'
+  post 'verify', to: 'users#verify'
 end
