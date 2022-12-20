@@ -35,7 +35,7 @@ class LessonsController < ApplicationController
 
   def update
     if @lesson.update(lesson_params)
-      redirect_to @lesson
+      render :show
     else
       render :error, status: :unprocessable_entity
     end
@@ -54,7 +54,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at, :lesson_image)
   end
 
   def lesson_find
