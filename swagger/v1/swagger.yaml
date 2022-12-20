@@ -874,6 +874,9 @@ components:
         created_at:
           type: string
           example: '2022-12-01 14:11:33 +0300'
+        views_count:
+          type: integer
+          example: 12
       required:
       - id
       - title
