@@ -31,7 +31,7 @@ RSpec.describe 'users', type: :request do
       end
     end
   end
-  
+
   path '/users/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
