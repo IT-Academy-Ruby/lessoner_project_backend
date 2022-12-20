@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
   include ActiveStorage::SetCurrent
-  protect_from_forgery unless: -> { request.format.json? }
 
   def jwt_token
     request.headers['Authorization']&.split&.last
