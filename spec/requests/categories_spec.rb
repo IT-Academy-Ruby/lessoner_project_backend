@@ -3,6 +3,10 @@ require 'swagger_helper'
 RSpec.describe 'categories', type: :request do
   path '/categories' do
     get('list categories') do
+      parameter name: 'page', in: :query, type: :integer, default: 1, required: false
+      parameter name: 'items', in: :query, type: :integer, required: false
+      parameter name: 'sort_field', in: :query, type: :string, required: false
+      parameter name: 'sort_type', in: :query, type: :string, required: false
       tags 'Categories'
       produces 'application/json'
 

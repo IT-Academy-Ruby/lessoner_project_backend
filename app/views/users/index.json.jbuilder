@@ -1,6 +1,6 @@
 json.records do
   json.array! @users do |user|
-    json.extract! user, :name, :description, :avatar_url, :gender, :birthday, :created_at
+    json.extract! user, :id, :name, :description, :email, :avatar_url, :phone, :gender, :birthday, :created_at
   end
 end
 

@@ -7,6 +7,28 @@ paths:
   "/categories":
     get:
       summary: list categories
+      parameters:
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
       tags:
       - Categories
       responses:
@@ -103,6 +125,27 @@ paths:
       in: path
       description: lesson_id
       required: true
+      schema:
+        type: string
+    - name: page
+      in: query
+      default: 1
+      required: false
+      schema:
+        type: integer
+    - name: items
+      in: query
+      required: false
+      schema:
+        type: integer
+    - name: sort_field
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: sort_type
+      in: query
+      required: false
       schema:
         type: string
     get:
@@ -684,6 +727,80 @@ paths:
                 unauthorized:
                   value:
                     error: unathorized
+  "/users":
+    parameters:
+    - name: page
+      in: query
+      default: 1
+      required: false
+      schema:
+        type: integer
+    - name: items
+      in: query
+      required: false
+      schema:
+        type: integer
+    - name: sort_field
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: sort_type
+      in: query
+      required: false
+      schema:
+        type: string
+    get:
+      summary: list users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      minimum: 1
+                    name:
+                      type: string
+                      example: User name
+                    description:
+                      type: string
+                      example: User description
+                    email:
+                      type: string
+                      example: user@gmail.com
+                    avatar_url:
+                      type: string
+                      example: https://lessoner.s3.amazonaws.com/image-url
+                    phone:
+                      type: string
+                      example: "+375291234567"
+                    gender:
+                      type: integer
+                      example: male
+                    birthday:
+                      type: string
+                      example: '2000-01-01'
+                    created_at:
+                      type: string
+                      example: '2022-12-01 14:11:33 +0300'
+                  required:
+                  - id
+                  - name
+                  - description
+                  - email
+                  - avatar_url
+                  - phone
+                  - gender
+                  - birthday
+                  - created_at
   "/users/{id}":
     parameters:
     - name: id
