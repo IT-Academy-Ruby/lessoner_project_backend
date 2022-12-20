@@ -107,4 +107,6 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  config.debug_exception_response_format = :api
 end
