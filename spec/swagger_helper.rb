@@ -105,7 +105,8 @@ SWAGGER_DOCS = {
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
-            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            views_count: { type: :integer, example: 12 }
           },
           required: %w[id title description status video_link author_id category_id created_at]
         },
