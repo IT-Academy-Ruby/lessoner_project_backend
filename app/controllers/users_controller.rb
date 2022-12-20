@@ -19,9 +19,8 @@ class UsersController < AuthorizationController
       current_user.avatar_url = current_user.avatar&.url&.split('?')&.first
       current_user.save!
     end
-    channel = params[:channel]
     if current_user.update(user_params)
-      start_verification(current_user.phone, channel)
+      start_verification(current_user.phone, params[:channel]) if user_params[:phone].present?
       render :show
     else
       render :error, status: :unprocessable_entity
