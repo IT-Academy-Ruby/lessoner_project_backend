@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  protect_from_forgery unless: -> { request.format.json? }
 
   def jwt_token
     request.headers['Authorization']&.split&.last
