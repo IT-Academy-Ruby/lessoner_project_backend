@@ -36,7 +36,7 @@ class UsersController < AuthorizationController
     if is_verified
       current_user.verified = true
       current_user.save
-      render json: { verified: 'true' }, status: :ok
+      render json: { verified: true }, status: :ok
     else
       render json: { error: 'the code is invalid' }, status: :unprocessable_entity
     end
