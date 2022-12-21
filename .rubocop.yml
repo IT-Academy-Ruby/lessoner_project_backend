@@ -27,6 +27,7 @@ Metrics/AbcSize:
     - app/controllers/sign_up_controller.rb
     - app/controllers/passwords_controller.rb
     - app/controllers/users_controller.rb
+    - app/controllers/categories_controller.rb
 
 Style/ClassAndModuleChildren:
   Exclude:
@@ -48,4 +49,7 @@ Metrics/MethodLength:
   Max: 20
 
 Style/RescueStandardError:
+  Enabled: false
+
+Style/GuardClause:
   Enabled: false

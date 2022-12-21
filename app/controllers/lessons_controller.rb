@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LessonsController < ApplicationController
   before_action :lesson_find, only: %i[show edit update destroy]
   def index

@@ -16,11 +16,7 @@ class UsersController < AuthorizationController
   def edit; end
 
   def update
-    if params[:avatar].present?
-      current_user.avatar.attach(params[:avatar])
-      current_user.avatar_url = current_user.avatar&.url&.split('?')&.first
-      current_user.save!
-    end
+    current_user.update!(avatar_url: current_user.avatar&.url&.split('?')&.first) if params[:avatar].present?
     if current_user.update(user_params)
       render 'users/show'
     else
