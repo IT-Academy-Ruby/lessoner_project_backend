@@ -140,6 +140,31 @@ SWAGGER_DOCS = {
             id: { type: :integer, minimum: 1, example: 22 }
           },
           required: %w[id]
+        },
+        show_user: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            name: { type: :string, example: 'User name' },
+            description: { type: :string, example: 'User description' },
+            email: { type: :string, example: 'user@gmail.com' },
+            avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            phone: { type: :string, example: '+375291234567' },
+            gender: { type: :integer, example: 'male' },
+            birthday: { type: :string, example: '2000-01-01' },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
+          },
+          required: %w[id name description email avatar_url phone gender birthday created_at]
+        },
+        update_user: {
+          type: :object,
+          minProperties: 1,
+          properties: {
+            name: { type: :string, example: 'User name' },
+            description: { type: :string, example: 'User description' },
+            gender: { type: :integer, example: 'male' },
+            birthday: { type: :string, example: '2000-01-01' }
+          }
         }
       }
     }

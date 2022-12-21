@@ -8,19 +8,7 @@ RSpec.describe 'users', type: :request do
       tags 'Users'
       produces 'application/json'
       response(200, 'successful') do
-        schema type: :object,
-               properties: {
-                 id: { type: :integer, minimum: 1 },
-                 name: { type: :string, example: 'User name' },
-                 description: { type: :string, example: 'User description' },
-                 email: { type: :string, example: 'user@gmail.com' },
-                 avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
-                 phone: { type: :string, example: '+375291234567' },
-                 gender: { type: :integer, example: 'male' },
-                 birthday: { type: :string, example: '2000-01-01' },
-                 created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
-               },
-               required: %w[id name description email avatar_url phone gender birthday created_at]
+        schema '$ref' => '#/components/schemas/show_user'
         let(:id) { '3' }
 
         run_test!
@@ -33,6 +21,31 @@ RSpec.describe 'users', type: :request do
         }
 
         let(:id) { '1' }
+
+        run_test!
+      end
+    end
+
+    put('update user (name, description, gender, birthday)') do
+      tags 'Users'
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :user, in: :body, schema: { '$ref' => '#/components/schemas/update_user' }
+
+      response(200, 'ok') do
+        schema '$ref' => '#/components/schemas/show_user'
+
+        run_test!
+      end
+
+      response(422, 'unprocessable entity') do
+        example 'application/json', :example_name_too_short, {
+          errors: {
+            name: [
+              'is too short (minimum is 3 characters)'
+            ]
+          }
+        }
 
         run_test!
       end
