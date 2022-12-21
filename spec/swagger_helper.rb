@@ -103,7 +103,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 }
           },
           required: %w[id title description status video_link author_id category_id]
         },
@@ -115,9 +116,10 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 }
           },
-          required: %w[title description video_link author_id category_id]
+          required: %w[title description video_link author_id category_id rating]
         },
         lesson_update: {
           type: :object,
@@ -128,7 +130,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 }
           }
         },
         lesson_delete: {
