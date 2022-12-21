@@ -120,15 +120,16 @@ paths:
             schema:
               "$ref": "#/components/schemas/update_category"
   "/lessons/{lesson_id}/comments":
+    parameters:
+    - name: lesson_id
+      in: path
+      description: lesson_id
+      required: true
+      schema:
+        type: string
     get:
       summary: list comments
       parameters:
-      - name: lesson_id
-        in: path
-        description: lesson_id
-        required: true
-        schema:
-          type: string
       - name: page
         in: query
         default: 1
