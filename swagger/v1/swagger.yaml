@@ -120,36 +120,36 @@ paths:
             schema:
               "$ref": "#/components/schemas/update_category"
   "/lessons/{lesson_id}/comments":
-    parameters:
-    - name: lesson_id
-      in: path
-      description: lesson_id
-      required: true
-      schema:
-        type: string
-    - name: page
-      in: query
-      default: 1
-      required: false
-      schema:
-        type: integer
-    - name: items
-      in: query
-      required: false
-      schema:
-        type: integer
-    - name: sort_field
-      in: query
-      required: false
-      schema:
-        type: string
-    - name: sort_type
-      in: query
-      required: false
-      schema:
-        type: string
     get:
       summary: list comments
+      parameters:
+      - name: lesson_id
+        in: path
+        description: lesson_id
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
       tags:
       - Comments
       responses:
@@ -728,30 +728,30 @@ paths:
                   value:
                     error: unathorized
   "/users":
-    parameters:
-    - name: page
-      in: query
-      default: 1
-      required: false
-      schema:
-        type: integer
-    - name: items
-      in: query
-      required: false
-      schema:
-        type: integer
-    - name: sort_field
-      in: query
-      required: false
-      schema:
-        type: string
-    - name: sort_type
-      in: query
-      required: false
-      schema:
-        type: string
     get:
       summary: list users
+      parameters:
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
       tags:
       - Users
       responses:

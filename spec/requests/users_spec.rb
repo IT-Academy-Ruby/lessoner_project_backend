@@ -2,12 +2,11 @@ require 'swagger_helper'
 
 RSpec.describe 'users', type: :request do
   path '/users' do
-    parameter name: 'page', in: :query, type: :integer, default: 1, required: false
-    parameter name: 'items', in: :query, type: :integer, required: false
-    parameter name: 'sort_field', in: :query, type: :string, required: false
-    parameter name: 'sort_type', in: :query, type: :string, required: false
-
     get('list users') do
+      parameter name: 'page', in: :query, type: :integer, default: 1, required: false
+      parameter name: 'items', in: :query, type: :integer, required: false
+      parameter name: 'sort_field', in: :query, type: :string, required: false
+      parameter name: 'sort_type', in: :query, type: :string, required: false
       tags 'Users'
       produces 'application/json'
 

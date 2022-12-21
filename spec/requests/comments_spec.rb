@@ -2,13 +2,12 @@ require 'swagger_helper'
 
 RSpec.describe 'comments', type: :request do
   path '/lessons/{lesson_id}/comments' do
-    parameter name: 'lesson_id', in: :path, type: :string, description: 'lesson_id'
-    parameter name: 'page', in: :query, type: :integer, default: 1, required: false
-    parameter name: 'items', in: :query, type: :integer, required: false
-    parameter name: 'sort_field', in: :query, type: :string, required: false
-    parameter name: 'sort_type', in: :query, type: :string, required: false
-
     get('list comments') do
+      parameter name: 'lesson_id', in: :path, type: :string, description: 'lesson_id'
+      parameter name: 'page', in: :query, type: :integer, default: 1, required: false
+      parameter name: 'items', in: :query, type: :integer, required: false
+      parameter name: 'sort_field', in: :query, type: :string, required: false
+      parameter name: 'sort_type', in: :query, type: :string, required: false
       tags 'Comments'
       produces 'application/json'
 
