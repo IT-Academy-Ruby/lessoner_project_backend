@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-
   def jwt_token
     request.headers['Authorization']&.split&.last
   end
