@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-class LessonsController < AuthorizationController
+class LessonsController < ApplicationController
   include Pagy::Backend
 
   before_action :lesson_find, only: %i[show edit update destroy]
+  before_action :for_registered_user, only: %i[create update destroy]
+
   def index
     sort_field = params[:sort] || 'created_at'
     sort_type = params[:sort_type] || 'DESC'
@@ -35,7 +37,9 @@ class LessonsController < AuthorizationController
   def edit; end
 
   def update
-    CalculateLessonsRating.new(lesson: @lesson, current_user:, rating: lesson_rating_params[:rating]).call
+    service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
+    return render json: { error: service_result.message } unless service_result.success?
+
     if @lesson.update(lesson_params)
       redirect_to @lesson
     else

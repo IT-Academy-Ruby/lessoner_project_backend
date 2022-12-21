@@ -22,7 +22,7 @@ class Lesson < ApplicationRecord
                                     message: 'This character is not available for input in this field' }
   validates :video_link, presence: true, url: { message: 'Please check the correctness of the link' }
   validates :category_id, presence: true
-  validates :rating, numericality: { less_than_or_equal_to: 5 }
+  validates :rating, numericality: { in: 0..5 }
 
   scope :filter_by_status, ->(status) { where status: }
   scope :filter_by_category_id, ->(category_id) { where category_id: }
