@@ -73,9 +73,23 @@ SWAGGER_DOCS = {
             name: { type: :string },
             description: { type: :string },
             status: { type: :string, enum: Category::STATUSES },
+            image_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
-          required: %w[id name description status created_at]
+          required: %w[id name description status image_url created_at]
+        },
+        show_category: {
+          type: 'object',
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            name: { type: :string },
+            description: { type: :string },
+            status: { type: :string, enum: Category::STATUSES },
+            image_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            amount_lessons: { type: :integer, example: 0 }
+          },
+          required: %w[id name description status image_url created_at amount_lessons]
         },
         create_category: {
           type: 'object',

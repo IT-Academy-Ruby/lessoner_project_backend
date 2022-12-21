@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CommentsController < AuthorizationController
   before_action :find_comment, only: %i[update destroy]
 

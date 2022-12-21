@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/category"
+                "$ref": "#/components/schemas/show_category"
         '422':
           description: invalid request
           content:
@@ -47,6 +47,14 @@ paths:
                       - can't be blank
               schema:
                 "$ref": "#/components/schemas/errors_object"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    error: You don't have permission to access
       requestBody:
         content:
           application/json:
@@ -70,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/category"
+                "$ref": "#/components/schemas/show_category"
         '404':
           description: not found
           content:
@@ -91,12 +99,63 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/update_category"
+                "$ref": "#/components/schemas/show_category"
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not found
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    error: You don't have permission to access
       requestBody:
         content:
           application/json:
             schema:
               "$ref": "#/components/schemas/update_category"
+    delete:
+      summary: delete category
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                required:
+                - id
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not found
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    error: You don't have permission to access
   "/lessons/{lesson_id}/comments":
     parameters:
     - name: lesson_id
@@ -795,6 +854,9 @@ components:
           enum:
           - active
           - archived
+        image_url:
+          type: string
+          example: https://lessoner.s3.amazonaws.com/image-url
         created_at:
           type: string
           example: '2022-12-01 14:11:33 +0300'
@@ -803,7 +865,40 @@ components:
       - name
       - description
       - status
+      - image_url
       - created_at
+    show_category:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+        image_url:
+          type: string
+          example: https://lessoner.s3.amazonaws.com/image-url
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
+        amount_lessons:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - description
+      - status
+      - image_url
+      - created_at
+      - amount_lessons
     create_category:
       type: object
       properties:
