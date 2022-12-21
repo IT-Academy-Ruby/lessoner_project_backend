@@ -38,6 +38,16 @@ class UsersController < AuthorizationController
     end
   end
 
+  def update_email
+    @user = User.find_by(update_email_token: params[:token])
+    if @user&.update_email_token_valid?
+      @user.update_email!(params[:email])
+      render json: { user: 'email has been changed' }, status: :ok
+    else
+      render json: { error: 'not found' }, status: :not_found
+    end
+  end
+
   private
 
   def user_params
