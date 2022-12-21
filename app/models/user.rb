@@ -15,6 +15,8 @@ class User < ApplicationRecord
                    uniqueness: true
   validates :email, presence: true, length: { in: 3..256 },
                     format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
+  validates :new_email, length: { in: 3..256 },
+                        format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { new_email.present? }
   validates :password, presence: true, length: { in: 6..256 },
                        format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }, if: -> { password.present? }
   validates :phone, phone: true, if: -> { phone.present? }
@@ -56,9 +58,10 @@ class User < ApplicationRecord
     (update_email_token_sent_at + 24.hours) > Time.now.utc
   end
 
-  def update_email!(email)
+  def update_email!(new_email)
     self.update_email_token = nil
-    self.email = email
+    self.email = new_email
+    self.new_email = nil
     save!
   end
 

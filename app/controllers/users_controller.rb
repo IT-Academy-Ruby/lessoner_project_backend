@@ -45,7 +45,7 @@ class UsersController < AuthorizationController
   def update_email
     @user = User.find_by(update_email_token: params[:token])
     if @user&.update_email_token_valid?
-      @user.update_email!(params[:email])
+      @user.update_email!(@user.new_email)
       render json: { user: 'email has been changed' }, status: :ok
     else
       render json: { error: 'not found' }, status: :not_found
@@ -72,13 +72,22 @@ class UsersController < AuthorizationController
   end
 
   def send_email
-    return if params[:email].blank?
-
-    current_user.generate_update_email_token!
     new_email = params[:email]
-    UserMailer.update_email_information(current_user, new_email).deliver_now
-    UserMailer.update_email_confirmation(current_user, new_email).deliver_now
-    render json: { user: 'sent' }, status: :ok
+    return if new_email.blank?
+
+    if User.where(email: new_email).any?
+      return render json: { error: 'email already exists' },
+                    status: :unprocessable_entity
+    end
+
+    if current_user.update(new_email:)
+      current_user.generate_update_email_token!
+      UserMailer.update_email_information(current_user, new_email).deliver_now
+      UserMailer.update_email_confirmation(current_user, new_email).deliver_now
+      render json: { deliver: 'sent' }, status: :ok
+    else
+      render :error, status: :unprocessable_entity
+    end
   end
 
   def set_client
