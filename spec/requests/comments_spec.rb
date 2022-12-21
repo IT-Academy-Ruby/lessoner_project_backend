@@ -3,7 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'comments', type: :request do
   path '/lessons/{lesson_id}/comments' do
     parameter name: 'lesson_id', in: :path, type: :string, description: 'lesson_id'
-    
+
     get('list comments') do
       parameter name: 'page', in: :query, type: :integer, default: 1, required: false
       parameter name: 'items', in: :query, type: :integer, required: false
