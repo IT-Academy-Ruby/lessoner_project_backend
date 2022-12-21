@@ -2,6 +2,7 @@ class UsersController < AuthorizationController
   before_action :update_password, only: :update
   before_action :send_email, only: :update
   before_action :set_client, only: %i[update verify]
+  before_action :update_phone, only: :update
 
   def show
     if current_user
@@ -20,7 +21,6 @@ class UsersController < AuthorizationController
       current_user.save!
     end
     if current_user.update(user_params)
-      start_verification(current_user.phone, params[:channel]) if user_params[:phone].present?
       render :show
     else
       render :error, status: :unprocessable_entity
@@ -64,6 +64,14 @@ class UsersController < AuthorizationController
       render :show
     else
       render json: { error: 'current password does not match' }, status: :forbidden
+    end
+  end
+
+  def update_phone
+    if user_params[:phone].present?
+      start_verification(current_user.phone, params[:channel])
+      current_user.verified = false
+      current_user.save
     end
   end
 
