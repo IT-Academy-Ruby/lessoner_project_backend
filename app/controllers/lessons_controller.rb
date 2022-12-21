@@ -26,6 +26,8 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
+    video_link
+    image_link
     if @lesson.save
       render :show
     else
@@ -36,6 +38,8 @@ class LessonsController < ApplicationController
   def edit; end
 
   def update
+    video_link
+    image_link
     if @lesson.update(lesson_params)
       render :show
     else
@@ -56,10 +60,23 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at, :lesson_image)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at, :lesson_image, :lesson_video, :image_link)
   end
 
   def lesson_find
     @lesson = Lesson.find_by(id: params[:id])
+  end
+
+  def video_link
+    if params[:lesson_video].present?
+      @lesson.video_link = @lesson.lesson_video&.url&.split("?")&.first
+      @lesson.save!
+    end
+  end
+
+  def image_link
+      params[:lesson_image].present?
+      @lesson.image_link = @lesson.lesson_image&.url&.split("?")&.first
+      @lesson.save!
   end
 end
