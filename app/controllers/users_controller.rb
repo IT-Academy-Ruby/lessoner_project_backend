@@ -48,7 +48,7 @@ class UsersController < AuthorizationController
       @user.update_email!(@user.new_email)
       render json: { user: 'email has been changed' }, status: :ok
     else
-      render json: { error: 'not found' }, status: :not_found
+      render :not_found, status: :not_found
     end
   end
 
