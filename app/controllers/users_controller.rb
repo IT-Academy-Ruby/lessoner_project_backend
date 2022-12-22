@@ -59,7 +59,7 @@ class UsersController < AuthorizationController
     return if @password.blank?
 
     if current_user.authenticate(params[:current_password])
-      return render :error unless current_user.update(password: @password)
+      return render :error, status: :unprocessable_entity unless current_user.update(password: @password)
 
       render :show
     else

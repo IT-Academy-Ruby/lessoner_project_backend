@@ -26,25 +26,131 @@ RSpec.describe 'users', type: :request do
       end
     end
 
-    put('update user (name, description, gender, birthday)') do
+    put('update user') do
       tags 'Users'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :user, in: :body, schema: { '$ref' => '#/components/schemas/update_user' }
+      parameter name: :user, in: :body, schema: {
+        oneOf: [
+          { '$ref' => '#/components/schemas/update_user' },
+          {
+            type: :object,
+            properties: {
+              phone: { type: :string, example: '+375297774455' }
+            }
+          },
+          {
+            type: :object,
+            properties: {
+              email: { type: :string, example: 'nagibator2000@gmail.com' }
+            }
+          },
+          {
+            type: :object,
+            properties: {
+              password: { type: :string, example: '9p0i5z6de67c4' },
+              current_password: { type: :string, example: '1234567890' }
+            },
+            required: %w[password current_password]
+          }
+        ]
+      }
 
       response(200, 'ok') do
-        schema '$ref' => '#/components/schemas/show_user'
+        example 'application/json', :updated, {
+          id: 1,
+          email: 'abc@gmail.com',
+          name: 'User name',
+          description: 'User description',
+          avatar_url: 'https://lessoner.s3.amazonaws.com/image-url',
+          phone: '+375291234567',
+          verified: false,
+          gender: 'female',
+          birthday: '2000-01-01',
+          created_at: '2022-12-01 14:11:33 +0300'
+        }
+
+        example 'application/json', :email_sent, {
+          deliver: 'sent'
+        }
+
+        run_test!
+      end
+
+      response(403, 'forbidden') do
+        example 'application/json', :password_not_match, {
+          error: 'current password does not match'
+        }
 
         run_test!
       end
 
       response(422, 'unprocessable entity') do
-        example 'application/json', :example_name_too_short, {
+        example 'application/json', :name_too_short, {
           errors: {
             name: [
               'is too short (minimum is 3 characters)'
             ]
           }
+        }
+
+        example 'application/json', :email_exists, {
+          error: 'email already exists'
+        }
+
+        run_test!
+      end
+    end
+  end
+
+  path '/users/update_email?token={token}' do
+    parameter name: 'token', in: :path, type: :string, description: 'token'
+
+    get('update email') do
+      tags 'Users'
+      produces 'application/json'
+
+      response(200, 'ok') do
+        example 'application/json', :updated, {
+          user: 'email has been changed'
+        }
+
+        run_test!
+      end
+
+      response(404, 'not found') do
+        example 'application/json', :user_not_found, {
+          error: 'Not found'
+        }
+
+        run_test!
+      end
+    end
+  end
+
+  path '/verify' do
+    post('verify phone') do
+      tags 'Users'
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: :user, in: :body, schema: {
+        type: :object,
+        properties: {
+          verification_code: { type: :string, example: '54957' }
+        }
+      }
+
+      response(200, 'ok') do
+        example 'application/json', :verified, {
+          verified: true
+        }
+
+        run_test!
+      end
+
+      response(422, 'unprocessable entity') do
+        example 'application/json', :invalid_code, {
+          error: 'the code is invalid'
         }
 
         run_test!

@@ -164,7 +164,7 @@ SWAGGER_DOCS = {
             email: { type: :string, example: 'user@gmail.com' },
             avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
             phone: { type: :string, example: '+375291234567' },
-            gender: { type: :integer, example: 'male' },
+            gender: { type: :string, enum: %i[male female other] },
             birthday: { type: :string, example: '2000-01-01' },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
@@ -176,7 +176,7 @@ SWAGGER_DOCS = {
           properties: {
             name: { type: :string, example: 'User name' },
             description: { type: :string, example: 'User description' },
-            gender: { type: :integer, example: 'male' },
+            gender: { type: :string, enum: %i[male female other] },
             birthday: { type: :string, example: '2000-01-01' }
           }
         }
