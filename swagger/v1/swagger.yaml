@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/category"
+                "$ref": "#/components/schemas/show_category"
         '422':
           description: invalid request
           content:
@@ -47,6 +47,14 @@ paths:
                       - can't be blank
               schema:
                 "$ref": "#/components/schemas/errors_object"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    error: You don't have permission to access
       requestBody:
         content:
           application/json:
@@ -70,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/category"
+                "$ref": "#/components/schemas/show_category"
         '404':
           description: not found
           content:
@@ -91,12 +99,63 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/category"
+                "$ref": "#/components/schemas/show_category"
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not found
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    error: You don't have permission to access
       requestBody:
         content:
           application/json:
             schema:
               "$ref": "#/components/schemas/update_category"
+    delete:
+      summary: delete category
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                required:
+                - id
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                example_not_found:
+                  value:
+                    status: 404
+                    error: Not found
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    error: You don't have permission to access
   "/lessons/{lesson_id}/comments":
     parameters:
     - name: lesson_id
@@ -302,42 +361,42 @@ paths:
                   value:
                     error: not found
   "/lessons":
-    parameters:
-    - name: page
-      in: query
-      default: 1
-      required: false
-      schema:
-        type: integer
-    - name: items
-      in: query
-      required: false
-      schema:
-        type: integer
-    - name: status
-      in: query
-      schema:
-        type: string
-        enum:
-        - active
-        - archived
-    - name: category_id
-      in: query
-      required: false
-      schema:
-        type: integer
-    - name: sort_field
-      in: query
-      required: false
-      schema:
-        type: string
-    - name: sort_type
-      in: query
-      required: false
-      schema:
-        type: string
     get:
       summary: list lessons
+      parameters:
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - archived
+      - name: category_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
       tags:
       - Lessons
       responses:
@@ -612,6 +671,8 @@ paths:
                     type: string
                   birthday:
                     type: string
+                  created_at:
+                    type: string
                 required:
                 - id
                 - name
@@ -707,18 +768,38 @@ paths:
                     minimum: 1
                   name:
                     type: string
+                    example: User name
                   description:
                     type: string
+                    example: User description
                   email:
                     type: string
+                    example: user@gmail.com
                   avatar_url:
                     type: string
+                    example: https://lessoner.s3.amazonaws.com/image-url
+                  phone:
+                    type: string
+                    example: "+375291234567"
+                  gender:
+                    type: integer
+                    example: male
+                  birthday:
+                    type: string
+                    example: '2000-01-01'
+                  created_at:
+                    type: string
+                    example: '2022-12-01 14:11:33 +0300'
                 required:
                 - id
                 - name
                 - description
                 - email
                 - avatar_url
+                - phone
+                - gender
+                - birthday
+                - created_at
         '404':
           description: not found
           content:
@@ -729,14 +810,14 @@ paths:
                     status: 404
                     error: Not Found
 servers:
-- url: http://{Lessoner Dev}
+- url: https://{lessonerTest}
   variables:
-    dev:
-      default: lessoner.herokuapp.com/
-- url: http://{Lessoner Prod}
+    lessonerTest:
+      default: qa-test-pfm3.onrender.com/
+- url: https://{lessonerProd}
   variables:
-    prod:
-      default: lessoner-prod.herokuapp.com/
+    lessonerProd:
+      default: lessoner-project-2w3h.onrender.com/
 - url: http://{localHost1}
   variables:
     localHost1:
@@ -784,11 +865,51 @@ components:
           enum:
           - active
           - archived
+        image_url:
+          type: string
+          example: https://lessoner.s3.amazonaws.com/image-url
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
       required:
       - id
       - name
       - description
       - status
+      - image_url
+      - created_at
+    show_category:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+        image_url:
+          type: string
+          example: https://lessoner.s3.amazonaws.com/image-url
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
+        amount_lessons:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - description
+      - status
+      - image_url
+      - created_at
+      - amount_lessons
     create_category:
       type: object
       properties:
@@ -817,6 +938,7 @@ components:
           enum:
           - active
           - archived
+          example: archived
     lesson:
       type: object
       properties:
@@ -847,6 +969,12 @@ components:
         rating:
           type: number
           minimum: 0
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
+        views_count:
+          type: integer
+          example: 12
       required:
       - id
       - title
@@ -855,6 +983,7 @@ components:
       - video_link
       - author_id
       - category_id
+      - created_at
     lesson_create:
       type: object
       properties:

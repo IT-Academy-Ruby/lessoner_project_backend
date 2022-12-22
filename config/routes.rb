@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'
 
-  resources :categories, defaults: { format: :json }
   resources :users, defaults: { format: :json }
   resources :lessons, defaults: { format: :json }
   root 'static_pages#home'
   get '/about', to: 'static_pages#about'
-  resources :lessons do
-    resources :comments
+  resources :categories do
+    resources :lessons do
+      resources :comments
+    end
   end
 
   scope module: 'public' do
@@ -30,4 +31,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
   end
+
+  post '/add_lesson_view', to: 'lesson_views#add_view'
 end

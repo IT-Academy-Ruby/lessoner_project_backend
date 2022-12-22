@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LessonsController < ApplicationController
   include Pagy::Backend
 
@@ -15,6 +13,7 @@ class LessonsController < ApplicationController
 
   def show
     if @lesson
+      @views_count = @lesson.lesson_views.size
       render :show
     else
       render :not_found, status: :not_found
@@ -27,6 +26,8 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
+    set_video_link
+    set_image_link
     if @lesson.save
       render :show
     else
@@ -40,8 +41,10 @@ class LessonsController < ApplicationController
     service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
     return render json: { error: service_result.message } unless service_result.success?
 
+    set_video_link
+    set_image_link
     if @lesson.update(lesson_params)
-      redirect_to @lesson
+      render :show
     else
       render :error, status: :unprocessable_entity
     end
@@ -60,7 +63,8 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-    params.permit(:title, :description, :status, :video_link, :author_id, :category_id)
+    params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at, :lesson_image,
+                  :lesson_video, :image_link)
   end
 
   def lesson_rating_params
@@ -69,5 +73,19 @@ class LessonsController < ApplicationController
 
   def lesson_find
     @lesson = Lesson.find_by(id: params[:id])
+  end
+
+  def set_video_link
+    return if params[:lesson_video].blank?
+
+    @lesson.video_link = @lesson.lesson_video&.url&.split('?')&.first
+    @lesson.save!
+  end
+
+  def set_image_link
+    return if params[:lesson_image].blank?
+
+    @lesson.image_link = @lesson.lesson_image&.url&.split('?')&.first
+    @lesson.save!
   end
 end

@@ -41,8 +41,6 @@ gem 'omniauth-facebook', '~> 9.0'
 gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 
-gem 'kaminari'
-
 # Videoplayer for rails [https://github.com/sadiqmmm/plyr-rails]
 gem 'plyr-rails'
 
@@ -57,6 +55,12 @@ gem 'jwt'
 
 # URL validator
 gem 'validate_url'
+
+# S3 software development kit
+gem 'aws-sdk-s3', require: false
+
+# Validation for uploading file
+gem 'active_storage_validations'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'bcrypt', '~> 3.1.7'
@@ -89,6 +93,10 @@ gem 'phonelib', '~> 0.7.3'
 
 gem 'rack-cors'
 
+gem 'ruby-vips', '~> 2.1', '>= 2.1.4'
+
+gem 'fastimage'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -115,5 +123,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'simplecov', '~> 0.21.2', require: false
   gem 'webdrivers'
 end

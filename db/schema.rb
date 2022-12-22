@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_114810) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_21_143331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_114810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.string "image_url"
+    t.index ["description"], name: "index_categories_on_description", unique: true
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
@@ -70,6 +73,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_114810) do
     t.index ["user_id"], name: "index_lesson_ratings_on_user_id"
   end
 
+  create_table "lesson_views", force: :cascade do |t|
+    t.string "ip"
+    t.bigint "user_id"
+    t.bigint "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_lesson_views_on_lesson_id"
+  end
+
   create_table "lessons", force: :cascade do |t|
     t.string "description"
     t.string "title"
@@ -80,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_114810) do
     t.bigint "category_id"
     t.integer "status", default: 0
     t.float "rating"
+    t.string "image_link"
     t.index ["author_id"], name: "index_lessons_on_author_id"
     t.index ["category_id"], name: "index_lessons_on_category_id"
   end

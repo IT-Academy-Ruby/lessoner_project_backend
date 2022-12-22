@@ -12,18 +12,18 @@ SWAGGER_DOCS = {
     paths: {},
     servers: [
       {
-        url: 'http://{Lessoner Dev}',
+        url: 'https://{lessonerTest}',
         variables: {
-          dev: {
-            default: 'lessoner.herokuapp.com/'
+          lessonerTest: {
+            default: 'qa-test-pfm3.onrender.com/'
           }
         }
       },
       {
-        url: 'http://{Lessoner Prod}',
+        url: 'https://{lessonerProd}',
         variables: {
-          prod: {
-            default: 'lessoner-prod.herokuapp.com/'
+          lessonerProd: {
+            default: 'lessoner-project-2w3h.onrender.com/'
           }
         }
       },
@@ -72,9 +72,24 @@ SWAGGER_DOCS = {
             id: { type: :integer, minimum: 1 },
             name: { type: :string },
             description: { type: :string },
-            status: { type: :string, enum: Category::STATUSES }
+            status: { type: :string, enum: Category::STATUSES },
+            image_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
-          required: %w[id name description status]
+          required: %w[id name description status image_url created_at]
+        },
+        show_category: {
+          type: 'object',
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            name: { type: :string },
+            description: { type: :string },
+            status: { type: :string, enum: Category::STATUSES },
+            image_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            amount_lessons: { type: :integer, example: 0 }
+          },
+          required: %w[id name description status image_url created_at amount_lessons]
         },
         create_category: {
           type: 'object',
@@ -91,7 +106,7 @@ SWAGGER_DOCS = {
           properties: {
             name: { type: :string },
             description: { type: :string },
-            status: { type: :string, enum: Category::STATUSES }
+            status: { type: :string, enum: Category::STATUSES, example: 'archived' }
           }
         },
         lesson: {
@@ -105,8 +120,10 @@ SWAGGER_DOCS = {
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
             rating: { type: :number, minimum: 0 }
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            views_count: { type: :integer, example: 12 }
           },
-          required: %w[id title description status video_link author_id category_id]
+          required: %w[id title description status video_link author_id category_id created_at]
         },
         lesson_create: {
           type: :object,
