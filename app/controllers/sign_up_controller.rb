@@ -16,7 +16,7 @@ class SignUpController < ApplicationController
         token = JsonWebToken.encode(name: @user.name, email: @user.email,
                                     description: @user.description, phone: @user.phone,
                                     gender: @user.gender, birthday: @user.birthday.to_s,
-                                    exp: 3.hours.from_now.to_i)
+                                    admin: @user.admin_type, exp: 3.hours.from_now.to_i)
         render json: { jwt: token }, status: :ok
       else
         render json: { error: 'unconfirmed' }, status: :unauthorized
