@@ -48,6 +48,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_143331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.string "image_url"
+    t.index ["description"], name: "index_categories_on_description", unique: true
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
