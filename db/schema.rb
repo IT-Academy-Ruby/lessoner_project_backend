@@ -63,6 +63,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_171132) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "lesson_ratings", force: :cascade do |t|
+    t.float "rating", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "lesson_id"
+    t.index ["lesson_id"], name: "index_lesson_ratings_on_lesson_id"
+    t.index ["user_id"], name: "index_lesson_ratings_on_user_id"
+  end
+
   create_table "lesson_views", force: :cascade do |t|
     t.string "ip"
     t.bigint "user_id"
@@ -81,6 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_171132) do
     t.bigint "author_id"
     t.bigint "category_id"
     t.integer "status", default: 0
+    t.float "rating"
+    t.string "image_link"
     t.index ["author_id"], name: "index_lessons_on_author_id"
     t.index ["category_id"], name: "index_lessons_on_category_id"
   end
@@ -115,6 +127,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_171132) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "lessons"
   add_foreign_key "comments", "users"
+  add_foreign_key "lesson_ratings", "lessons"
+  add_foreign_key "lesson_ratings", "users"
   add_foreign_key "lessons", "categories"
   add_foreign_key "lessons", "users", column: "author_id"
 end
