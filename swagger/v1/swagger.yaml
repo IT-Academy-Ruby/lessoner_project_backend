@@ -39,7 +39,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/category"
+                  "$ref": "#/components/schemas/show_category"
     post:
       summary: create category
       tags:

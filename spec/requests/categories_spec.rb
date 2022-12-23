@@ -11,7 +11,7 @@ RSpec.describe 'categories', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
-        schema type: :array, items: { '$ref' => '#/components/schemas/category' }
+        schema type: :array, items: { '$ref' => '#/components/schemas/show_category' }
 
         run_test!
       end
