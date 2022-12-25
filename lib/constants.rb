@@ -5,5 +5,7 @@ module Constants
 
   DESCRIPTION_MAX_SIZE = 600
 
+  DESCRIPTION_CATEGORY_MAX_SIZE = 300
+
   REG_EXP_FOR_LESSON = %r/\A[а-яА-ЯёЁa-zA-Z0-9`:%&'"@,><{|}=_~\-!()$*+\/?\^.\[\]\s]+\z/
 end
