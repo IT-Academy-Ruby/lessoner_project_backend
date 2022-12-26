@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pagy::Backend
+
   def jwt_token
     request.headers['Authorization']&.split&.last
   end
