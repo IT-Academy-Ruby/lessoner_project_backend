@@ -9,7 +9,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, length: { maximum: TITLE_MAX_SIZE },
                    format: { with: REG_EXP_FOR_LESSON, message: 'The input field contains prohibited characters' },
                    uniqueness: true
-  validates :description, presence: true, length: { maximum: DESCRIPTION_MAX_SIZE },
+  validates :description, presence: true, length: { maximum: DESCRIPTION_CATEGORY_MAX_SIZE },
                           format: { with: REG_EXP_FOR_LESSON,
                                     message: 'The input field contains prohibited characters' },
                           uniqueness: true
