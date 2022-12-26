@@ -2,6 +2,8 @@ require 'swagger_helper'
 
 RSpec.describe 'my_studios', type: :request do
   path '/my_studio/lessons' do
+    parameter name: :Authorization, in: :header, type: :string, required: true, description: 'Bearer token'
+
     get('list my_studios') do
       tags 'my_studios'
       produces 'application/json'

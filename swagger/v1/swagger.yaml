@@ -502,6 +502,13 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error_not_found"
   "/my_studio/lessons":
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token
+      schema:
+        type: string
     get:
       summary: list my_studios
       tags:
