@@ -12,6 +12,7 @@ class CategoriesController < ApplicationController
 
   def show
     if @category
+      image_params
       render :show
     else
       render :not_found, status: :not_found
@@ -24,7 +25,8 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.image_url = @category.image&.url&.split('?')&.first
+    image_params
+    set_image_link
     if @category.save
       render :show
     else
@@ -35,8 +37,9 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def update
-    @category.update!(image_url: @category.image&.url&.split('?')&.first) if params[:image].present?
     if @category.update(category_params)
+      image_params
+      set_image_link
       render 'categories/show'
     else
       render 'categories/errors', status: :unprocessable_entity
@@ -64,7 +67,7 @@ class CategoriesController < ApplicationController
   end
 
   def show_lessons
-    @amount_lessons = @category&.lessons&.size
+    @amount_lessons = @category.lessons&.size
   end
 
   def check_size
@@ -74,5 +77,17 @@ class CategoriesController < ApplicationController
 
       render json: { error: 'Image has an invalid size' }, status: :unsupported_media_type
     end
+  end
+
+  def image_params
+    @image_name = @category.image&.filename
+    @image_size = @category.image&.byte_size
+  end
+
+  def set_image_link
+    return if params[:image].blank?
+
+    @category.image_url = @category.image&.url&.split('?')&.first
+    @category.save!
   end
 end
