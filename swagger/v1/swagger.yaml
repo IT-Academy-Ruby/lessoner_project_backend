@@ -501,6 +501,20 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_not_found"
+  "/my_studio/lessons":
+    get:
+      summary: list my_studios
+      tags:
+      - my_studios
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/lesson"
   "/password/forgot":
     post:
       summary: send reset link to email
