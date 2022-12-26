@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :lessons, class_name: 'Lesson', foreign_key: 'author_id'
-
+  has_many :lesson_ratings, dependent: :destroy
   # Validation for email: symbol . (dot) provided that it is neither the first nor the last,
   # and also if it is not repeated more than once in a row.
   def email_dots
