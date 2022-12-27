@@ -18,6 +18,7 @@ class CalculateLessonsRatingService
       create_lesson_rating
       update_lesson_rating
       update_lesson
+      set_votes
     end
 
     Rails.logger.info("- Finish #{self.class.name} with lesson: #{@lesson}")
@@ -45,6 +46,10 @@ class CalculateLessonsRatingService
 
   def calculate_lesson_rating
     @lesson.lesson_ratings.average(:rating)
+  end
+
+  def set_votes
+    @lesson.votes_count = @lesson.lesson_ratings.size
   end
 
   def create?
