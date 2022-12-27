@@ -1,5 +1,7 @@
 class LessonsController < ApplicationController
   before_action :lesson_find, only: %i[show edit update destroy]
+  before_action :for_registered_user, only: %i[create update destroy]
+
   def index
     @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status,
                                                              :category_id)).order(sort_params))
@@ -32,6 +34,9 @@ class LessonsController < ApplicationController
   def edit; end
 
   def update
+    service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
+    return render json: { error: service_result.message } unless service_result.success?
+
     set_video_link
     set_image_link
     if @lesson.update(lesson_params)
@@ -56,6 +61,10 @@ class LessonsController < ApplicationController
   def lesson_params
     params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at, :lesson_image,
                   :lesson_video, :image_link)
+  end
+
+  def lesson_rating_params
+    params.permit(:rating)
   end
 
   def lesson_find

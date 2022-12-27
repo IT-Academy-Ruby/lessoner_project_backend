@@ -1084,6 +1084,9 @@ components:
         category_id:
           type: integer
           minimum: 1
+        rating:
+          type: number
+          minimum: 0
         created_at:
           type: string
           example: '2022-12-01 14:11:33 +0300'
@@ -1123,12 +1126,16 @@ components:
         category_id:
           type: integer
           minimum: 1
+        rating:
+          type: number
+          minimum: 0
       required:
       - title
       - description
       - video_link
       - author_id
       - category_id
+      - rating
     lesson_update:
       type: object
       minProperties: 1
@@ -1154,6 +1161,9 @@ components:
         category_id:
           type: integer
           minimum: 1
+        rating:
+          type: number
+          minimum: 0
     lesson_delete:
       type: object
       properties:
