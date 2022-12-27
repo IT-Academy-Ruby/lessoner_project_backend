@@ -51,7 +51,7 @@ class CalculateLessonsRatingService
   def set_votes
     @lesson.votes_count = @lesson.lesson_ratings.size
   end
-  
+
   def create?
     @current_user.lesson_ratings.pluck(:lesson_id).exclude? @lesson.id
   end
