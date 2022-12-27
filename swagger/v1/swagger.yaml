@@ -902,6 +902,12 @@ components:
         amount_lessons:
           type: integer
           example: 0
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
       required:
       - id
       - name
@@ -910,6 +916,8 @@ components:
       - image_url
       - created_at
       - amount_lessons
+      - image_size
+      - image_name
     create_category:
       type: object
       properties:
