@@ -21,6 +21,7 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :lessons, class_name: 'Lesson', foreign_key: 'author_id'
+  has_many :lesson_ratings, dependent: :destroy
 
   def generate_password_token!
     self.password_reset_token = generate_token

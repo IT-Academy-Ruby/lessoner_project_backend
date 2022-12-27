@@ -23,4 +23,8 @@ class ApplicationController < ActionController::API
       render json: { error: "You don't have permission to access" }, status: :forbidden
     end
   end
+
+  def for_registered_user
+    render json: { error: "You don't have permission to access" }, status: :forbidden if current_user.blank?
+  end
 end
