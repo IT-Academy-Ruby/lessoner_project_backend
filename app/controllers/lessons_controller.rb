@@ -10,6 +10,7 @@ class LessonsController < ApplicationController
   def show
     if @lesson
       @views_count = @lesson.lesson_views.size
+      image_params
       render :show
     else
       render :not_found, status: :not_found
@@ -18,10 +19,13 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
+    image_params
+    set_image_link
   end
 
   def create
     @lesson = Lesson.new(lesson_params)
+    image_params
     set_video_link
     set_image_link
     if @lesson.save
@@ -78,6 +82,11 @@ class LessonsController < ApplicationController
 
     @lesson.video_link = @lesson.lesson_video&.url&.split('?')&.first
     @lesson.save!
+  end
+
+  def image_params
+    @image_name = @lesson.image&.filename
+    @image_size = @lesson.image&.byte_size
   end
 
   def set_image_link
