@@ -18,13 +18,13 @@ class UsersController < AuthorizationController
   def edit; end
 
   def update
-    current_user.update!(avatar_url: current_user.avatar&.url&.split('?')&.first) if params[:avatar].present?
     if current_user.update(user_params)
       if user_params[:phone].present?
         start_verification(current_user.phone, params[:channel])
         current_user.verified = false
         current_user.save
       end
+      current_user.update!(avatar_url: current_user.avatar&.url&.split('?')&.first) if params[:avatar].present?
       render :show
     else
       render :error, status: :unprocessable_entity
