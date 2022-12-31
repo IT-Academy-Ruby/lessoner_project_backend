@@ -3,6 +3,10 @@ class UsersController < AuthorizationController
   before_action :send_email, only: :update
   before_action :set_client, only: %i[update verify]
 
+  def index
+    @pagy, @users = pagy(User.all.order(sort_params))
+  end
+
   def show
     if current_user
       render :show
