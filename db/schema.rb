@@ -116,6 +116,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_082445) do
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
     t.boolean "admin_type", default: false
+    t.string "update_email_token"
+    t.datetime "update_email_token_sent_at"
+    t.boolean "verified", default: false
+    t.string "new_email"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end
