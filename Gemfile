@@ -93,6 +93,8 @@ gem 'phonelib', '~> 0.7.3'
 
 gem 'rack-cors'
 
+gem 'twilio-ruby', '~> 5.74'
+
 gem 'ruby-vips', '~> 2.1', '>= 2.1.4'
 
 gem 'fastimage'

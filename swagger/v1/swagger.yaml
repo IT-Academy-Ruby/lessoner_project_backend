@@ -7,6 +7,28 @@ paths:
   "/categories":
     get:
       summary: list categories
+      parameters:
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
       tags:
       - Categories
       responses:
@@ -166,6 +188,28 @@ paths:
         type: string
     get:
       summary: list comments
+      parameters:
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
       tags:
       - Comments
       responses:
@@ -764,6 +808,80 @@ paths:
                 unauthorized:
                   value:
                     error: unathorized
+  "/users":
+    get:
+      summary: list users
+      parameters:
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort_field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_type
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      minimum: 1
+                    name:
+                      type: string
+                      example: User name
+                    description:
+                      type: string
+                      example: User description
+                    email:
+                      type: string
+                      example: user@gmail.com
+                    avatar_url:
+                      type: string
+                      example: https://lessoner.s3.amazonaws.com/image-url
+                    phone:
+                      type: string
+                      example: "+375291234567"
+                    gender:
+                      type: integer
+                      example: male
+                    birthday:
+                      type: string
+                      example: '2000-01-01'
+                    created_at:
+                      type: string
+                      example: '2022-12-01 14:11:33 +0300'
+                  required:
+                  - id
+                  - name
+                  - description
+                  - email
+                  - avatar_url
+                  - phone
+                  - gender
+                  - birthday
+                  - created_at
   "/users/{id}":
     parameters:
     - name: id
@@ -782,45 +900,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    minimum: 1
-                  name:
-                    type: string
-                    example: User name
-                  description:
-                    type: string
-                    example: User description
-                  email:
-                    type: string
-                    example: user@gmail.com
-                  avatar_url:
-                    type: string
-                    example: https://lessoner.s3.amazonaws.com/image-url
-                  phone:
-                    type: string
-                    example: "+375291234567"
-                  gender:
-                    type: integer
-                    example: male
-                  birthday:
-                    type: string
-                    example: '2000-01-01'
-                  created_at:
-                    type: string
-                    example: '2022-12-01 14:11:33 +0300'
-                required:
-                - id
-                - name
-                - description
-                - email
-                - avatar_url
-                - phone
-                - gender
-                - birthday
-                - created_at
+                "$ref": "#/components/schemas/show_user"
         '404':
           description: not found
           content:
@@ -830,6 +910,141 @@ paths:
                   value:
                     status: 404
                     error: Not Found
+    put:
+      summary: update user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                updated:
+                  value:
+                    id: 1
+                    email: abc@gmail.com
+                    name: User name
+                    description: User description
+                    avatar_url: https://lessoner.s3.amazonaws.com/image-url
+                    phone: "+375291234567"
+                    verified: false
+                    gender: female
+                    birthday: '2000-01-01'
+                    created_at: '2022-12-01 14:11:33 +0300'
+                email_sent:
+                  value:
+                    deliver: sent
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              examples:
+                password_not_match:
+                  value:
+                    error: current password does not match
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              examples:
+                name_too_short:
+                  value:
+                    errors:
+                      name:
+                      - is too short (minimum is 3 characters)
+                email_exists:
+                  value:
+                    error: email already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - "$ref": "#/components/schemas/update_user"
+              - type: object
+                properties:
+                  phone:
+                    type: string
+                    example: "+375297774455"
+              - type: object
+                properties:
+                  email:
+                    type: string
+                    example: nagibator2000@gmail.com
+              - type: object
+                properties:
+                  password:
+                    type: string
+                    example: 9p0i5z6de67c4
+                  current_password:
+                    type: string
+                    example: '1234567890'
+                required:
+                - password
+                - current_password
+  "/users/update_email?token={token}":
+    parameters:
+    - name: token
+      in: path
+      description: token
+      required: true
+      schema:
+        type: string
+    get:
+      summary: update email
+      tags:
+      - Users
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                updated:
+                  value:
+                    user: email has been changed
+        '404':
+          description: not found
+          content:
+            application/json:
+              examples:
+                user_not_found:
+                  value:
+                    error: Not found
+  "/verify":
+    post:
+      summary: verify phone
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                verified:
+                  value:
+                    verified: true
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              examples:
+                invalid_code:
+                  value:
+                    error: the code is invalid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                verification_code:
+                  type: string
+                  example: '54957'
 servers:
 - url: https://{lessonerTest}
   variables:
@@ -1084,3 +1299,65 @@ components:
           example: 22
       required:
       - id
+    show_user:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+          example: User name
+        description:
+          type: string
+          example: User description
+        email:
+          type: string
+          example: user@gmail.com
+        avatar_url:
+          type: string
+          example: https://lessoner.s3.amazonaws.com/image-url
+        phone:
+          type: string
+          example: "+375291234567"
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - other
+        birthday:
+          type: string
+          example: '2000-01-01'
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
+      required:
+      - id
+      - name
+      - description
+      - email
+      - avatar_url
+      - phone
+      - gender
+      - birthday
+      - created_at
+    update_user:
+      type: object
+      minProperties: 1
+      properties:
+        name:
+          type: string
+          example: User name
+        description:
+          type: string
+          example: User description
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - other
+        birthday:
+          type: string
+          example: '2000-01-01'

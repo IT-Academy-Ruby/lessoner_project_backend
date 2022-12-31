@@ -1,0 +1,7 @@
+p Hi #{@user.name},
+
+p Your email has been changed.
+
+p Confirmation link
+
+href="#{ENV['FRONTEND_URL']}/users/update_email?token=#{@user.update_email_token}"
