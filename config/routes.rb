@@ -28,10 +28,6 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  namespace :admin do
-    resources :users
-  end
-
   post '/add_lesson_view', to: 'lesson_views#add_view'
   get 'my_studio/lessons', to: 'my_studios#index'
 end

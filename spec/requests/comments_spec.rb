@@ -5,6 +5,10 @@ RSpec.describe 'comments', type: :request do
     parameter name: 'lesson_id', in: :path, type: :string, description: 'lesson_id'
 
     get('list comments') do
+      parameter name: 'page', in: :query, type: :integer, default: 1, required: false
+      parameter name: 'items', in: :query, type: :integer, required: false
+      parameter name: 'sort_field', in: :query, type: :string, required: false
+      parameter name: 'sort_type', in: :query, type: :string, required: false
       tags 'Comments'
       produces 'application/json'
 

@@ -24,6 +24,14 @@ class ApplicationController < ActionController::API
     end
   end
 
+  private
+
+  def sort_params
+    sort_field = params[:sort] || 'created_at'
+    sort_type = params[:sort_type] || 'DESC'
+    "#{sort_field} #{sort_type}"
+  end
+
   def for_registered_user
     render json: { error: "You don't have permission to access" }, status: :forbidden if current_user.blank?
   end

@@ -1,14 +1,10 @@
 class LessonsController < ApplicationController
-  include Pagy::Backend
-
   before_action :lesson_find, only: %i[show edit update destroy]
   before_action :for_registered_user, only: %i[create update destroy]
 
   def index
-    sort_field = params[:sort] || 'created_at'
-    sort_type = params[:sort_type] || 'DESC'
     @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status,
-                                                             :category_id)).order("#{sort_field} #{sort_type}"))
+                                                             :category_id)).order(sort_params))
   end
 
   def show
