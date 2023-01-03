@@ -136,7 +136,9 @@ SWAGGER_DOCS = {
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
-            rating: { type: :number, minimum: 0 }
+            rating: { type: :number, minimum: 0 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
           },
           required: %w[title description video_link author_id category_id rating]
         },
@@ -150,7 +152,9 @@ SWAGGER_DOCS = {
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
-            rating: { type: :number, minimum: 0 }
+            rating: { type: :number, minimum: 0 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
           }
         },
         lesson_delete: {

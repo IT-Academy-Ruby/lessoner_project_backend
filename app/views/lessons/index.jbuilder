@@ -9,4 +9,6 @@ json.pagy_metadata do
   json.page @pagy.page
   json.per_page @pagy.items
   json.count_pages @pagy.pages
+  json.image_size lesson.image.byte_size
+  json.image_name lesson.image.filename
 end
