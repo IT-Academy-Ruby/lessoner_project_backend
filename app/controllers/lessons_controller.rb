@@ -19,8 +19,6 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
-    image_params
-    set_image_link
   end
 
   def create
@@ -84,7 +82,7 @@ class LessonsController < ApplicationController
     @lesson.save!
   end
 
-  def image_params
+  def lesson_image_params
     @image_name = @lesson.image&.filename
     @image_size = @lesson.image&.byte_size
   end
