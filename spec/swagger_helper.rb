@@ -129,6 +129,24 @@ SWAGGER_DOCS = {
           },
           required: %w[id title description status video_link author_id category_id created_at]
         },
+        lesson_show: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            title: { type: :string, example: 'Lesson name' },
+            description: { type: :string, example: 'Lesson description' },
+            video_link: { type: :string, example: 'http://video.com/my-video' },
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
+            author_id: { type: :integer, minimum: 1 },
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            views_count: { type: :integer, example: 12 },
+            author_name: { type: :string, example: 'Author name' },
+            author_avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' }
+          },
+          required: %w[id title description status video_link author_id category_id created_at]
+        },
         lesson_create: {
           type: :object,
           properties: {
