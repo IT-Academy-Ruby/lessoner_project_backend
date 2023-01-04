@@ -2,8 +2,8 @@ json.records do
   json.array! @lessons do |lesson|
     json.extract! lesson, :id, :title, :description, :video_link, :author_id, :category_id, :status, :created_at,
                   :image_link, :votes_count
-    json.image_size lesson.image.byte_size
-    json.image_name lesson.image.filename
+    json.image_size lesson.lesson_image.byte_size
+    json.image_name lesson.lesson_image.filename
   end
 end
 

@@ -84,7 +84,7 @@ class LessonsController < ApplicationController
 
   def lesson_image_params
     @image_name = @lesson.lesson_image&.filename
-    @image_size = @lesson.image&.byte_size
+    @image_size = @lesson.lesson_image&.byte_size
   end
 
   def set_image_link
