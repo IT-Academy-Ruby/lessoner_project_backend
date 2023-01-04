@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
   def show
     if @lesson
       @views_count = @lesson.lesson_views.size
-      image_params
+      lesson_image_params
       render :show
     else
       render :not_found, status: :not_found
@@ -23,7 +23,7 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    image_params
+    lesson_image_params
     set_video_link
     set_image_link
     if @lesson.save
@@ -40,7 +40,7 @@ class LessonsController < ApplicationController
       service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
       return render json: { error: service_result.message } unless service_result.success?
     end
-
+    lesson_image_params
     set_video_link
     set_image_link
     if @lesson.update(lesson_params)
