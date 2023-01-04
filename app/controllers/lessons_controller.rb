@@ -83,7 +83,7 @@ class LessonsController < ApplicationController
   end
 
   def lesson_image_params
-    @image_name = @lesson.image&.filename
+    @image_name = @lesson.lesson_image&.filename
     @image_size = @lesson.image&.byte_size
   end
 
