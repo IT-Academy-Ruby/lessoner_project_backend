@@ -30,7 +30,7 @@ RSpec.describe 'lessons', type: :request do
       parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_create' }
 
       response(200, 'successful') do
-        schema '$ref' => '#/components/schemas/lesson'
+        schema '$ref' => '#/components/schemas/lesson_show'
 
         run_test!
       end
@@ -63,7 +63,7 @@ RSpec.describe 'lessons', type: :request do
       tags 'Lessons'
       produces 'application/json'
       response(200, 'successful') do
-        schema '$ref' => '#/components/schemas/lesson'
+        schema '$ref' => '#/components/schemas/lesson_show'
         let(:id) { '1' }
 
         run_test!
@@ -84,7 +84,7 @@ RSpec.describe 'lessons', type: :request do
       parameter title: :lesson, in: :body, schema: { '$ref' => '#/components/schemas/lesson_update' }
 
       response(200, 'successful') do
-        schema '$ref' => '#/components/schemas/lesson'
+        schema '$ref' => '#/components/schemas/lesson_show'
 
         let(:id) { '1' }
         run_test!
