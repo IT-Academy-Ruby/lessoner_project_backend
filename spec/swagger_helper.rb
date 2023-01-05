@@ -160,6 +160,15 @@ SWAGGER_DOCS = {
           },
           required: %w[id]
         },
+        pagy_metadata: {
+          type: :object,
+          properties: {
+            page: { type: :integer, example: 1 },
+            per_page: { type: :integer, example: 12 },
+            count_pages: { type: :integer, example: 3 }
+          },
+          required: %w[page per_page count_pages]
+        },
         show_user: {
           type: :object,
           properties: {
