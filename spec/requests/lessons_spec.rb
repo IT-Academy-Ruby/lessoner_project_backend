@@ -13,7 +13,11 @@ RSpec.describe 'lessons', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
-        schema type: :array, items: { '$ref' => '#/components/schemas/lesson' }
+        schema type: :object, properties: {
+                                records: { type: :array, items: { '$ref' => '#/components/schemas/lesson' } },
+                                pagy_metadata: { '$ref' => '#/components/schemas/pagy_metadata' }
+                              },
+               required: %w[records pagy_metadata]
 
         run_test!
       end

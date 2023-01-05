@@ -37,9 +37,15 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/show_category"
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/show_category"
+                  pagy_metadata:
+                    "$ref": "#/components/schemas/pagy_metadata"
+                required: records pagy_metadata
     post:
       summary: create category
       tags:
@@ -449,9 +455,17 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/lesson"
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/lesson"
+                  pagy_metadata:
+                    "$ref": "#/components/schemas/pagy_metadata"
+                required:
+                - records
+                - pagy_metadata
     post:
       summary: create lesson
       tags:
@@ -1317,6 +1331,22 @@ components:
           example: 22
       required:
       - id
+    pagy_metadata:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        per_page:
+          type: integer
+          example: 12
+        count_pages:
+          type: integer
+          example: 3
+      required:
+      - page
+      - per_page
+      - count_pages
     show_user:
       type: object
       properties:
