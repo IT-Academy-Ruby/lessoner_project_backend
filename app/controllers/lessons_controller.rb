@@ -34,8 +34,10 @@ class LessonsController < ApplicationController
   def edit; end
 
   def update
-    service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
-    return render json: { error: service_result.message } unless service_result.success?
+    if lesson_rating_params.present?
+      service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
+      return render json: { error: service_result.message } unless service_result.success?
+    end
 
     set_video_link
     set_image_link
