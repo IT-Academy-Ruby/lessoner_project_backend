@@ -1219,6 +1219,12 @@ components:
         views_count:
           type: integer
           example: 12
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
       required:
       - id
       - title
@@ -1255,6 +1261,12 @@ components:
         rating:
           type: number
           minimum: 0
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
       required:
       - title
       - description
@@ -1290,6 +1302,12 @@ components:
         rating:
           type: number
           minimum: 0
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
     lesson_delete:
       type: object
       properties:
