@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'users/update_email', to: 'users#update_email'
   post '/login', to: 'sign_up#login', defaults: { format: :json }
   post 'password/forgot', to: 'passwords#forgot'
-  post 'password/reset', to: 'passwords#reset'
+  post 'reset_password', to: 'passwords#reset'
 
   resources :users, defaults: { format: :json }
   resources :lessons, defaults: { format: :json }
