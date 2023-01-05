@@ -73,9 +73,25 @@ SWAGGER_DOCS = {
             name: { type: :string },
             description: { type: :string },
             status: { type: :string, enum: Category::STATUSES },
+            image_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
           },
-          required: %w[id name description status created_at]
+          required: %w[id name description status image_url created_at]
+        },
+        show_category: {
+          type: 'object',
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            name: { type: :string },
+            description: { type: :string },
+            status: { type: :string, enum: Category::STATUSES },
+            image_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            amount_lessons: { type: :integer, example: 0 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
+          },
+          required: %w[id name description status image_url created_at amount_lessons image_size image_name]
         },
         create_category: {
           type: 'object',
@@ -105,6 +121,7 @@ SWAGGER_DOCS = {
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
             views_count: { type: :integer, example: 12 }
           },
@@ -118,9 +135,10 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 }
           },
-          required: %w[title description video_link author_id category_id]
+          required: %w[title description video_link author_id category_id rating]
         },
         lesson_update: {
           type: :object,
@@ -131,7 +149,8 @@ SWAGGER_DOCS = {
             video_link: { type: :string, example: 'http://video.com/my-video' },
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
-            category_id: { type: :integer, minimum: 1 }
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 }
           }
         },
         lesson_delete: {
@@ -140,6 +159,31 @@ SWAGGER_DOCS = {
             id: { type: :integer, minimum: 1, example: 22 }
           },
           required: %w[id]
+        },
+        show_user: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            name: { type: :string, example: 'User name' },
+            description: { type: :string, example: 'User description' },
+            email: { type: :string, example: 'user@gmail.com' },
+            avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            phone: { type: :string, example: '+375291234567' },
+            gender: { type: :string, enum: %i[male female other] },
+            birthday: { type: :string, example: '2000-01-01' },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' }
+          },
+          required: %w[id name description email avatar_url phone gender birthday created_at]
+        },
+        update_user: {
+          type: :object,
+          minProperties: 1,
+          properties: {
+            name: { type: :string, example: 'User name' },
+            description: { type: :string, example: 'User description' },
+            gender: { type: :string, enum: %i[male female other] },
+            birthday: { type: :string, example: '2000-01-01' }
+          }
         }
       }
     }

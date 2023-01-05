@@ -8,10 +8,8 @@ class JwtAuth
     jwt = bearer.split.last if bearer
     begin
       @decoded = JsonWebToken.decode(jwt)
-      @current_user = User.find_by(email: @decoded['email'])
-    rescue ActiveRecord::RecordNotFound => e
-      return [401, { 'Content-Type' => 'application/json' }, [e.message]]
-    rescue JWT::DecodeError => e
+      @current_user = User.find_by!(email: @decoded['email'])
+    rescue => e
       return [401, { 'Content-Type' => 'application/json' }, [e.message]]
     end
     env[:current_user] = @current_user
