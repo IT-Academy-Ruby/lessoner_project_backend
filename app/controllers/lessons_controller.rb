@@ -1,9 +1,6 @@
 class LessonsController < ApplicationController
   before_action :lesson_find, only: %i[show edit update destroy]
   before_action :for_registered_user, only: %i[create update destroy]
-  before_action :lesson_image_params, only: %i[update]
-  before_action :set_video_link, only: %i[update]
-  before_action :set_image_link, only: %i[update]
 
   def index
     @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status,
@@ -39,19 +36,14 @@ class LessonsController < ApplicationController
   def edit; end
 
   def update
-<<<<<<< HEAD
     if lesson_rating_params.present?
       service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
       return render json: { error: service_result.message } unless service_result.success?
     end
-=======
-    service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
-    return render json: { error: service_result.message } unless service_result.success?
 
     set_lesson_image_params
     set_video_link
     set_image_link
->>>>>>> c4850d4 (Update name block lessons_controller)
     if @lesson.update(lesson_params)
       render :show
     else
