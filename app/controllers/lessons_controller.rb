@@ -13,7 +13,7 @@ class LessonsController < ApplicationController
   def show
     if @lesson
       @views_count = @lesson.lesson_views.size
-      lesson_image_params
+      set_lesson_image_params
       render :show
     else
       render :not_found, status: :not_found
@@ -26,7 +26,7 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    lesson_image_params
+    set_lesson_image_params
     set_video_link
     set_image_link
     if @lesson.save
@@ -39,10 +39,19 @@ class LessonsController < ApplicationController
   def edit; end
 
   def update
+<<<<<<< HEAD
     if lesson_rating_params.present?
       service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
       return render json: { error: service_result.message } unless service_result.success?
     end
+=======
+    service_result = CalculateLessonsRatingService.new(@lesson, current_user, lesson_rating_params[:rating]).call
+    return render json: { error: service_result.message } unless service_result.success?
+
+    set_lesson_image_params
+    set_video_link
+    set_image_link
+>>>>>>> c4850d4 (Update name block lessons_controller)
     if @lesson.update(lesson_params)
       render :show
     else
@@ -82,7 +91,7 @@ class LessonsController < ApplicationController
     @lesson.save!
   end
 
-  def lesson_image_params
+  def set_lesson_image_params
     @image_name = @lesson.lesson_image&.filename
     @image_size = @lesson.lesson_image&.byte_size
   end
