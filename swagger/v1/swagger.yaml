@@ -37,9 +37,15 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/show_category"
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/show_category"
+                  pagy_metadata:
+                    "$ref": "#/components/schemas/pagy_metadata"
+                required: records pagy_metadata
     post:
       summary: create category
       tags:
@@ -449,9 +455,17 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/lesson"
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/lesson"
+                  pagy_metadata:
+                    "$ref": "#/components/schemas/pagy_metadata"
+                required:
+                - records
+                - pagy_metadata
     post:
       summary: create lesson
       tags:
@@ -463,7 +477,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/lesson"
+                "$ref": "#/components/schemas/lesson_show"
         '422':
           description: invalid request
           content:
@@ -504,7 +518,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/lesson"
+                "$ref": "#/components/schemas/lesson_show"
         '404':
           description: not found
           content:
@@ -522,7 +536,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/lesson"
+                "$ref": "#/components/schemas/lesson_show"
       requestBody:
         content:
           application/json:
@@ -1219,6 +1233,63 @@ components:
         views_count:
           type: integer
           example: 12
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
+      required:
+      - id
+      - title
+      - description
+      - status
+      - video_link
+      - author_id
+      - category_id
+      - created_at
+    lesson_show:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+          example: Lesson name
+        description:
+          type: string
+          example: Lesson description
+        video_link:
+          type: string
+          example: http://video.com/my-video
+        status:
+          type: string
+          enum:
+          - active
+          - archived
+          example: active
+        author_id:
+          type: integer
+          minimum: 1
+        category_id:
+          type: integer
+          minimum: 1
+        rating:
+          type: number
+          minimum: 0
+        created_at:
+          type: string
+          example: '2022-12-01 14:11:33 +0300'
+        views_count:
+          type: integer
+          example: 12
+        author_name:
+          type: string
+          example: Author name
+        author_avatar_url:
+          type: string
+          example: https://lessoner.s3.amazonaws.com/image-url
       required:
       - id
       - title
@@ -1255,6 +1326,12 @@ components:
         rating:
           type: number
           minimum: 0
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
       required:
       - title
       - description
@@ -1290,6 +1367,12 @@ components:
         rating:
           type: number
           minimum: 0
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
     lesson_delete:
       type: object
       properties:
@@ -1299,6 +1382,22 @@ components:
           example: 22
       required:
       - id
+    pagy_metadata:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        per_page:
+          type: integer
+          example: 12
+        count_pages:
+          type: integer
+          example: 3
+      required:
+      - page
+      - per_page
+      - count_pages
     show_user:
       type: object
       properties:
