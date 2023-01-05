@@ -1219,6 +1219,12 @@ components:
         views_count:
           type: integer
           example: 12
+        image_size:
+          type: integer
+          example: 900
+        image_name:
+          type: string
+          example: image.jpg
       required:
       - id
       - title

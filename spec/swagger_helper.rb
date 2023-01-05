@@ -123,7 +123,9 @@ SWAGGER_DOCS = {
             category_id: { type: :integer, minimum: 1 },
             rating: { type: :number, minimum: 0 },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
-            views_count: { type: :integer, example: 12 }
+            views_count: { type: :integer, example: 12 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
           },
           required: %w[id title description status video_link author_id category_id created_at]
         },
