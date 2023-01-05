@@ -11,7 +11,11 @@ RSpec.describe 'categories', type: :request do
       produces 'application/json'
 
       response(200, 'successful') do
-        schema type: :array, items: { '$ref' => '#/components/schemas/show_category' }
+        schema type: :object, properties: {
+                                records: { type: :array, items: { '$ref' => '#/components/schemas/show_category' } },
+                                pagy_metadata: { '$ref' => '#/components/schemas/pagy_metadata' }
+                              },
+               required: %(records pagy_metadata)
 
         run_test!
       end

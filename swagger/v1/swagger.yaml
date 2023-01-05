@@ -37,9 +37,15 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/show_category"
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/show_category"
+                  pagy_metadata:
+                    "$ref": "#/components/schemas/pagy_metadata"
+                required: records pagy_metadata
     post:
       summary: create category
       tags:
