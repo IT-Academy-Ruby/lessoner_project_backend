@@ -46,8 +46,6 @@ class User < ApplicationRecord
   end
 
   def generate_update_email_token!
-    return if update_email_token.present?
-
     self.update_email_token = generate_token
     self.update_email_token_sent_at = Time.now.utc
     save!(validate: false)
