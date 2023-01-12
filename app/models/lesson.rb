@@ -9,6 +9,7 @@ class Lesson < ApplicationRecord
   has_one_attached :lesson_image, dependent: :destroy
   has_one_attached :lesson_video, dependent: :destroy
   belongs_to :author, class_name: 'User'
+  belongs_to :category
   enum :status, STATUSES
 
   validates :title, presence: true,
