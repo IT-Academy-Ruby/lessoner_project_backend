@@ -123,7 +123,27 @@ SWAGGER_DOCS = {
             category_id: { type: :integer, minimum: 1 },
             rating: { type: :number, minimum: 0 },
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
-            views_count: { type: :integer, example: 12 }
+            views_count: { type: :integer, example: 12 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
+          },
+          required: %w[id title description status video_link author_id category_id created_at]
+        },
+        lesson_show: {
+          type: :object,
+          properties: {
+            id: { type: :integer, minimum: 1 },
+            title: { type: :string, example: 'Lesson name' },
+            description: { type: :string, example: 'Lesson description' },
+            video_link: { type: :string, example: 'http://video.com/my-video' },
+            status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
+            author_id: { type: :integer, minimum: 1 },
+            category_id: { type: :integer, minimum: 1 },
+            rating: { type: :number, minimum: 0 },
+            created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
+            views_count: { type: :integer, example: 12 },
+            author_name: { type: :string, example: 'Author name' },
+            author_avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' }
           },
           required: %w[id title description status video_link author_id category_id created_at]
         },
@@ -136,7 +156,9 @@ SWAGGER_DOCS = {
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
-            rating: { type: :number, minimum: 0 }
+            rating: { type: :number, minimum: 0 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
           },
           required: %w[title description video_link author_id category_id rating]
         },
@@ -150,7 +172,9 @@ SWAGGER_DOCS = {
             status: { type: :string, enum: Lesson::STATUSES, example: 'active' },
             author_id: { type: :integer, minimum: 1 },
             category_id: { type: :integer, minimum: 1 },
-            rating: { type: :number, minimum: 0 }
+            rating: { type: :number, minimum: 0 },
+            image_size: { type: :integer, example: 900 },
+            image_name: { type: :string, example: 'image.jpg' }
           }
         },
         lesson_delete: {
@@ -159,6 +183,15 @@ SWAGGER_DOCS = {
             id: { type: :integer, minimum: 1, example: 22 }
           },
           required: %w[id]
+        },
+        pagy_metadata: {
+          type: :object,
+          properties: {
+            page: { type: :integer, example: 1 },
+            per_page: { type: :integer, example: 12 },
+            count_pages: { type: :integer, example: 3 }
+          },
+          required: %w[page per_page count_pages]
         },
         show_user: {
           type: :object,
