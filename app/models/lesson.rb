@@ -8,6 +8,7 @@ class Lesson < ApplicationRecord
   has_many :lesson_views, dependent: :destroy
   has_one_attached :lesson_image, dependent: :destroy
   has_one_attached :lesson_video, dependent: :destroy
+  belongs_to :category
   belongs_to :author, class_name: 'User'
   enum :status, STATUSES
 
