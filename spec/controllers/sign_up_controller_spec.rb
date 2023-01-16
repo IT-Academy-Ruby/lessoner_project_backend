@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe SignUpController, type: :request do
   let(:sign_up_url) { '/sign_up' }
   let(:login_url) { '/login' }
+  let(:confirm_url) { '/sign_up/confirm_email' }
 
   let(:email) { 'test@mail.com' }
   let(:name) { 'test' }
@@ -10,6 +11,7 @@ RSpec.describe SignUpController, type: :request do
   let(:phone) { '+375(44)355-35-34' }
   let(:birthday) { '2000-01-11' }
   let(:password) { '12345678' }
+  let(:confirm_token) { '1234567890aa788jq' }
 
   let(:params) do
     {
@@ -101,4 +103,25 @@ RSpec.describe SignUpController, type: :request do
       end
     end
   end
+
+  describe 'GET sign_up/confirm_email' do
+    let!(:user) { create(:user, confirm_token:) }
+    context 'when confirmed is successful' do
+      before { get confirm_url, params: { token: '1234567890aa788jq' } }
+      it 'returns success response' do
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)['user']).to eq('confirmed')
+      end
+    end
+
+    context 'when user is not found' do
+      before do
+        get confirm_url, params: { token: '1234554321qaz' }
+      end
+      it 'returns not found error' do
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
 end
+
