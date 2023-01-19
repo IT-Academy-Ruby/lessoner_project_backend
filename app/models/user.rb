@@ -36,7 +36,7 @@ class User < ApplicationRecord
   def reset_password!(password)
     self.password_reset_token = nil
     self.password = password
-    save!
+    save
   end
 
   def email_activate!
