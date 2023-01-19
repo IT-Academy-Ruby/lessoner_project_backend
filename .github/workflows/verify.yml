@@ -27,17 +27,27 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          sudo apt install -yqq libpq-dev
+          sudo apt-get install -yqq libpq-dev
+          sudo apt-get install -y libvips
           gem install bundler
 
       - name: Install Gems
         run: |
           bundle install
-
-  # We don't have RSpec files for testing:
-  #      - name: Run Tests
-  #        run: |
-  #          bundle exec rspec
+#
+#      - name: Run Tests
+#        run: |
+#          bundle exec rspec spec/*
+#
+#      - name: Test
+#        run: bundle exec rspec -f j -o tmp/rspec_results.json -f p
+#
+#      - name: RSpec Report
+#        uses: SonicGarden/rspec-report-action@v2
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          json-path: tmp/rspec_results.json
+#        if: always()
 
   security:
     runs-on: ubuntu-latest
