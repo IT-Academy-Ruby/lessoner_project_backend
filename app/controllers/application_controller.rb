@@ -28,7 +28,7 @@ class ApplicationController < ActionController::API
   private
 
   def sort_params
-    sort_field = params[:sort] || 'created_at'
+    sort_field = params[:sort_field] || 'created_at'
     sort_type = params[:sort_type] || 'DESC'
     "#{sort_field} #{sort_type}"
   end
