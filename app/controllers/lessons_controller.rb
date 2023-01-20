@@ -9,7 +9,6 @@ class LessonsController < ApplicationController
 
   def show
     if @lesson
-      @views_count = @lesson.lesson_views.size
       set_lesson_image_params
       render :show
     else
@@ -65,7 +64,7 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.permit(:title, :description, :status, :video_link, :author_id, :category_id, :created_at, :lesson_image,
-                  :lesson_video, :image_link)
+                  :lesson_video, :image_link, :views_count)
   end
 
   def lesson_rating_params
@@ -94,4 +93,5 @@ class LessonsController < ApplicationController
     @lesson.image_link = @lesson.lesson_image&.url&.split('?')&.first
     @lesson.save!
   end
+
 end
