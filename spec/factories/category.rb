@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :category do
-    name { 'Ruby' }
-    description { 'the most beautiful language' }
+    sequence(:name) { |i| "Category#{i}" }
+    sequence(:description) { |i| "Description #{i}" }
     status { 'active' }
   end
 end
