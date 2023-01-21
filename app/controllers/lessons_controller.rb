@@ -42,11 +42,12 @@ class LessonsController < ApplicationController
       return render json: { error: service_result.message } unless service_result.success?
     end
 
-    set_lesson_image_params
-    set_video_link
-    set_image_link
     if @lesson.update(lesson_params)
       set_user_rating
+      set_lesson_image_params
+      set_video_link
+      set_image_link
+
       render :show
     else
       render :error, status: :unprocessable_entity
