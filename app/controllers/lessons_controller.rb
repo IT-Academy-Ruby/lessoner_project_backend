@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
   def show
     if @lesson
       @views_count = @lesson.lesson_views.size
-      check_user_rating
+      set_user_rating
       set_lesson_image_params
       render :show
     else
@@ -99,6 +99,6 @@ class LessonsController < ApplicationController
   end
 
   def set_user_rating
-    @user_rating = @lesson.lesson_ratings.find_by(user_id: current_user).rating
+    @user_rating = @lesson.lesson_ratings.find_by(user_id: current_user)&.rating
   end
 end
