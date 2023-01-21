@@ -2,6 +2,9 @@ class LessonViewsController < ApplicationController
   def add_view
     @lesson_view = LessonView.new(ip: client_ip, lesson_id: params[:lesson_id], user_id: current_user_id)
     if @lesson_view.save
+      @lesson = Lesson.find(params[:lesson_id])
+      @lesson.views_count = @lesson.lesson_views.size
+      @lesson.save!
       render :show
     else
       render :error, status: :unprocessable_entity
