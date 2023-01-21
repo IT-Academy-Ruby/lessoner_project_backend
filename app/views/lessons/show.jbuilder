@@ -5,3 +5,4 @@ json.author_name @lesson.author.name
 json.author_avatar_url @lesson.author.avatar_url
 json.image_size @image_size
 json.image_name @image_name
+json.user_rating @user_rating

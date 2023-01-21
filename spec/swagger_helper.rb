@@ -143,7 +143,8 @@ SWAGGER_DOCS = {
             created_at: { type: :string, example: '2022-12-01 14:11:33 +0300' },
             views_count: { type: :integer, example: 12 },
             author_name: { type: :string, example: 'Author name' },
-            author_avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' }
+            author_avatar_url: { type: :string, example: 'https://lessoner.s3.amazonaws.com/image-url' },
+            user_rating: { type: :integer, example: 3 }
           },
           required: %w[id title description status video_link author_id category_id created_at]
         },

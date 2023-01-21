@@ -1290,6 +1290,9 @@ components:
         author_avatar_url:
           type: string
           example: https://lessoner.s3.amazonaws.com/image-url
+        user_rating:
+          type: integer
+          example: 3
       required:
       - id
       - title
