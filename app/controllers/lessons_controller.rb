@@ -46,7 +46,7 @@ class LessonsController < ApplicationController
     set_video_link
     set_image_link
     if @lesson.update(lesson_params)
-      check_user_rating
+      set_user_rating
       render :show
     else
       render :error, status: :unprocessable_entity
@@ -97,7 +97,7 @@ class LessonsController < ApplicationController
     @lesson.save!
   end
 
-  def check_user_rating
+  def set_user_rating
     @user_rating = @lesson.lesson_ratings.find_by(user_id: current_user).rating
   end
 end
