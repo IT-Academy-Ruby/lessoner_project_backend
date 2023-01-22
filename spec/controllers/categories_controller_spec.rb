@@ -47,21 +47,13 @@ RSpec.describe CategoriesController, type: :request do
     end
   end
 
-  # describe 'GET /categories/{id}' do
-  #
-  #   # context 'when record exists' do
-  #   #   before { get "#{categories_url}/#{category.id}" }
-  #   #
-  #   #   include_examples 'checks that the request is successful'
-  #   # end
-  #
-  #   context 'when the request is invalid' do
-  #     it 'returns an error 404' do
-  #       get "#{categories_url}/abc"
-  #       expect(response).to have_http_status(404)
-  #     end
-  #   end
-  # end
+  describe 'GET /categories/{id}' do
+    context 'when record exists' do
+      before { get "#{categories_url}/#{Category.all.sample.id}" }
+
+      include_examples 'checks that the request is successful'
+    end
+  end
 
   describe 'POST /categories' do
     context 'when params are valid' do
@@ -122,11 +114,11 @@ RSpec.describe CategoriesController, type: :request do
     end
 
     context 'when category has lesson' do
-      let!(:category_1) { create(:category) }
-      let!(:lesson_1) { create(:lesson, category_id: category_1.id) }
+      let!(:category) { create(:category) }
+      let!(:lesson) { create(:lesson, category_id: category.id) }
 
       before do
-        delete "#{categories_url}/#{category_1.id}", headers: { 'Authorization': "Bearer #{admin_token}" }
+        delete "#{categories_url}/#{category.id}", headers: { 'Authorization': "Bearer #{admin_token}" }
       end
 
       it 'user creates category' do
@@ -136,4 +128,35 @@ RSpec.describe CategoriesController, type: :request do
     end
   end
 
+  describe 'PATCH update' do
+    let(:category) { create(:category) }
+
+    context 'when params are valid' do
+      let(:new_name) { { name: 'New category' } }
+
+      before do
+        put "#{categories_url}/#{category.id}", params: new_name, headers: { 'Authorization': "Bearer #{admin_token}" }
+      end
+
+      it 'responds with success code' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'responds correct category name' do
+        expect(JSON.parse(response.body)['name']).to eq new_name[:name]
+      end
+    end
+
+    context 'when params are invalid' do
+      let(:update_params) { { name: '//\\' } }
+
+      before do
+        put "#{categories_url}/#{category.id}", params: update_params, headers: { 'Authorization': "Bearer #{admin_token}" }
+      end
+
+      it 'returns an error 422' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
 end
