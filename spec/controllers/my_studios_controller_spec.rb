@@ -16,7 +16,7 @@ RSpec.describe MyStudiosController, type: :request do
 
   describe 'GET /my_studio/lessons' do
     context 'when all records are requested' do
-      before { get '/my_studio/lessons', headers: { 'Authorization': "Bearer #{token}" }, as: :json  }
+      before { get '/my_studio/lessons', headers: { 'Authorization': "Bearer #{token}" }, as: :json }
 
       it 'returns all lessons' do
         expect(JSON.parse(response.body)['records'].count).to eq 5
