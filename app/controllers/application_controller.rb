@@ -6,6 +6,13 @@ class ApplicationController < ActionController::API
     request.headers['Authorization']&.split&.last
   end
 
+  def encode_jwt_token(user)
+    JsonWebToken.encode(name: user.name, email: user.email,
+                        description: user.description, phone: user.phone,
+                        gender: user.gender, birthday: user.birthday.to_s,
+                        admin: user.admin_type, exp: 3.hours.from_now.to_i)
+  end
+
   def client_ip
     request.remote_ip
   end
