@@ -13,11 +13,7 @@ class SignUpController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
       if @user.email_confirmed?
-        token = JsonWebToken.encode(name: @user.name, email: @user.email,
-                                    description: @user.description, phone: @user.phone,
-                                    gender: @user.gender, birthday: @user.birthday.to_s,
-                                    admin: @user.admin_type, exp: 3.hours.from_now.to_i)
-        render json: { jwt: token }, status: :ok
+        render json: { jwt: encode_jwt_token(@user) }, status: :ok
       else
         render json: { error: 'unconfirmed' }, status: :unauthorized
       end
@@ -30,7 +26,7 @@ class SignUpController < ApplicationController
     @user = User.find_by(confirm_token: params[:token])
     if @user
       @user.email_activate!
-      render json: { user: 'confirmed' }, status: :ok
+      render json: { jwt: encode_jwt_token(@user) }, status: :ok
     else
       render json: { error: 'not found' }, status: :not_found
     end
