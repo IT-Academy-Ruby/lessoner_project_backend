@@ -34,10 +34,16 @@ class ApplicationController < ActionController::API
 
   private
 
-  def sort_params
-    sort_field = params[:sort_field] || 'created_at'
-    sort_type = params[:sort_type] || 'DESC'
-    "#{sort_field} #{sort_type}"
+  def sort_params(random: false)
+    sort_field = params[:sort_field]
+    sort_type = params[:sort_type]
+    if random && [sort_field, sort_type].all?(&:blank?)
+      'RANDOM()'
+    else
+      sort_field ||= 'created_at'
+      sort_type ||= 'DESC'
+      "#{sort_field} #{sort_type}"
+    end
   end
 
   def for_registered_user
