@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   before_action :check_size, only: %i[new create edit update]
 
   def index
-    list = current_user&.admin_type? ? Category.all : Category.where(status: 'active')
+    list = current_user&.admin_type? ? Category.all : Category.active
     @pagy, @categories = pagy(list.order(sort_params))
   end
 
