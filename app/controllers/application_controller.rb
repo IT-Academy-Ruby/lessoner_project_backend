@@ -6,6 +6,13 @@ class ApplicationController < ActionController::API
     request.headers['Authorization']&.split&.last
   end
 
+  def encode_jwt_token(user)
+    JsonWebToken.encode(name: user.name, email: user.email,
+                        description: user.description, phone: user.phone,
+                        gender: user.gender, birthday: user.birthday.to_s,
+                        admin: user.admin_type, exp: 3.hours.from_now.to_i)
+  end
+
   def client_ip
     request.remote_ip
   end
@@ -27,10 +34,16 @@ class ApplicationController < ActionController::API
 
   private
 
-  def sort_params
-    sort_field = params[:sort_field] || 'created_at'
-    sort_type = params[:sort_type] || 'DESC'
-    "#{sort_field} #{sort_type}"
+  def sort_params(random: false)
+    sort_field = params[:sort_field]
+    sort_type = params[:sort_type]
+    if random && [sort_field, sort_type].all?(&:blank?)
+      'RANDOM()'
+    else
+      sort_field ||= 'created_at'
+      sort_type ||= 'DESC'
+      "#{sort_field} #{sort_type}"
+    end
   end
 
   def for_registered_user
