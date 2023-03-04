@@ -4,7 +4,7 @@ class LessonsController < ApplicationController
 
   def index
     @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status,
-                                                             :category_id)).order(sort_params))
+                                                             :category_id)).order(sort_params(random: true)))
   end
 
   def show
