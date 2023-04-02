@@ -8,5 +8,6 @@ module LessonerProject
     config.api_only = true
     config.load_defaults 7.0
     config.autoload_paths += %W[#{config.root}/lib]
+    config.middleware.use ActionDispatch::Cookies
   end
 end

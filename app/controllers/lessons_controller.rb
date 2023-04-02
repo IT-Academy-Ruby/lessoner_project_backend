@@ -1,8 +1,13 @@
 class LessonsController < ApplicationController
+  include ActionController::Cookies
+
   before_action :lesson_find, only: %i[show edit update destroy]
   before_action :for_registered_user, only: %i[create update destroy]
+  before_action :set_rand_cookie, only: :index
 
   def index
+    seed_val = Lesson.connection.quote(cookies[:rand_seed])
+    Lesson.connection.execute("SELECT setseed(#{seed_val})")
     @pagy, @lessons = pagy(Lesson.filter(lesson_params.slice(:status,
                                                              :category_id)).order(sort_params(random: true)))
   end
@@ -100,5 +105,9 @@ class LessonsController < ApplicationController
 
   def set_user_rating
     @user_rating = @lesson.lesson_ratings.find_by(user_id: current_user)&.rating
+  end
+
+  def set_rand_cookie
+    cookies[:rand_seed] ||= { value: rand, expires: Time.zone.now + 5.minutes }
   end
 end
