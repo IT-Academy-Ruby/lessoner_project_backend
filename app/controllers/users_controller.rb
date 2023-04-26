@@ -19,11 +19,7 @@ class UsersController < AuthorizationController
 
   def update
     if current_user.update(user_params)
-      if user_params[:phone].present?
-        start_verification(current_user.phone, params[:channel])
-        current_user.verified = false
-        current_user.save
-      end
+      start_verification(current_user.phone, params[:channel]) if user_params[:phone].present?
       current_user.update!(avatar_url: current_user.avatar&.url&.split('?')&.first) if params[:avatar].present?
       render :show
     else
@@ -100,6 +96,12 @@ class UsersController < AuthorizationController
                           .verifications
                           .create(to:, channel:)
     verification.sid
+    current_user.verified = false
+  rescue Twilio::REST::RestError => e
+    current_user.verified = true
+    UserMailer.twilio_rest_error(e).deliver_now
+  ensure
+    current_user.save
   end
 
   def check_verification(phone, code)

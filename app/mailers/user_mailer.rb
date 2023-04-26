@@ -20,4 +20,9 @@ class UserMailer < ApplicationMailer
     @new_email = new_email
     mail to: new_email, subject: 'Update email confirmation'
   end
+
+  def twilio_rest_error(error)
+    @error = error
+    mail to: ENV['ADMIN_EMAIL'], subject: 'Twilio rest error'
+  end
 end
