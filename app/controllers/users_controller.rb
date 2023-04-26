@@ -97,10 +97,9 @@ class UsersController < AuthorizationController
                           .create(to:, channel:)
     verification.sid
     current_user.verified = false
-  rescue
-    current_user.verified = true
-  ensure
     current_user.save
+  rescue Twilio::REST::RestError
+    nil
   end
 
   def check_verification(phone, code)
