@@ -97,8 +97,9 @@ class UsersController < AuthorizationController
                           .create(to:, channel:)
     verification.sid
     current_user.verified = false
-  rescue Twilio::REST::RestError
+  rescue Twilio::REST::RestError => e
     current_user.verified = true
+    UserMailer.twilio_rest_error(e).deliver_now
   ensure
     current_user.save
   end
