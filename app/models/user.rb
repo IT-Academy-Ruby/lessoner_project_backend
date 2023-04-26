@@ -17,7 +17,7 @@ class User < ApplicationRecord
                         format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { new_email.present? }
   validates :password, presence: true, length: { in: 6..256 },
                        format: { with: %r/\A[a-z0-9!#$%&'*+\-\/=?^_`{|}~]+\z/i }, if: -> { password.present? }
-  validates :phone, phone: true, if: -> { phone.present? }
+  validates :phone, uniqueness: true, phone: true, if: -> { phone.present? }
 
   has_many :comments, dependent: :destroy
   has_many :lessons, class_name: 'Lesson', foreign_key: 'author_id'
